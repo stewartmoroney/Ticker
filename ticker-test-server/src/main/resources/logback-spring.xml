@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="io.atomix.copycat" level="WARN"/>
+    <logger name="org.apache.tomcat" level="WARN"/>
+
+    <logger name="org.springframework.web.socket" level="info"/>
+
+    <!--<logger name="org.springframework.web.servlet" level="trace"/>-->
+    <!--<logger name="org.springframework.messaging" level="trace"/>-->
+
+
+
+
+</configuration>
