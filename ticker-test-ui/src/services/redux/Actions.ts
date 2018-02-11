@@ -1,4 +1,4 @@
-import { TICK, USER_UPDATE, STATUS, SESSION, GRID_UPDATE } from './ActionTypes';
+import { TICK, USER_UPDATE, STATUS, SESSION, GRID_UPDATE, SUBSCRIBE } from './ActionTypes';
 
 export const newTick = (s: string) => ({ type: TICK, payload: s });
 
@@ -9,3 +9,5 @@ export const status = (s: string) => ({ type: STATUS, payload: s});
 export const session  = (s: string) => ({ type: SESSION, payload: s});
 
 export const dataUpdate = (s: string) => ({ type: GRID_UPDATE, payload: s});
+
+export const subscribe = (s: string) => ({ type: SUBSCRIBE, payload: s});

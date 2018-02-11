@@ -41,6 +41,7 @@ export class SubscribeServiceImpl implements SubscribeService {
       this.reduxStore.dispatch(status('unsubscribing'));
       this._client.send('/app/tick/unsubscribe', {priority: 9});
       this._client.send('/app/data/unsubscribe', {priority: 9});
+      this.reduxStore.dispatch(status('unsubscribed'));
   }  
 
   private connectedClient(callback: Function) {
