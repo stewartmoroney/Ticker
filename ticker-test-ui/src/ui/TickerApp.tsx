@@ -5,7 +5,7 @@ import TickerHeader from './TickerHeader/TickerHeader';
 import TickerStatus from './TickerStatus/TickerStatus';
 import TickerBody from './TickerBody';
 import TickerLogon from './TickerLogon';
-import TickerUnsubscribe from './TickerUnsubscribe';
+import TickerUnsubscribe from './TickerUnsubscribe/TickerUnsubscribe';
 import Grid from './Grid';
 
 export default class TickerApp extends React.Component<{ }, { }> {

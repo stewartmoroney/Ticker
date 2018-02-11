@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 
-import Services from '../services/Services';
+import Services from '../../services/Services';
 
 interface Props {
   userName: string;
 } 
 
-const mapStateToProps = (state: any) => {
-  return { userName: state.userName};
-};
-
-class TickerUnsubscribe extends React.Component<Props, {}> {
-  constructor(props: any) {
+export default class TickerUnsubscribeComponent extends React.Component<Props, {}> {
+  constructor(props: Props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,5 +21,3 @@ class TickerUnsubscribe extends React.Component<Props, {}> {
     );
   }
 }
-
-export default connect(mapStateToProps)(TickerUnsubscribe);
