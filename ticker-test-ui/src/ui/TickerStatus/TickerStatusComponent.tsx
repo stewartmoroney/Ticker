@@ -3,7 +3,7 @@ import * as React from 'react';
 export interface TickerStatusState {
   tickerStatus: string;
   sessionId: string;
-  userName: string
+  userName: string;
 }
 
 export default class TickerStatusComponent extends React.Component<TickerStatusState> {
@@ -12,4 +12,4 @@ export default class TickerStatusComponent extends React.Component<TickerStatusS
       <div>{this.props.tickerStatus} Session - {this.props.sessionId} User - {this.props.userName}</div>
     );
   }
-};
+}

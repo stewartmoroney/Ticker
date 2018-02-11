@@ -9,7 +9,7 @@ const mapStateToProps = (state: any) => {
   return { value: state.tickerValue };
 };
 
-class TickerBody extends React.Component <Props, {}> {
+class TickerBody extends React.Component <Props> {
 
   render() {
     return (
