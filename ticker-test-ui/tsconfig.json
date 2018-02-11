@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
-    "target": "es5",
+    "target": "es6",
     "sourceMap": true,
     "jsx": "react",
     "moduleResolution": "node",
@@ -24,7 +24,6 @@
     "forkChecker": true
   },  
   "exclude": [
-    "Stash",
     "node_modules",
     "build",
     "scripts",

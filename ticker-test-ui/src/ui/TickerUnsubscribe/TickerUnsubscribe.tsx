@@ -7,7 +7,7 @@ import TickerUnsubscribeComponent from './TickerUnsubscribeComponent';
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-     unsubscribe: (userName: string) => {}
+     unsubscribe: (userName: string) => Services.subscribeService().unsubscribe(userName)
   };
 };
 
