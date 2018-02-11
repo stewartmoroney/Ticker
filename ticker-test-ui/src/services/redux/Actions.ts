@@ -9,4 +9,3 @@ export const status = (s: string) => ({ type: STATUS, payload: s});
 export const session  = (s: string) => ({ type: SESSION, payload: s});
 
 export const dataUpdate = (s: string) => ({ type: GRID_UPDATE, payload: s});
-

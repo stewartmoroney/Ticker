@@ -1,13 +1,9 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
 
+import TickerAppState from '../../state/TickerAppState';
 import TickerUnsubscribeComponent from './TickerUnsubscribeComponent';
 
-interface Props {
-  userName: string;
-} 
-
-const mapStateToProps = (state: Props) => {
+const mapStateToProps = (state: TickerAppState) => {
   return { userName: state.userName};
 };
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface TickerStatusState {
+interface TickerStatusState {
   tickerStatus: string;
   sessionId: string;
   userName: string;

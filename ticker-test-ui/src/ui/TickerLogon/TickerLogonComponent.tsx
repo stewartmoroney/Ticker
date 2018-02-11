@@ -1,30 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 
-import { InstancePerDependency } from 'eye-oh-see';
-
-import Services from '../services/Services';
-
-import { logon } from '../services/redux/Actions';
+import Services from '../../services/Services';
 
 interface Props {
   userName: string;
-  logon: any;
+  logon: (userName: string) => void;
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-     logon: (userName: string) => dispatch(logon(userName))
-  };
-};
-
-const mapStateToProps = (state: any) => {
-  return {
-    userName: state.userName 
-   };
-};
-
-class TickerLogon extends React.Component<Props, {}> {
+export default class TickerLogonComponent extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
 
@@ -49,5 +32,3 @@ class TickerLogon extends React.Component<Props, {}> {
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(TickerLogon);

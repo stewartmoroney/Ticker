@@ -3,14 +3,14 @@ import Services from '../services/Services';
 
 import TickerHeader from './TickerHeader/TickerHeader';
 import TickerStatus from './TickerStatus/TickerStatus';
-import TickerBody from './TickerBody';
-import TickerLogon from './TickerLogon';
+import TickerBody from './TickerBody/TickerBody';
+import TickerLogon from './TickerLogon/TickerLogon';
 import TickerUnsubscribe from './TickerUnsubscribe/TickerUnsubscribe';
 import Grid from './Grid';
 
 export default class TickerApp extends React.Component<{ }, { }> {
 
-  constructor(props: any) {
+  constructor(props: { }) {
     super(props);
     Services.bootstrap();
   }
