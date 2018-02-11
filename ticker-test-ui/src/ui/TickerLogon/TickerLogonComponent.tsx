@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-import Services from '../../services/Services';
-
 interface Props {
   userName: string;
+  setUid: (userName: string) => void;
   logon: (userName: string) => void;
 }
 
-export default class TickerLogonComponent extends React.Component<Props, {}> {
+export default class TickerLogonComponent extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
@@ -16,11 +15,11 @@ export default class TickerLogonComponent extends React.Component<Props, {}> {
   }
    
   handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    this.props.logon(e.target.value);
+    this.props.setUid(e.target.value);
   }
  
   handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
-    Services.subscribeService().subscribe(this.props.userName);
+    this.props.logon(this.props.userName);
   }
 
   render() {
