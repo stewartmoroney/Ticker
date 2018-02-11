@@ -25,9 +25,9 @@ export class SubscribeServiceImpl implements SubscribeService {
   }
 
   public subscribe(userName: string) {
-    if (this._client && this._client.connected && this.sessionId){
+    if (this._client && this._client.connected && this.sessionId) {
       this.doSubscribe(userName);
-    } else if (this._client && this._client.connected){
+    } else if (this._client && this._client.connected) {
       this.doLogon(userName);
     } else {
       this._client = this.connectedClient((e: Stomp.Message) => {
@@ -37,6 +37,11 @@ export class SubscribeServiceImpl implements SubscribeService {
     }
   }
 
+  public unsubscribe(userName: string) {
+      this.reduxStore.dispatch(status('unsubscribing'));
+      this._client.send('/app/tick/unsubscribe', {priority: 9});
+  }  
+
   private connectedClient(callback: Function) {
     if (this._client) {
       return this._client;
@@ -45,17 +50,12 @@ export class SubscribeServiceImpl implements SubscribeService {
     }
   }
 
-  private doLogon(userName: string){
+  private doLogon(userName: string) {
     this._client.subscribe('/login/ack*', this.handleLoggedIn);
     this._client.send('/app/login', {priority: 9}, userName);        
   }
 
-  public unsubscribe(userName: string) {
-      this.reduxStore.dispatch(status('unsubscribing'));
-      this._client.send('/app/tick/unsubscribe', {priority: 9});
-  }
-
-  private doSubscribe(sessionId: string){
+  private doSubscribe(sessionId: string) {
     this._client.subscribe('/tick-user' + sessionId, this.handleTick);    
     this._client.subscribe('/data-user' + sessionId, this.handleData);
     this._client.send('/app/tick/subscribe', {priority: 9});
@@ -70,11 +70,11 @@ export class SubscribeServiceImpl implements SubscribeService {
       this.doSubscribe(this.sessionId);
   }
   
-  private handleTick(tick: any) {
+  private handleTick(tick: Stomp.Message) {
     this.reduxStore.dispatch(newTick(tick.body));
   }
 
-  private handleData(data: any) {
+  private handleData(data: Stomp.Message) {
     this.reduxStore.dispatch(dataUpdate(data.body));
   }
 }
