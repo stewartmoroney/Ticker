@@ -6,8 +6,8 @@ import Services from './Services';
 import Store from '../services/redux/Store';
 
 export abstract class SubscribeService {
-  abstract subscribe(userName: String): void;
-  abstract unsubscribe(userName: String): void;
+  abstract subscribe(userName: string): void;
+  abstract unsubscribe(userName: string): void;
 }
 
 @SingleInstance(SubscribeService)

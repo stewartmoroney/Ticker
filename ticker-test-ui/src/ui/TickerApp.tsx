@@ -2,7 +2,7 @@ import * as React from 'react';
 import Services from '../services/Services';
 
 import TickerHeader from './TickerHeader';
-import TickerStatus from './TickerStatus';
+import TickerStatus from './TickerStatus/TickerStatus';
 import TickerBody from './TickerBody';
 import TickerLogon from './TickerLogon';
 import TickerUnsubscribe from './TickerUnsubscribe';
