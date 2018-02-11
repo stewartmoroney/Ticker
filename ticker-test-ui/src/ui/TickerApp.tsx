@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Services from '../services/Services';
 
-import TickerHeader from './TickerHeader';
+import TickerHeader from './TickerHeader/TickerHeader';
 import TickerStatus from './TickerStatus/TickerStatus';
 import TickerBody from './TickerBody';
 import TickerLogon from './TickerLogon';
