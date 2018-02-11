@@ -1,8 +1,5 @@
-import { Action, createStore, applyMiddleware } from 'redux';
-import { ActionsObservable, createEpicMiddleware } from 'redux-observable';
-import 'rxjs';
-
-import { map, filter, switchMap } from 'rxjs/operators';
+import { createStore, applyMiddleware } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
 
 import rootReducer from './Reducer';
 import { loggingEpic } from '../epics/Epics';
