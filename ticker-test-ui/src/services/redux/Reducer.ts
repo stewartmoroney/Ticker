@@ -1,4 +1,4 @@
-import { TICK, STATUS, LOGON, SESSION, GRID_CLEAR, GRID_UPDATE }  from './ActionTypes';
+import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE }  from './ActionTypes';
 import TickerAppState from '../../state/TickerAppState';
 
 const initialState: TickerAppState = {
@@ -24,7 +24,7 @@ export default (state: TickerAppState = initialState, action: any) => {
       return { ...state, tickerValue: action.payload };
     case STATUS:
       return { ...state, tickerStatus: action.payload };
-    case LOGON:
+    case USER_UPDATE:
       return { ...state, userName: action.payload };
     case SESSION:
       return { ...state, sessionId: action.payload };

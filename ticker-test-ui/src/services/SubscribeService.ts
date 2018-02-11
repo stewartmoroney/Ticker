@@ -1,6 +1,6 @@
 import * as Stomp from 'stompjs';
 import { Container, SingleInstance } from 'eye-oh-see';
-import { logon, status, newTick, session, dataUpdate } from './redux/Actions';
+import { status, newTick, session, dataUpdate } from './redux/Actions';
 
 import Services from './Services';
 import Store from '../services/redux/Store';
@@ -56,6 +56,13 @@ export class SubscribeServiceImpl implements SubscribeService {
     this._client.send('/app/login', {priority: 9}, userName);        
   }
 
+  private handleLoggedIn(e: Stomp.Message) {
+      this.sessionId = e.headers['message-id'].split('-')[0];
+      this.reduxStore.dispatch(session(this.sessionId));
+      this.reduxStore.dispatch(status('logged on'));
+      this.doSubscribe(this.sessionId);
+  }
+  
   private doSubscribe(sessionId: string) {
     this._client.subscribe('/tick-user' + sessionId, this.handleTick);    
     this._client.subscribe('/data-user' + sessionId, this.handleData);
@@ -64,13 +71,6 @@ export class SubscribeServiceImpl implements SubscribeService {
     this.reduxStore.dispatch(status('listening for ticks'));    
   }
 
-  private handleLoggedIn(e: Stomp.Message) {
-      this.sessionId = e.headers['message-id'].split('-')[0];
-      this.reduxStore.dispatch(session(this.sessionId));
-      this.reduxStore.dispatch(status('logged on'));
-      this.doSubscribe(this.sessionId);
-  }
-  
   private handleTick(tick: Stomp.Message) {
     this.reduxStore.dispatch(newTick(tick.body));
   }

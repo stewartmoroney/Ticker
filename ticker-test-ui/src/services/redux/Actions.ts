@@ -1,8 +1,8 @@
-import { TICK, LOGON, STATUS, SESSION, GRID_UPDATE } from './ActionTypes';
+import { TICK, USER_UPDATE, STATUS, SESSION, GRID_UPDATE } from './ActionTypes';
 
 export const newTick = (s: string) => ({ type: TICK, payload: s });
 
-export const logon = (s: string) => ({ type: LOGON, payload: s });
+export const updateUser = (s: string) => ({ type: USER_UPDATE, payload: s });
 
 export const status = (s: string) => ({ type: STATUS, payload: s});
 
