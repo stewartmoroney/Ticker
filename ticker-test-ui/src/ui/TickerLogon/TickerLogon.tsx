@@ -12,7 +12,6 @@ import TickerLogonComponent from './TickerLogonComponent';
 const mapDispatchToProps = (dispatch: any) => {
   return {
      setUid: (userName: string) => dispatch(updateUser(userName)),
-     // logon: (userName: string) =>  Services.subscribeService().subscribe(userName)
      logon: (userName: string) =>  dispatch(subscribe(userName))
   };
 };

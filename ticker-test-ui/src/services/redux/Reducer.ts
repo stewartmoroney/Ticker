@@ -1,4 +1,4 @@
-import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBE }  from './ActionTypes';
+import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBE, UNSUBSCRIBE }  from './ActionTypes';
 import TickerAppState from '../../state/TickerAppState';
 
 const initialState: TickerAppState = {
@@ -33,7 +33,7 @@ export default (state: TickerAppState = initialState, action: any) => {
     case GRID_UPDATE:
       return { ...state, rowData: JSON.parse(action.payload).rows };
     case SUBSCRIBE:
-      return state;
+    case UNSUBSCRIBE:
     default:
       return state;
   }

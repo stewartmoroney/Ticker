@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import Services from '../../services/Services';
+import { unsubscribe } from '../../services/redux/Actions';
 
 import TickerAppState from '../../state/TickerAppState';
 import TickerUnsubscribeComponent from './TickerUnsubscribeComponent';
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-     unsubscribe: (userName: string) => Services.subscribeService().unsubscribe(userName)
+     unsubscribe: (userName: string) => dispatch(unsubscribe(userName))
   };
 };
 

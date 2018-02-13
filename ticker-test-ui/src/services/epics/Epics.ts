@@ -1,7 +1,8 @@
-import { ActionsObservable, combineEpics} from 'redux-observable';
+import { ActionsObservable, combineEpics } from 'redux-observable';
 import 'rxjs';
 
-import { SUBSCRIBE} from '../redux/ActionTypes';
+import Services from '../../services/Services';
+import { SUBSCRIBE, UNSUBSCRIBE } from '../redux/ActionTypes';
 
 export const loggingEpic: any = (action$: ActionsObservable<any>) =>
   action$.filter((action: any) => true)
@@ -10,11 +11,20 @@ export const loggingEpic: any = (action$: ActionsObservable<any>) =>
 
 export const susbscribeEpic: any = (action$: ActionsObservable<any>) =>
   action$.filter((action: any) => action.type === SUBSCRIBE)
-    // .mapTo()
-    .do((item: any) => console.log('subscribing async'))
+    .do((action: any) => {
+      Services.subscribeService().subscribe(action.payload);
+    })
+    .ignoreElements();
+
+export const unsusbscribeEpic: any = (action$: ActionsObservable<any>) =>
+  action$.filter((action: any) => action.type === UNSUBSCRIBE)
+    .do((action: any) => {
+      Services.subscribeService().unsubscribe(action.payload);
+    })
     .ignoreElements();
 
 export const rootEpic = combineEpics(
   loggingEpic,
-  susbscribeEpic
+  susbscribeEpic,
+  unsusbscribeEpic
 );

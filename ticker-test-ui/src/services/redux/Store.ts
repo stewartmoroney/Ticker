@@ -6,6 +6,4 @@ import { rootEpic } from '../epics/Epics';
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
-export default createStore(rootReducer
-	, applyMiddleware(epicMiddleware)
-	);
+export default createStore(rootReducer, applyMiddleware(epicMiddleware));
