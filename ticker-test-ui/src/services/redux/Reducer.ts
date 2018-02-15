@@ -1,5 +1,6 @@
 import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBE, UNSUBSCRIBE }  from './ActionTypes';
 import TickerAppState from '../../state/TickerAppState';
+import TickAction from './../redux/TickAction';
 
 const initialState: TickerAppState = {
   tickerStatus: 'Connecting',
@@ -11,14 +12,10 @@ const initialState: TickerAppState = {
     {headerName: 'Name', field: 'name'},
     {headerName: 'Value', field: 'value'}
   ],
-  rowData: [
-    // {id: 1, name: 'Celica', value: 35000},
-    // {id: 2, name: 'Mondeo', value: 32000},
-    // {id: 3, name: 'Boxter', value: 72000}
-  ]
+  rowData: []
 };
 
-export default (state: TickerAppState = initialState, action: any) => {
+export default (state: TickerAppState = initialState, action: TickAction) => {
   switch (action.type) {
     case TICK:
       return { ...state, tickerValue: action.payload };
