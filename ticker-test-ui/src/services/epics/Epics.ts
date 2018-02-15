@@ -4,7 +4,7 @@ import UnSubscribeEpic from './UnsubscribeEpic';
 import { combineEpics } from 'redux-observable';
 import 'rxjs';
 
-export const rootEpic = combineEpics(
+export default combineEpics(
   SubscribeEpic,
   UnSubscribeEpic
 );

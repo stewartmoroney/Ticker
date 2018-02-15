@@ -1,5 +1,5 @@
 import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBE, UNSUBSCRIBE }  from './ActionTypes';
-import TickerAppState from '../../state/TickerAppState';
+import TickerAppState from './../../state/TickerAppState';
 import TickAction from './../redux/TickAction';
 
 const initialState: TickerAppState = {

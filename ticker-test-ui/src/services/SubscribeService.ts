@@ -1,9 +1,11 @@
 import * as Stomp from 'stompjs';
 import { Container, SingleInstance } from 'eye-oh-see';
-import { status, newTick, session, dataUpdate } from './redux/Actions';
+import { Store } from 'redux';
 
+import { status, newTick, session, dataUpdate } from './redux/Actions';
 import Services from './Services';
-import Store from '../services/redux/Store';
+import CreateStore from '../services/redux/Store';
+import TickerAppState from './../state/TickerAppState';
 
 export abstract class SubscribeService {
   abstract subscribe(userName: string): void;
@@ -15,10 +17,10 @@ export class SubscribeServiceImpl implements SubscribeService {
 
   private _client: Stomp.Client;
   private sessionId: string;
-  private reduxStore: any;
+  private reduxStore: Store<any>;
 
   constructor() {
-    this.reduxStore = Store;
+    this.reduxStore = CreateStore;
     this.handleLoggedIn = this.handleLoggedIn.bind(this);
     this.handleTick = this.handleTick.bind(this);
     this.handleData = this.handleData.bind(this);
