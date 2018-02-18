@@ -6,7 +6,6 @@ import { CONNECT, CONNECTED, NEW_SESSION, TICK, GRID_UPDATE,
 type StringTickActionCreator = (arg: String) => TickAction;
 type VoidTickActionCreator = () => TickAction;
 
-
 export const connect: VoidTickActionCreator = () => ({type: CONNECT, payload: ''});
 export const connected: VoidTickActionCreator = () => ({type: CONNECTED, payload: ''});
 

@@ -4,7 +4,7 @@ import { newTick, dataUpdate,  } from './redux/Actions';
 
 export interface Channel {
   name: string;
-  dataHandler: (body: string, observer: Observer<TickAction>) => any;
+  dataHandler: (body: string, observer: Observer<TickAction>) => void;
 }
 
 export const defaultChannels = [

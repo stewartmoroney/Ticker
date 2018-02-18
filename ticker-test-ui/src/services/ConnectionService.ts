@@ -48,7 +48,6 @@ export class ConnectionServiceImpl implements ConnectionService {
     if (this._client) {
       return this._client;
     } else {
-      ;
       return this._client;
     }
   }
