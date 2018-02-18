@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Services from '../services/Services';
 
 import TickerHeader from './TickerHeader/TickerHeader';
 import TickerStatus from './TickerStatus/TickerStatus';
@@ -12,7 +11,6 @@ export default class TickerApp extends React.Component<{ }, { }> {
 
   constructor(props: { }) {
     super(props);
-    Services.bootstrap();
   }
                   
   render() {

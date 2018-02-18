@@ -5,7 +5,10 @@ import TickerApp from './ui/TickerApp';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
+import Services from './services/Services';
 import Store from './services/redux/Store';
+
+Services.bootstrap();
 
 render(
   <Provider store={Store}>
