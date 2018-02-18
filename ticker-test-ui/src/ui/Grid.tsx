@@ -18,7 +18,7 @@ const mapStateToProps = (state: any) => {
     columnDefs: state.columnDefs,
     rowData: state.rowData
   };
-}
+};
 
 class Grid extends React.Component<Props, { }> {
 

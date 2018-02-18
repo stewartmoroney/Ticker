@@ -3,7 +3,7 @@ import { Container, SingleInstance } from 'eye-oh-see';
 import { Store } from 'redux';
 import { Observable, Observer } from 'rxjs';
 
-import { subscribed, status, newTick, session, dataUpdate,  } from './redux/Actions';
+import { subscribed, unsubscribed, status, newTick, session, dataUpdate,  } from './redux/Actions';
 import Services from './Services';
 import TickAction from './redux/TickAction';
 
@@ -21,7 +21,7 @@ export class SubscribeServiceImpl implements SubscribeService {
   public subscribe(userName: string): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
       if (this._client && this._client.connected && this.sessionId) {
-        this.doSubscribe(userName, observer);
+        this.doSubscribe(this.sessionId, observer);
       } else if (this._client && this._client.connected) {
         this.doLogon(userName, observer);
       } else {
@@ -38,7 +38,7 @@ export class SubscribeServiceImpl implements SubscribeService {
       observer.next(status('unsubscribing'));
       this._client.send('/app/tick/unsubscribe', {priority: 9});
       this._client.send('/app/data/unsubscribe', {priority: 9});
-      observer.next(status('unsubscribed'));
+      observer.next(unsubscribed());
     });
   }  
 
@@ -65,7 +65,7 @@ export class SubscribeServiceImpl implements SubscribeService {
     this._client.subscribe('/data-user' + sessionId, (data: Stomp.Message) => observer.next(dataUpdate(data.body)));
     this._client.send('/app/tick/subscribe', {priority: 9});
     this._client.send('/app/data/subscribe', {priority: 9});
-    observer.next(subscribed())
+    observer.next(subscribed());
     observer.next(status('listening for ticks'));    
   }
 }
