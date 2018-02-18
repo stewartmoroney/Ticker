@@ -1,4 +1,4 @@
-export default interface TickAction{
+export default interface TickAction {
 	type: string;
 	payload: string
 }
