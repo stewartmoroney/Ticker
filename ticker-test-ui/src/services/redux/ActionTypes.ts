@@ -1,6 +1,7 @@
 export const TICK = 'NEW_TICK';
 export const USER_UPDATE = 'USER_UPDATE';
 export const SUBSCRIBE = 'SUBSCRIBE';
+export const SUBSCRIBED = 'SUBSCRIBED';
 export const UNSUBSCRIBE = 'UNSUBSCRIBE';
 export const STATUS = 'CONNECTION_STATE';
 export const SESSION = 'NEW_SESSION';

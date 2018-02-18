@@ -1,8 +1,10 @@
-import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBE, UNSUBSCRIBE }  from './ActionTypes';
+import { TICK, STATUS, USER_UPDATE, SESSION, GRID_CLEAR, GRID_UPDATE, SUBSCRIBED, UNSUBSCRIBE }  from './ActionTypes';
 import TickerAppState from './../../state/TickerAppState';
 import TickAction from './../redux/TickAction';
 
 const initialState: TickerAppState = {
+  connected: false,
+  subscribed: false,
   tickerStatus: 'Connecting',
   sessionId: '',
   tickerValue: '<.. watiing ..>',
@@ -29,7 +31,8 @@ export default (state: TickerAppState = initialState, action: TickAction) => {
       return { ...state, rowData: []};
     case GRID_UPDATE:
       return { ...state, rowData: JSON.parse(action.payload).rows };
-    case SUBSCRIBE:
+    case SUBSCRIBED:
+      return { ...state, subscribed: true };
     case UNSUBSCRIBE:
     default:
       return state;

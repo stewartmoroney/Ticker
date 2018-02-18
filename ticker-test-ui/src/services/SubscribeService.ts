@@ -3,7 +3,7 @@ import { Container, SingleInstance } from 'eye-oh-see';
 import { Store } from 'redux';
 import { Observable, Observer } from 'rxjs';
 
-import { status, newTick, session, dataUpdate } from './redux/Actions';
+import { subscribed, status, newTick, session, dataUpdate,  } from './redux/Actions';
 import Services from './Services';
 import TickAction from './redux/TickAction';
 
@@ -65,6 +65,7 @@ export class SubscribeServiceImpl implements SubscribeService {
     this._client.subscribe('/data-user' + sessionId, (data: Stomp.Message) => observer.next(dataUpdate(data.body)));
     this._client.send('/app/tick/subscribe', {priority: 9});
     this._client.send('/app/data/subscribe', {priority: 9});
+    observer.next(subscribed())
     observer.next(status('listening for ticks'));    
   }
 }
