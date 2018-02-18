@@ -1,9 +1,13 @@
 import { SingleInstance } from 'eye-oh-see';
+import { Observable, Observer } from 'rxjs';
 
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
 import { BACKEND_URL } from '../Constants';
+
+import { connected, newSession } from './redux/Actions';
+import TickAction from './redux/TickAction';
 
 export abstract class ConnectionService {
   abstract client(onConnected: Function): Stomp.Client; 

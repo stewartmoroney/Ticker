@@ -22,12 +22,12 @@ public class LoginController {
     private final SessionController sessionController;
 
     @MessageMapping("/login")
-    public void login(String uid, SimpMessageHeaderAccessor stompAccessor) {
-        log.info("Received request {} from {}", uid, sessionController.getUserSession(stompAccessor));
+    public void login(SimpMessageHeaderAccessor stompAccessor) {
+        log.info("Received request from {}", sessionController.getUserSession(stompAccessor));
         UserSession userSession = sessionController.getUserSession(stompAccessor);
         String correlationId = Headers.getCorrelationId(stompAccessor);
         String endpoint = "/login/ack";
-        sendLoginAck(userSession, correlationId, endpoint, logonUser(uid) , stompAccessor);
+        sendLoginAck(userSession, correlationId, endpoint, logonUser() , stompAccessor);
     }
 
     public void sendLoginAck(UserSession userSession, String correlationId, String endpoint, CompletableFuture<User> future, SimpMessageHeaderAccessor accessor) {
@@ -46,7 +46,7 @@ public class LoginController {
         });
     }
 
-    private CompletableFuture<User> logonUser(String uid){
-        return CompletableFuture.completedFuture(User.builder().id(uid).build());
+    private CompletableFuture<User> logonUser(){
+        return CompletableFuture.completedFuture(User.builder().build());
     }
 }

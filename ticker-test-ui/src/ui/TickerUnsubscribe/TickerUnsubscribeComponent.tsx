@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 interface Props {
-  userName: string;
-  unsubscribe: (userName: string) => void;
+  unsubscribe: () => void;
 } 
 
 export default class TickerUnsubscribeComponent extends React.Component<Props> {
@@ -12,7 +11,7 @@ export default class TickerUnsubscribeComponent extends React.Component<Props> {
   }
 
   handleSubmit() {
-    this.props.unsubscribe(this.props.userName);
+    this.props.unsubscribe();
   }
   render() {
     return (

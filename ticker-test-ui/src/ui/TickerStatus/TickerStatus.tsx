@@ -6,8 +6,7 @@ import TickerStatusComponent from './TickerStatusComponent';
 const mapStateToProps = (state: TickerAppState) => {
   return { 
     tickerStatus: state.tickerStatus,
-    sessionId: state.sessionId,
-    userName: state.userName
+    sessionId: state.sessionId
   };
 };
 

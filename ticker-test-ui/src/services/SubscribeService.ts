@@ -1,15 +1,17 @@
 import * as Stomp from 'stompjs';
-import { Container, SingleInstance } from 'eye-oh-see';
+import { SingleInstance } from 'eye-oh-see';
 import { Store } from 'redux';
 import { Observable, Observer } from 'rxjs';
 
-import { subscribed, unsubscribed, status, newTick, session, dataUpdate,  } from './redux/Actions';
+import { connected, subscribed, unsubscribed, newSession } from './redux/Actions';
 import Services from './Services';
 import TickAction from './redux/TickAction';
 
+import { Channel, defaultChannels } from './Channels';
+
 export abstract class SubscribeService {
-  abstract subscribe(userName: string): Observable<TickAction>;
-  abstract unsubscribe(userName: string): Observable<TickAction>;
+  abstract subscribe(): Observable<TickAction>;
+  abstract unsubscribe(): Observable<TickAction>;
 }
 
 @SingleInstance(SubscribeService)
@@ -18,26 +20,24 @@ export class SubscribeServiceImpl implements SubscribeService {
   private _client: Stomp.Client;
   private sessionId: string;
 
-  public subscribe(userName: string): Observable<TickAction> {
+  public subscribe(): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
       if (this._client && this._client.connected && this.sessionId) {
         this.doSubscribe(this.sessionId, observer);
-      } else if (this._client && this._client.connected) {
-        this.doLogon(userName, observer);
-      } else {
-        this._client = this.connectedClient((e: Stomp.Message) => {
-          observer.next(status('Connected'));
-          this.doLogon(userName, observer);
-        });      
-      }
+      } 
+
+      this._client = this.connectedClient((e: Stomp.Message) => {
+        observer.next(connected());
+        this.doLogon(observer, () => 
+          this.doSubscribe(this.sessionId, observer)
+        );
+      });      
     });
   }
 
-  public unsubscribe(userName: string): Observable<TickAction> {
+  public unsubscribe(): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
-      observer.next(status('unsubscribing'));
-      this._client.send('/app/tick/unsubscribe', {priority: 9});
-      this._client.send('/app/data/unsubscribe', {priority: 9});
+      defaultChannels.forEach((channel: Channel) => this._client.send('/app/' + channel.name + '/unsubscribe', {priority: 9}));
       observer.next(unsubscribed());
     });
   }  
@@ -50,22 +50,26 @@ export class SubscribeServiceImpl implements SubscribeService {
     }
   }
 
-  private doLogon(userName: string, observer: Observer<TickAction>) {
+  private doLogon(observer: Observer<TickAction>, logonCallback: Function) {
     this._client.subscribe('/login/ack*', (e: Stomp.Message) => {
       this.sessionId = e.headers['message-id'].split('-')[0];
-      observer.next(session(this.sessionId));
-      observer.next(status('logged on'));
-      this.doSubscribe(this.sessionId, observer);
+      observer.next(newSession(this.sessionId));
+      logonCallback();
     });
-    this._client.send('/app/login', {priority: 9}, userName);        
+    this._client.send('/app/login', {priority: 9}, '');        
   }
   
   private doSubscribe(sessionId: string, observer: Observer<TickAction>) {
-    this._client.subscribe('/tick-user' + sessionId, (tick: Stomp.Message) => observer.next(newTick(tick.body)));    
-    this._client.subscribe('/data-user' + sessionId, (data: Stomp.Message) => observer.next(dataUpdate(data.body)));
-    this._client.send('/app/tick/subscribe', {priority: 9});
-    this._client.send('/app/data/subscribe', {priority: 9});
+    defaultChannels.forEach((channel: Channel) => {
+      this.clientSubscribe(sessionId, observer, channel);
+    });
+
     observer.next(subscribed());
-    observer.next(status('listening for ticks'));    
+  }
+
+  private clientSubscribe(sessionId: string, observer: Observer<TickAction>, channel: Channel) {  
+    const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
+    this._client.subscribe('/' + channel.name + '-user' + sessionId, (data: Stomp.Message) => channel.dataHandler(data.body, observer));    
+    this._client.send(subscribeEndpoint, {priority: 9});      
   }
 }
