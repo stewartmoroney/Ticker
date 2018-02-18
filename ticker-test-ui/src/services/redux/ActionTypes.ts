@@ -1,4 +1,5 @@
-export const CONNECTED = 'CONECTED';
+export const CONNECT = 'CONNECT';
+export const CONNECTED = 'CONNECTED';
 export const TICK = 'NEW_TICK';
 export const USER_UPDATE = 'USER_UPDATE';
 export const SUBSCRIBE = 'SUBSCRIBE';

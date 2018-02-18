@@ -9,7 +9,7 @@ import TickAction from './../redux/TickAction';
 const initialState: TickerAppState = {
   connected: false,
   subscribed: false,
-  tickerStatus: 'Connecting',
+  tickerStatus: 'Connecting...',
   sessionId: '',
   tickerValue: '<.. watiing ..>',
   columnDefs: [
@@ -23,7 +23,7 @@ const initialState: TickerAppState = {
 export default (state: TickerAppState = initialState, action: TickAction) => {
   switch (action.type) {
     case CONNECTED:
-      return { ...state, connected: true };
+      return { ...state, connected: true, tickerStatus: 'Connected' };
     case TICK:
       return { ...state, tickerValue: action.payload };
     case NEW_SESSION:
@@ -33,9 +33,9 @@ export default (state: TickerAppState = initialState, action: TickAction) => {
     case GRID_UPDATE:
       return { ...state, rowData: JSON.parse(action.payload).rows };
     case SUBSCRIBED:
-      return { ...state, subscribed: true , tickerStatus: 'listening ' };
+      return { ...state, subscribed: true , tickerStatus: 'Listening' };
     case UNSUBSCRIBED:
-      return { ...state, subscribed: false , tickerStatus: 'not listening' };
+      return { ...state, subscribed: false , tickerStatus: 'Not Listening' };
     default:
       return state;
   }

@@ -1,11 +1,13 @@
 import TickAction from './TickAction';
 
-import { CONNECTED, TICK, NEW_SESSION, GRID_UPDATE, 
+import { CONNECT, CONNECTED, NEW_SESSION, TICK, GRID_UPDATE, 
   SUBSCRIBE, SUBSCRIBED, UNSUBSCRIBE, UNSUBSCRIBED } from './ActionTypes';
 
 type StringTickActionCreator = (arg: String) => TickAction;
 type VoidTickActionCreator = () => TickAction;
 
+
+export const connect: VoidTickActionCreator = () => ({type: CONNECT, payload: ''});
 export const connected: VoidTickActionCreator = () => ({type: CONNECTED, payload: ''});
 
 export const newTick: StringTickActionCreator = (s: string) => ({ type: TICK, payload: s });

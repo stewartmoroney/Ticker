@@ -8,7 +8,7 @@ import './index.css';
 import Services from './services/Services';
 import Store from './services/redux/Store';
 
-Services.bootstrap();
+Services.bootstrap(Store.dispatch);
 
 render(
   <Provider store={Store}>
