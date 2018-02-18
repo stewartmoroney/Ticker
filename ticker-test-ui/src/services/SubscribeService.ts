@@ -1,14 +1,10 @@
 import * as Stomp from 'stompjs';
 import { Container, SingleInstance } from 'eye-oh-see';
 import { Store } from 'redux';
-
 import { Observable, Observer } from 'rxjs';
 
 import { status, newTick, session, dataUpdate } from './redux/Actions';
 import Services from './Services';
-import CreateStore from '../services/redux/Store';
-import TickerAppState from './../state/TickerAppState';
-
 import TickAction from './redux/TickAction';
 
 export abstract class SubscribeService {
