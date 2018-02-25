@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import { ColumnApi, GridApi } from 'ag-grid';
 
+import TickerAppState from '../state/TickerAppState';
+
 import '../../node_modules/ag-grid/dist/styles/ag-grid.css';
 import '../../node_modules/ag-grid/dist/styles/theme-fresh.css';
 
@@ -13,7 +15,7 @@ interface Props {
     columnDefs: any[];
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: TickerAppState) => {
   return {
     columnDefs: state.columnDefs,
     rowData: state.rowData
@@ -25,7 +27,7 @@ class Grid extends React.Component<Props, { }> {
   private gridApi: GridApi;
   private columnApi: ColumnApi;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.onGridReady = this.onGridReady.bind(this);
