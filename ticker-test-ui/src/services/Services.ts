@@ -1,6 +1,7 @@
 import * as IOC from 'eye-oh-see';
-import { Store } from 'redux';
+import { Store, Dispatch } from 'redux';
 
+import TickAction from './../services/redux/TickAction';
 import { connect } from './redux/Actions';
 import TickerAppState from './../state/TickerAppState';
 
@@ -11,7 +12,7 @@ export default class Services {
 
   private static container: IOC.Container;
 
-  public static bootstrap(dispatch: any) {
+  public static bootstrap(dispatch: Dispatch<TickAction>) {
     Services.container = new IOC.Container();
     Services.container.register(ConnectionService);
     Services.container.register(ConnectionServiceImpl);

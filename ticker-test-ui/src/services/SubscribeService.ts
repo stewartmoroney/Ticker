@@ -1,9 +1,10 @@
 import * as Stomp from 'stompjs';
-import { SingleInstance } from 'eye-oh-see';
+import { SingleInstance, Factory } from 'eye-oh-see';
 import { Store } from 'redux';
 import { Observable, Observer } from 'rxjs';
 
 import { subscribed, unsubscribed } from './redux/Actions';
+import { ConnectionService } from './ConnectionService';
 import Services from './Services';
 import TickAction from './redux/TickAction';
 
@@ -17,6 +18,12 @@ export abstract class SubscribeService {
 @SingleInstance(SubscribeService)
 export class SubscribeServiceImpl implements SubscribeService {
 
+  private connectionService: ConnectionService;
+
+  constructor(@Factory(ConnectionService) private connectionServiceFactory: () => ConnectionService) { 
+    this.connectionService = this.connectionServiceFactory();
+  }
+
   public subscribe(sessionId: string): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
         return this.doSubscribe(sessionId, observer);
@@ -25,11 +32,17 @@ export class SubscribeServiceImpl implements SubscribeService {
 
   public unsubscribe(): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
-      defaultChannels.forEach((channel: Channel) => Services.connectionService().client().send('/app/' + channel.name + '/unsubscribe', {priority: 9}));
+      defaultChannels.forEach((channel: Channel) => {
+        this.client().send('/app/' + channel.name + '/unsubscribe', {priority: 9});
+      });
       observer.next(unsubscribed());
     });
   }  
   
+  private client(): Stomp.Client {
+    return this.connectionService.client();
+  }
+
   private doSubscribe(sessionId: string, observer: Observer<TickAction>) {
     defaultChannels.forEach((channel: Channel) => {
       this.clientSubscribe(sessionId, observer, channel);
@@ -40,7 +53,9 @@ export class SubscribeServiceImpl implements SubscribeService {
 
   private clientSubscribe(sessionId: string, observer: Observer<TickAction>, channel: Channel) {  
     const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
-    Services.connectionService().client().subscribe('/' + channel.name + '-user' + sessionId, (data: Stomp.Message) => channel.dataHandler(data.body, observer));    
-    Services.connectionService().client().send(subscribeEndpoint, {priority: 9});      
+    const endpoint = '/' + channel.name + '-user' + sessionId;
+
+    this.client().subscribe(endpoint, (data: Stomp.Message) => channel.dataHandler(data.body, observer));    
+    this.client().send(subscribeEndpoint, {priority: 9});      
   }
 }

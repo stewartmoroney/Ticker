@@ -10,9 +10,8 @@ import { connected, newSession } from './redux/Actions';
 import TickAction from './redux/TickAction';
 
 export abstract class ConnectionService {
-  abstract connectClient(): Observable<TickAction>; 
+  abstract connect(): Observable<TickAction>; 
   abstract client(): Stomp.Client; 
-
 }
 
 @SingleInstance(ConnectionService)
@@ -22,7 +21,7 @@ export class ConnectionServiceImpl implements ConnectionService {
   private userId: string;
   private passsword: string;
 
-  public connectClient(): Observable<TickAction>  {
+  public connect(): Observable<TickAction>  {
     return Observable.create((observer: Observer<TickAction>) => {
       var socket = new SockJS(BACKEND_URL);
       this._client = Stomp.over(socket);

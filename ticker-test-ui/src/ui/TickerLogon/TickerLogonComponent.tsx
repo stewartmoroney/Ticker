@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import TickAction from './../../services/redux/TickAction';
+
 interface Props {
-  logon: () => void;
+  logon: () => TickAction;
 }
 
 export default class TickerLogonComponent extends React.Component<Props> {

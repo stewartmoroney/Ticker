@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import TickAction from './../../services/redux/TickAction';
+
 interface Props {
-  unsubscribe: () => void;
+  unsubscribe: () => TickAction;
 } 
 
 export default class TickerUnsubscribeComponent extends React.Component<Props> {

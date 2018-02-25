@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { InstancePerDependency } from 'eye-oh-see';
 
 import Services from '../../services/Services';
 
+import TickAction from './../../services/redux/TickAction';
 import { TickActionCreator, subscribe } from '../../services/redux/Actions';
 
 import TickerAppState from '../../state/TickerAppState';
@@ -13,7 +15,7 @@ const mapStateToProps = (state: TickerAppState) => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<TickAction>) => {
   return {
      logon: () =>  dispatch(subscribe())
   };
