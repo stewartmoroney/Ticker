@@ -6,7 +6,6 @@ import { UNSUBSCRIBE } from '../redux/ActionTypes';
 import TickAction from './../redux/TickAction';
 
 export default (action$: ActionsObservable<TickAction>) =>
-  action$.ofType(UNSUBSCRIBE)
-    .mergeMap((action: TickAction) => {
-      return Services.subscribeService().unsubscribe();
-    });
+  action$.ofType(UNSUBSCRIBE).mergeMap((action: TickAction) => {
+    return Services.subscribeService().unsubscribe();
+  });

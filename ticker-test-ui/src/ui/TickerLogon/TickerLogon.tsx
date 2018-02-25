@@ -17,8 +17,10 @@ const mapStateToProps = (state: TickerAppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<TickAction>) => {
   return {
-     logon: () =>  dispatch(subscribe())
+    logon: () => dispatch(subscribe())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TickerLogonComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TickerLogonComponent
+);

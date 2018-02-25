@@ -13,8 +13,10 @@ const mapStateToProps = (state: TickerAppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<TickAction>) => {
   return {
-     unsubscribe: () => dispatch(unsubscribe())
+    unsubscribe: () => dispatch(unsubscribe())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TickerUnsubscribeComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TickerUnsubscribeComponent
+);

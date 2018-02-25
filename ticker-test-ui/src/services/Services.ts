@@ -9,7 +9,6 @@ import { ConnectionService, ConnectionServiceImpl } from './ConnectionService';
 import { SubscribeService, SubscribeServiceImpl } from './SubscribeService';
 
 export default class Services {
-
   private static container: IOC.Container;
 
   public static bootstrap(dispatch: Dispatch<TickAction>) {

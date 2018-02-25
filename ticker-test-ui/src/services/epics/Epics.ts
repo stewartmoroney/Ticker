@@ -5,8 +5,4 @@ import UnSubscribeEpic from './UnsubscribeEpic';
 import { combineEpics } from 'redux-observable';
 import 'rxjs';
 
-export default combineEpics(
-  ConnectEpic,
-  SubscribeEpic,
-  UnSubscribeEpic
-);
+export default combineEpics(ConnectEpic, SubscribeEpic, UnSubscribeEpic);

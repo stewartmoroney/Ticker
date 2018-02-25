@@ -12,9 +12,8 @@ Services.bootstrap(Store.dispatch);
 
 render(
   <Provider store={Store}>
-    <TickerApp/>
-  </Provider>
-  ,
+    <TickerApp />
+  </Provider>,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();

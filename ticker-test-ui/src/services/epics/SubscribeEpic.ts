@@ -8,8 +8,12 @@ import Services from './../../services/Services';
 import { SUBSCRIBE } from './../redux/ActionTypes';
 import TickAction from './../redux/TickAction';
 
-export default (action$: ActionsObservable<TickAction>, store: Store<TickerAppState>) =>
-  action$.ofType(SUBSCRIBE)
-    .mergeMap((action: TickAction) => {
-      return Services.subscribeService().subscribe(store.getState().sessionId);
-    });
+export default (
+  action$: ActionsObservable<TickAction>,
+  store: Store<TickerAppState>
+) =>
+  action$.ofType(SUBSCRIBE).mergeMap((action: TickAction) => {
+    return Services.subscribeService().subscribe(
+      store.getState().sessionId
+    );
+  });

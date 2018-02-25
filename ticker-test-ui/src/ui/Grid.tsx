@@ -11,8 +11,8 @@ import '../../node_modules/ag-grid/dist/styles/theme-fresh.css';
 import './Grid.css';
 
 interface Props {
-    rowData: any[];
-    columnDefs: any[];
+  rowData: any[];
+  columnDefs: any[];
 }
 
 const mapStateToProps = (state: TickerAppState) => {
@@ -22,8 +22,7 @@ const mapStateToProps = (state: TickerAppState) => {
   };
 };
 
-class Grid extends React.Component<Props, { }> {
-
+class Grid extends React.Component<Props, {}> {
   private gridApi: GridApi;
   private columnApi: ColumnApi;
 
@@ -46,7 +45,7 @@ class Grid extends React.Component<Props, { }> {
       width: 500
     };
 
-    return(
+    return (
       <div style={containerStyle} className="ag-fresh">
         <AgGridReact
           columnDefs={this.props.columnDefs}

@@ -17,28 +17,32 @@ export abstract class SubscribeService {
 
 @SingleInstance(SubscribeService)
 export class SubscribeServiceImpl implements SubscribeService {
-
   private connectionService: ConnectionService;
 
-  constructor(@Factory(ConnectionService) private connectionServiceFactory: () => ConnectionService) { 
+  constructor(
+    @Factory(ConnectionService)
+    private connectionServiceFactory: () => ConnectionService
+  ) {
     this.connectionService = this.connectionServiceFactory();
   }
 
   public subscribe(sessionId: string): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
-        return this.doSubscribe(sessionId, observer);
+      return this.doSubscribe(sessionId, observer);
     });
   }
 
   public unsubscribe(): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
       defaultChannels.forEach((channel: Channel) => {
-        this.client().send('/app/' + channel.name + '/unsubscribe', {priority: 9});
+        this.client().send('/app/' + channel.name + '/unsubscribe', {
+          priority: 9
+        });
       });
       observer.next(unsubscribed());
     });
-  }  
-  
+  }
+
   private client(): Stomp.Client {
     return this.connectionService.client();
   }
@@ -51,11 +55,17 @@ export class SubscribeServiceImpl implements SubscribeService {
     observer.next(subscribed());
   }
 
-  private clientSubscribe(sessionId: string, observer: Observer<TickAction>, channel: Channel) {  
+  private clientSubscribe(
+    sessionId: string,
+    observer: Observer<TickAction>,
+    channel: Channel
+  ) {
     const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
     const endpoint = '/' + channel.name + '-user' + sessionId;
 
-    this.client().subscribe(endpoint, (data: Stomp.Message) => channel.dataHandler(data.body, observer));    
-    this.client().send(subscribeEndpoint, {priority: 9});      
+    this.client().subscribe(endpoint, (data: Stomp.Message) =>
+      channel.dataHandler(data.body, observer)
+    );
+    this.client().send(subscribeEndpoint, { priority: 9 });
   }
 }

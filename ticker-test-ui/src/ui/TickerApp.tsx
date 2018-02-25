@@ -7,21 +7,20 @@ import TickerLogon from './TickerLogon/TickerLogon';
 import TickerUnsubscribe from './TickerUnsubscribe/TickerUnsubscribe';
 import Grid from './Grid';
 
-export default class TickerApp extends React.Component<{ }, { }> {
-
-  constructor(props: { }) {
+export default class TickerApp extends React.Component<{}, {}> {
+  constructor(props: {}) {
     super(props);
   }
-                  
+
   render() {
     return (
       <div>
-        <TickerHeader/>
-        <TickerLogon/>
-        <TickerStatus/>
-        <TickerBody/>
-        <TickerUnsubscribe/>
-        <Grid/>
+        <TickerHeader />
+        <TickerLogon />
+        <TickerStatus />
+        <TickerBody />
+        <TickerUnsubscribe />
+        <Grid />
       </div>
     );
   }

@@ -6,4 +6,4 @@ export default interface TickerAppState {
   tickerValue: string;
   columnDefs: Array<any>;
   rowData: Array<any>;
-}
+};

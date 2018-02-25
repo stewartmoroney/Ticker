@@ -11,16 +11,16 @@ export default class TickerLogonComponent extends React.Component<Props> {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
- 
+
   handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
     this.props.logon();
   }
 
   render() {
     return (
-  <div>
-    <button onClick={this.handleSubmit}>logon</button>
-  </div>
+      <div>
+        <button onClick={this.handleSubmit}>logon</button>
+      </div>
     );
   }
 }

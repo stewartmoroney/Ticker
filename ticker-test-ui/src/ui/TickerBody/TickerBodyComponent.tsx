@@ -4,11 +4,8 @@ interface Props {
   value: string;
 }
 
-export default class TickerBodyComponent extends React.Component <Props> {
-
+export default class TickerBodyComponent extends React.Component<Props> {
   render() {
-    return (
-      <div>{this.props.value}</div>
-    );
+    return <div>{this.props.value}</div>;
   }
 }
