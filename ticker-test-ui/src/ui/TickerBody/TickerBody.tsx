@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 
-import TickerAppState from '../../state/TickerAppState';
+import ITickerAppState from '../../state/TickerAppState';
 import TickerBodyComponent from './TickerBodyComponent';
 
-interface Props {
-  value: string;
-}
-
-const mapStateToProps = (state: TickerAppState) => {
+const mapStateToProps = (state: ITickerAppState) => {
   return { value: state.tickerValue };
 };
 

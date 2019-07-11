@@ -1,26 +1,26 @@
 import * as React from 'react';
 
-import TickAction from './../../services/redux/TickAction';
+import ITickAction from './../../services/redux/TickAction';
 
-interface Props {
-  logon: () => TickAction;
+interface IProps {
+  logon: () => ITickAction;
 }
 
-export default class TickerLogonComponent extends React.Component<Props> {
-  constructor(props: Props) {
+export default class TickerLogonComponent extends React.Component<IProps> {
+  constructor(props: IProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
-    this.props.logon();
-  }
-
-  render() {
+  public render() {
     return (
       <div>
         <button onClick={this.handleSubmit}>logon</button>
       </div>
     );
+  }
+
+  private handleSubmit(event: React.MouseEvent<HTMLButtonElement>) {
+    this.props.logon();
   }
 }

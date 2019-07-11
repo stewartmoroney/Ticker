@@ -1,6 +1,6 @@
-import { Action } from "redux";
+import { Action } from 'redux';
 
-export default interface TickAction extends Action {
-	type: string;
-	payload: string;
-};
+export default interface ITickAction extends Action {
+  type: string;
+  payload: string;
+}

@@ -1,21 +1,22 @@
 import * as React from 'react';
 
-import TickAction from './../../services/redux/TickAction';
+import ITickAction from './../../services/redux/TickAction';
 
-interface Props {
-  unsubscribe: () => TickAction;
+interface IProps {
+  unsubscribe: () => ITickAction;
 }
 
-export default class TickerUnsubscribeComponent extends React.Component<Props> {
-  constructor(props: Props) {
+export default class TickerUnsubscribeComponent extends React.Component<IProps> {
+  constructor(props: IProps) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
-    this.props.unsubscribe();
-  }
-  render() {
+  public render() {
     return <button onClick={this.handleSubmit}>Ticker Unsubscribe</button>;
+  }
+
+  private handleSubmit() {
+    this.props.unsubscribe();
   }
 }

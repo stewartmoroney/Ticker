@@ -9,23 +9,17 @@
     "eye-oh-see": "^0.5.5",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-dom-factories": "^1.0.2",
     "react-redux": "7.1.0",
-    "react-scripts-ts": "2.8.0",
+    "react-scripts-ts": "3.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
     "redux-observable": "1.1.0",
     "rxjs": "6.1.0",
     "sockjs-client": "1.3.0",
-    "stompjs": "2.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "webpack": "webpack -p",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
-  "devDependencies": {
+    "stompjs": "2.3.3",
+    "typescript": "3.5.2",
+
     "@types/jest": "^23.3.9",
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.2",
@@ -36,7 +30,18 @@
     "prettier": "^1.14.3",
     "rxjs-tslint-rules": "^4.1.1",
     "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.4"
+    "tslint-config-prettier": "^1.17.0"
+
+
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "webpack": "webpack -p",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

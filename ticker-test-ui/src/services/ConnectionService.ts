@@ -1,17 +1,17 @@
 import { SingleInstance } from 'eye-oh-see';
 import { Observable, Observer } from 'rxjs';
 
-import SockJS  from 'sockjs-client';
+import SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
 import { BACKEND_URL } from '../Constants';
 
 import { connected, newSession } from './redux/Actions';
-import TickAction from './redux/TickAction';
+import ITickAction from './redux/TickAction';
 
 export abstract class ConnectionService {
-  abstract connect(): Observable<TickAction>;
-  abstract client(): Stomp.Client;
+  public abstract connect(): Observable<ITickAction>;
+  public abstract client(): Stomp.Client;
 }
 
 @SingleInstance(ConnectionService)
@@ -20,8 +20,8 @@ export class ConnectionServiceImpl implements ConnectionService {
   private userId!: string;
   private passsword!: string;
 
-  public connect(): Observable<TickAction> {
-    return Observable.create((observer: Observer<TickAction>) => {
+  public connect(): Observable<ITickAction> {
+    return Observable.create((observer: Observer<ITickAction>) => {
       const socket = new SockJS(BACKEND_URL);
       this._client = Stomp.over(socket);
       this._client.connect(
