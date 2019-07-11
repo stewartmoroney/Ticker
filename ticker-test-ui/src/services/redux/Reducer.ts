@@ -49,4 +49,4 @@ const appReducer = (state: ITickerAppState = initialState, action: ITickAction):
   }
 };
 
-export default combineReducers(appReducer);
+export default combineReducers([appReducer]);
