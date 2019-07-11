@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ofType, StateObservable } from 'redux-observable';
+import { ActionsObservable, ofType, StateObservable } from 'redux-observable';
 import { Observable } from 'rxjs';
 import { mergeMap, withLatestFrom } from 'rxjs/operators';
 
@@ -11,12 +11,15 @@ import ITickerAppState from '../../state/TickerAppState';
 
 import { ApplicationEpic } from './Epics';
 
-export const subscribeEpic: ApplicationEpic = (action$: Observable<Action>, state$: StateObservable<ITickerAppState>) =>
+export const subscribeEpic: ApplicationEpic = (
+    action$: ActionsObservable<Action>,
+    state$: StateObservable<ITickerAppState>
+  ) =>
   action$.pipe(
     ofType(SUBSCRIBE),
-    mergeMap((action, state) => {
-      return Services.subscribeService().subscribe(
-        state$.value.sessionId
-      );
+    withLatestFrom(state$),
+    mergeMap(([action, state]) => {
+      const { sessionId } = state;
+      return Services.subscribeService().subscribe(sessionId);
     })
   );

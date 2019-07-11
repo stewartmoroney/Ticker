@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Epic } from 'redux-observable';
+import { ActionsObservable, Epic } from 'redux-observable';
 
 import { connectEpic } from './ConnectEpic';
 import { subscribeEpic } from './SubscribeEpic';
