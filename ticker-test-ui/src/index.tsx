@@ -6,12 +6,13 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 import Services from './services/Services';
-import Store from './services/redux/Store';
+import createStore from './services/redux/Store';
 
-Services.bootstrap(Store.dispatch);
+const store = createStore();
+Services.bootstrap(store.dispatch);
 
 render(
-  <Provider store={Store}>
+  <Provider store={store}>
     <TickerApp />
   </Provider>,
   document.getElementById('root') as HTMLElement

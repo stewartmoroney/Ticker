@@ -1,19 +1,19 @@
-import { ActionsObservable } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators/mergeMap';
-import { Store } from 'redux';
-
-import TickerAppState from './../../state/TickerAppState';
+import { Observable } from 'rxjs'
+import { ofType, StateObservable } from 'redux-observable';
+import { mergeMap, withLatestFrom } from 'rxjs/operators';
+import { Action } from 'redux';
 
 import Services from './../../services/Services';
 import { SUBSCRIBE } from './../redux/ActionTypes';
-import TickAction from './../redux/TickAction';
+import TickerAppState from '../../state/TickerAppState';
+import { ApplicationEpic } from './Epics';
 
-export default (
-  action$: ActionsObservable<TickAction>,
-  store: Store<TickerAppState>
-) =>
-  action$.ofType(SUBSCRIBE).mergeMap((action: TickAction) => {
-    return Services.subscribeService().subscribe(
-      store.getState().sessionId
-    );
-  });
+export const subscribeEpic: ApplicationEpic = (action$: Observable<Action>, state$: StateObservable<TickerAppState>) =>
+  action$.pipe(
+    ofType(SUBSCRIBE),
+    mergeMap((action, state) => {
+      return Services.subscribeService().subscribe(
+        state$.value.sessionId
+      );
+    })
+  )

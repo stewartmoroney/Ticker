@@ -12,7 +12,7 @@ import {
   UNSUBSCRIBED
 } from './ActionTypes';
 
-type StringTickActionCreator = (arg: String) => TickAction;
+type StringTickActionCreator = (arg: string) => TickAction;
 type VoidTickActionCreator = () => TickAction;
 
 export const connect: VoidTickActionCreator = () => ({

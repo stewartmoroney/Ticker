@@ -1,8 +1,16 @@
-import ConnectEpic from './ConnectEpic';
-import SubscribeEpic from './SubscribeEpic';
-import UnSubscribeEpic from './UnsubscribeEpic';
+import { Action } from 'redux'
+import { Epic } from 'redux-observable'
 
-import { combineEpics } from 'redux-observable';
-import 'rxjs';
+import { connectEpic } from './ConnectEpic';
+import { subscribeEpic } from './SubscribeEpic';
+import { unSubscribeEpic } from './UnsubscribeEpic';
+import TickerAppState from '../../state/TickerAppState';
 
-export default combineEpics(ConnectEpic, SubscribeEpic, UnSubscribeEpic);
+export type ApplicationEpic<
+  T extends Action = Action
+> = Epic<T, T, TickerAppState>
+
+export default [connectEpic, 
+  subscribeEpic, 
+  unSubscribeEpic
+];

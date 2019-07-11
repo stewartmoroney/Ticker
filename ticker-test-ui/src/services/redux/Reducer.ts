@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 import {
   CONNECTED,
   NEW_SESSION,
@@ -24,7 +26,7 @@ const initialState: TickerAppState = {
   rowData: []
 };
 
-export default (state: TickerAppState = initialState, action: TickAction) => {
+const appReducer = (state: TickerAppState = initialState, action: TickAction): TickerAppState => {
   switch (action.type) {
     case CONNECTED:
       return { ...state, connected: true, tickerStatus: 'Connected' };
@@ -44,3 +46,5 @@ export default (state: TickerAppState = initialState, action: TickAction) => {
       return state;
   }
 };
+
+export default combineReducers(appReducer)

@@ -23,8 +23,8 @@ const mapStateToProps = (state: TickerAppState) => {
 };
 
 class Grid extends React.Component<Props, {}> {
-  private gridApi: GridApi;
-  private columnApi: ColumnApi;
+  private gridApi: GridApi | undefined;
+  private columnApi: ColumnApi | undefined;
 
   constructor(props: Props) {
     super(props);
@@ -36,7 +36,7 @@ class Grid extends React.Component<Props, {}> {
     this.gridApi = params.api;
     this.columnApi = params.columnApi;
 
-    this.gridApi.sizeColumnsToFit();
+    this.gridApi && this.gridApi.sizeColumnsToFit();
   }
 
   render() {

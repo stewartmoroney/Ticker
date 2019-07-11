@@ -1,7 +1,7 @@
 import { SingleInstance } from 'eye-oh-see';
 import { Observable, Observer } from 'rxjs';
 
-import * as SockJS from 'sockjs-client';
+import SockJS  from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
 import { BACKEND_URL } from '../Constants';
@@ -16,21 +16,23 @@ export abstract class ConnectionService {
 
 @SingleInstance(ConnectionService)
 export class ConnectionServiceImpl implements ConnectionService {
-  private _client: Stomp.Client;
-  private userId: string;
-  private passsword: string;
+  private _client!: Stomp.Client;
+  private userId!: string;
+  private passsword!: string;
 
   public connect(): Observable<TickAction> {
     return Observable.create((observer: Observer<TickAction>) => {
-      var socket = new SockJS(BACKEND_URL);
+      const socket = new SockJS(BACKEND_URL);
       this._client = Stomp.over(socket);
       this._client.connect(
         this.userId,
         this.passsword,
-        (frame: Stomp.Frame) => {
+          () => {
+          // (frame: Stomp.Frame) => {
           observer.next(connected());
           this._client.subscribe('/login/ack*', (e: Stomp.Message) => {
-            const sessionId = e.headers['message-id'].split('-')[0];
+            // const sessionId = e.headers['message-id'].split('-')[0];
+            const sessionId = '1';
             observer.next(newSession(sessionId));
           });
           this._client.send('/app/login', { priority: 9 }, '');
@@ -43,10 +45,6 @@ export class ConnectionServiceImpl implements ConnectionService {
   }
 
   public client() {
-    if (this._client) {
-      return this._client;
-    } else {
-      return this._client;
-    }
+    return this._client;
   }
 }
