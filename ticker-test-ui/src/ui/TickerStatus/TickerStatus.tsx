@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
-import ITickerAppState from '../../state/TickerAppState';
+import { GlobalState } from '../../services/epics/Epics';
 import TickerStatusComponent from './TickerStatusComponent';
 
-const mapStateToProps = (state: ITickerAppState) => {
+const mapStateToProps = (state: GlobalState) => {
   return {
-    sessionId: state.sessionId,
-    tickerStatus: state.tickerStatus
+    sessionId: state.app.sessionId,
+    tickerStatus: state.app.tickerStatus
   };
 };
 

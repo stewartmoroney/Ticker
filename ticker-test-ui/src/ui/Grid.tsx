@@ -3,7 +3,7 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import ITickerAppState from '../state/TickerAppState';
+import { GlobalState } from '../services/epics/Epics';
 
 import '../../node_modules/ag-grid/dist/styles/ag-grid.css';
 import '../../node_modules/ag-grid/dist/styles/theme-fresh.css';
@@ -15,10 +15,10 @@ interface IProps {
   columnDefs: any[];
 }
 
-const mapStateToProps = (state: ITickerAppState) => {
+const mapStateToProps = (state: GlobalState) => {
   return {
-    columnDefs: state.columnDefs,
-    rowData: state.rowData
+    columnDefs: state.app.columnDefs,
+    rowData: state.app.rowData
   };
 };
 

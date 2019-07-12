@@ -13,7 +13,9 @@ import ITickerAppState from '../../state/TickerAppState';
 
 import TickerLogonComponent from './TickerLogonComponent';
 
-const mapStateToProps = (state: ITickerAppState) => {
+import { GlobalState } from '../../services/epics/Epics';
+
+const mapStateToProps = (state: GlobalState) => {
   return {};
 };
 
