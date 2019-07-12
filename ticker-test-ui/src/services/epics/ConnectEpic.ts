@@ -7,7 +7,7 @@ import Services from './../../services/Services';
 import { CONNECT } from './../redux/ActionTypes';
 import { ApplicationEpic } from './Epics';
 
-export const connectEpic: ApplicationEpic = (action$: ActionsObservable<Action>) =>
+export const connectEpic: ApplicationEpic = action$ =>
   action$.pipe(
     ofType(CONNECT),
     mergeMap(action => {

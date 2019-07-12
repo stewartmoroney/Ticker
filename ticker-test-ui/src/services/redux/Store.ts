@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 
 import rootReducer from './Reducer';
 
-import epics from '../epics/Epics';
+import epics, { GlobalState } from '../epics/Epics';
 
 import ITickerAppState from '../../state/TickerAppState';
 
 export default () => {
 
-  const middleware = createEpicMiddleware<Action, Action, ITickerAppState>();
+  const middleware = createEpicMiddleware<Action, Action, GlobalState>();
   const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(middleware))

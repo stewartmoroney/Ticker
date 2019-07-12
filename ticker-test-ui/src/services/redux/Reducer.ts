@@ -14,7 +14,7 @@ import ITickAction from './../redux/TickAction';
 
 import ITickerAppState from './../../state/TickerAppState';
 
-const initialState: ITickerAppState = {
+const initialState = {
   columnDefs: [
     { headerName: 'ID', field: 'id' },
     { headerName: 'Name', field: 'name' },
@@ -49,4 +49,6 @@ const appReducer = (state: ITickerAppState = initialState, action: ITickAction):
   }
 };
 
-export default combineReducers([appReducer]);
+export default combineReducers({
+  app: appReducer
+});

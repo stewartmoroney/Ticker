@@ -9,7 +9,7 @@ import { UNSUBSCRIBE } from '../redux/ActionTypes';
 
 import { ApplicationEpic } from './Epics';
 
-export const unSubscribeEpic: ApplicationEpic = (action$: ActionsObservable<Action>) =>
+export const unSubscribeEpic: ApplicationEpic = action$ =>
   action$.pipe(
     ofType(UNSUBSCRIBE),
     mergeMap(action => {

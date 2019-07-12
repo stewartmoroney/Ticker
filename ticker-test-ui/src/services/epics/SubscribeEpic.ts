@@ -7,19 +7,16 @@ import Services from './../../services/Services';
 
 import { SUBSCRIBE } from './../redux/ActionTypes';
 
-import ITickerAppState from '../../state/TickerAppState';
-
 import { ApplicationEpic } from './Epics';
 
-export const subscribeEpic: ApplicationEpic = (
-    action$: ActionsObservable<Action>,
-    state$: StateObservable<ITickerAppState>
-  ) =>
+import ITickerAppState from '../../state/TickerAppState';
+
+export const subscribeEpic: ApplicationEpic = (action$, state$) =>
   action$.pipe(
     ofType(SUBSCRIBE),
     withLatestFrom(state$),
     mergeMap(([action, state]) => {
-      const { sessionId } = state;
+      const { sessionId } = state.app;
       return Services.subscribeService().subscribe(sessionId);
     })
   );
