@@ -4,20 +4,16 @@ import { Observable, Observer } from 'rxjs';
 import SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
-import { BACKEND_URL } from '../Constants';
+import { BACKEND_URL } from '../../Constants';
 
-import { connected, newSession } from './redux/Actions';
-import ITickAction from './redux/TickAction';
+import { connected, newSession } from '../redux/Actions';
+import ITickAction from '../redux/TickAction';
 
-import logger from '../util/logger';
+import logger from '../../util/logger';
+import { IConnectionService } from './IConnectionService';
 
-export abstract class ConnectionService {
-  public abstract connect(): Observable<ITickAction>;
-  public abstract client(): Stomp.Client;
-}
-
-@SingleInstance(ConnectionService)
-export class ConnectionServiceImpl implements ConnectionService {
+@SingleInstance(IConnectionService)
+export class ConnectionServiceImpl extends IConnectionService {
   private _client!: Stomp.Client;
   private userId: string = 'aUser';
   private passsword: string = 'pass';
@@ -30,7 +26,6 @@ export class ConnectionServiceImpl implements ConnectionService {
         this.userId,
         this.passsword,
           () => {
-          // (frame: Stomp.Frame) => {
           observer.next(connected());
           this._client.subscribe('/login/ack*', (e: Stomp.Message) => {
             // @ts-ignore
