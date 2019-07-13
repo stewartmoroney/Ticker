@@ -1,30 +1,34 @@
+import { combineReducers } from 'redux';
+
 import {
   CONNECTED,
+  GRID_CLEAR,
+  GRID_UPDATE,
   NEW_SESSION,
   SUBSCRIBED,
-  UNSUBSCRIBED,
   TICK,
-  GRID_CLEAR,
-  GRID_UPDATE
+  UNSUBSCRIBED
 } from './ActionTypes';
-import TickerAppState from './../../state/TickerAppState';
-import TickAction from './../redux/TickAction';
 
-const initialState: TickerAppState = {
-  connected: false,
-  subscribed: false,
-  tickerStatus: 'Connecting...',
-  sessionId: '',
-  tickerValue: '<.. watiing ..>',
+import ITickAction from './../redux/TickAction';
+
+import ITickerAppState from './../../state/TickerAppState';
+
+const initialState = {
   columnDefs: [
     { headerName: 'ID', field: 'id' },
     { headerName: 'Name', field: 'name' },
     { headerName: 'Value', field: 'value' }
   ],
-  rowData: []
+  connected: false,
+  rowData: [],
+  sessionId: '',
+  subscribed: false,
+  tickerStatus: 'Connecting...',
+  tickerValue: '<.. watiing ..>'
 };
 
-export default (state: TickerAppState = initialState, action: TickAction) => {
+const appReducer = (state: ITickerAppState = initialState, action: ITickAction): ITickerAppState => {
   switch (action.type) {
     case CONNECTED:
       return { ...state, connected: true, tickerStatus: 'Connected' };
@@ -44,3 +48,7 @@ export default (state: TickerAppState = initialState, action: TickAction) => {
       return state;
   }
 };
+
+export default combineReducers({
+  app: appReducer
+});

@@ -1,17 +1,17 @@
 import * as IOC from 'eye-oh-see';
-import { Store, Dispatch } from 'redux';
+import { Dispatch, Store } from 'redux';
 
-import TickAction from './../services/redux/TickAction';
 import { connect } from './redux/Actions';
-import TickerAppState from './../state/TickerAppState';
+
+import ITickAction from './../services/redux/TickAction';
+
+import ITickerAppState from './../state/TickerAppState';
 
 import { ConnectionService, ConnectionServiceImpl } from './ConnectionService';
 import { SubscribeService, SubscribeServiceImpl } from './SubscribeService';
 
 export default class Services {
-  private static container: IOC.Container;
-
-  public static bootstrap(dispatch: Dispatch<TickAction>) {
+  public static bootstrap(dispatch: Dispatch<ITickAction>) {
     Services.container = new IOC.Container();
     Services.container.register(ConnectionService);
     Services.container.register(ConnectionServiceImpl);
@@ -21,11 +21,13 @@ export default class Services {
     dispatch(connect());
   }
 
-  static connectionService(): ConnectionService {
+  public static connectionService(): ConnectionService {
     return Services.container.resolve(ConnectionServiceImpl);
   }
 
-  static subscribeService(): SubscribeService {
+  public static subscribeService(): SubscribeService {
     return Services.container.resolve(SubscribeServiceImpl);
   }
+
+  private static container: IOC.Container;
 }

@@ -1,16 +1,16 @@
-import { ActionsObservable } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators/mergeMap';
-import { Store } from 'redux';
+import { Action } from 'redux';
+import { ActionsObservable, ofType } from 'redux-observable';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
-import TickerAppState from './../../state/TickerAppState';
 import Services from './../../services/Services';
 import { CONNECT } from './../redux/ActionTypes';
-import TickAction from './../redux/TickAction';
+import { ApplicationEpic } from './Epics';
 
-export default (
-  action$: ActionsObservable<TickAction>,
-  store: Store<TickerAppState>
-) =>
-  action$.ofType(CONNECT).mergeMap((action: TickAction) => {
-    return Services.connectionService().connect();
-  });
+export const connectEpic: ApplicationEpic = action$ =>
+  action$.pipe(
+    ofType(CONNECT),
+    mergeMap(action => {
+      return Services.connectionService().connect();
+    })
+  );

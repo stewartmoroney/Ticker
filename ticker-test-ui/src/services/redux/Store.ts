@@ -1,13 +1,25 @@
-import { createStore, applyMiddleware } from 'redux';
-import { createEpicMiddleware } from 'redux-observable';
+import { Action } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+
+import { Observable } from 'rxjs';
 
 import rootReducer from './Reducer';
-import rootEpic from '../epics/Epics';
 
-const epicMiddleware = createEpicMiddleware(rootEpic);
+import epics, { GlobalState } from '../epics/Epics';
 
-export default createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(epicMiddleware))
-);
+import ITickerAppState from '../../state/TickerAppState';
+
+export default () => {
+
+  const middleware = createEpicMiddleware<Action, Action, GlobalState>();
+  const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(middleware))
+  );
+
+  middleware.run(combineEpics(...epics));
+
+  return store;
+};

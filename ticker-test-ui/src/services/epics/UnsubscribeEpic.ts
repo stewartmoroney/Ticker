@@ -1,11 +1,18 @@
-import { ActionsObservable } from 'redux-observable';
-import { mergeMap } from 'rxjs/operators/mergeMap';
+import { Action } from 'redux';
+import { ActionsObservable, ofType } from 'redux-observable';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 import Services from '../../services/Services';
-import { UNSUBSCRIBE } from '../redux/ActionTypes';
-import TickAction from './../redux/TickAction';
 
-export default (action$: ActionsObservable<TickAction>) =>
-  action$.ofType(UNSUBSCRIBE).mergeMap((action: TickAction) => {
-    return Services.subscribeService().unsubscribe();
-  });
+import { UNSUBSCRIBE } from '../redux/ActionTypes';
+
+import { ApplicationEpic } from './Epics';
+
+export const unSubscribeEpic: ApplicationEpic = action$ =>
+  action$.pipe(
+    ofType(UNSUBSCRIBE),
+    mergeMap(action => {
+      return Services.subscribeService().unsubscribe();
+    })
+  );

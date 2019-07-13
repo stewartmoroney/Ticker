@@ -1,8 +1,21 @@
-import ConnectEpic from './ConnectEpic';
-import SubscribeEpic from './SubscribeEpic';
-import UnSubscribeEpic from './UnsubscribeEpic';
+import { Action } from 'redux';
+import { ActionsObservable, Epic } from 'redux-observable';
 
-import { combineEpics } from 'redux-observable';
-import 'rxjs';
+import { connectEpic } from './ConnectEpic';
+import { subscribeEpic } from './SubscribeEpic';
+import { unSubscribeEpic } from './UnsubscribeEpic';
 
-export default combineEpics(ConnectEpic, SubscribeEpic, UnSubscribeEpic);
+import ITickerAppState from '../../state/TickerAppState';
+
+import rootReducer from './../../services/redux/Reducer';
+
+export type GlobalState = ReturnType<typeof rootReducer>;
+
+export type ApplicationEpic<
+  T extends Action = Action
+> = Epic<T, T, GlobalState>;
+
+export default [connectEpic,
+  subscribeEpic,
+  unSubscribeEpic
+];

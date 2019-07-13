@@ -1,46 +1,39 @@
+import { ColumnApi, GridApi } from 'ag-grid';
+import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AgGridReact, AgGridColumn } from 'ag-grid-react';
-import { ColumnApi, GridApi } from 'ag-grid';
 
-import TickerAppState from '../state/TickerAppState';
+import { GlobalState } from '../services/epics/Epics';
 
 import '../../node_modules/ag-grid/dist/styles/ag-grid.css';
 import '../../node_modules/ag-grid/dist/styles/theme-fresh.css';
 
 import './Grid.css';
 
-interface Props {
+interface IProps {
   rowData: any[];
   columnDefs: any[];
 }
 
-const mapStateToProps = (state: TickerAppState) => {
+const mapStateToProps = (state: GlobalState) => {
   return {
-    columnDefs: state.columnDefs,
-    rowData: state.rowData
+    columnDefs: state.app.columnDefs,
+    rowData: state.app.rowData
   };
 };
 
-class Grid extends React.Component<Props, {}> {
-  private gridApi: GridApi;
-  private columnApi: ColumnApi;
+class Grid extends React.Component<IProps, {}> {
+  private gridApi: GridApi | undefined;
+  private columnApi: ColumnApi | undefined;
 
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super(props);
 
     this.onGridReady = this.onGridReady.bind(this);
   }
 
-  onGridReady(params: any) {
-    this.gridApi = params.api;
-    this.columnApi = params.columnApi;
-
-    this.gridApi.sizeColumnsToFit();
-  }
-
-  render() {
-    let containerStyle = {
+  public render() {
+    const containerStyle = {
       height: 115,
       width: 500
     };
@@ -54,6 +47,15 @@ class Grid extends React.Component<Props, {}> {
         />
       </div>
     );
+  }
+
+  private onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.columnApi = params.columnApi;
+
+    if (this.gridApi) {
+       this.gridApi.sizeColumnsToFit();
+    }
   }
 }
 

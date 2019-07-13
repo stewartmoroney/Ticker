@@ -1,9 +1,9 @@
-export default interface TickerAppState {
+export default interface ITickerAppState {
   connected: boolean;
   subscribed: boolean;
   tickerStatus: string;
   sessionId: string;
   tickerValue: string;
-  columnDefs: Array<any>;
-  rowData: Array<any>;
-};
+  columnDefs: any[];
+  rowData: any[];
+}

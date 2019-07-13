@@ -1,21 +1,23 @@
-import { Observer } from 'rxjs';
-import TickAction from './redux/TickAction';
-import { newTick, dataUpdate } from './redux/Actions';
+import ITickAction from './redux/TickAction';
 
-export interface Channel {
+import { Observer } from 'rxjs';
+
+import { dataUpdate, newTick  } from './redux/Actions';
+
+export interface IChannel {
   name: string;
-  dataHandler: (body: string, observer: Observer<TickAction>) => void;
+  dataHandler: (body: string, observer: Observer<ITickAction>) => void;
 }
 
 export const defaultChannels = [
   {
-    name: 'tick',
-    dataHandler: (body: string, observer: Observer<TickAction>) =>
-      observer.next(newTick(body))
+    dataHandler: (body: string, observer: Observer<ITickAction>) =>
+      observer.next(newTick(body)),
+    name: 'tick'
   },
   {
+    dataHandler: (body: string, observer: Observer<ITickAction>) =>
+      observer.next(dataUpdate(body)),
     name: 'data',
-    dataHandler: (body: string, observer: Observer<TickAction>) =>
-      observer.next(dataUpdate(body))
   }
 ];

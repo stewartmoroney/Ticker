@@ -1,14 +1,10 @@
 import { connect } from 'react-redux';
 
-import TickerAppState from '../../state/TickerAppState';
+import { GlobalState } from '../../services/epics/Epics';
 import TickerBodyComponent from './TickerBodyComponent';
 
-interface Props {
-  value: string;
-}
-
-const mapStateToProps = (state: TickerAppState) => {
-  return { value: state.tickerValue };
+const mapStateToProps = (state: GlobalState) => {
+  return { value: state.app.tickerValue };
 };
 
 export default connect(mapStateToProps)(TickerBodyComponent);

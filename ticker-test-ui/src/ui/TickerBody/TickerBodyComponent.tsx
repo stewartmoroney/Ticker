@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-interface Props {
+interface IProps {
   value: string;
 }
 
-export default class TickerBodyComponent extends React.Component<Props> {
-  render() {
+export default class TickerBodyComponent extends React.Component<IProps> {
+  public render() {
     return <div>{this.props.value}</div>;
   }
 }

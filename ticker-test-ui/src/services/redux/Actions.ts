@@ -1,58 +1,58 @@
-import TickAction from './TickAction';
+import ITickAction from './TickAction';
 
 import {
   CONNECT,
   CONNECTED,
-  NEW_SESSION,
-  TICK,
   GRID_UPDATE,
+  NEW_SESSION,
   SUBSCRIBE,
   SUBSCRIBED,
+  TICK,
   UNSUBSCRIBE,
   UNSUBSCRIBED
 } from './ActionTypes';
 
-type StringTickActionCreator = (arg: String) => TickAction;
-type VoidTickActionCreator = () => TickAction;
+type StringTickActionCreator = (arg: string) => ITickAction;
+type VoidTickActionCreator = () => ITickAction;
 
 export const connect: VoidTickActionCreator = () => ({
-  type: CONNECT,
-  payload: ''
+  payload: '',
+  type: CONNECT
 });
 export const connected: VoidTickActionCreator = () => ({
-  type: CONNECTED,
-  payload: ''
+  payload: '',
+  type: CONNECTED
 });
 
 export const newTick: StringTickActionCreator = (s: string) => ({
-  type: TICK,
-  payload: s
+  payload: s,
+  type: TICK
 });
 export const newSession: StringTickActionCreator = (s: string) => ({
+  payload: s,
   type: NEW_SESSION,
-  payload: s
 });
 export const dataUpdate: StringTickActionCreator = (s: string) => ({
-  type: GRID_UPDATE,
-  payload: s
+  payload: s,
+  type: GRID_UPDATE
 });
 
 export const subscribe: VoidTickActionCreator = () => ({
-  type: SUBSCRIBE,
-  payload: ''
+  payload: '',
+  type: SUBSCRIBE
 });
 export const subscribed: VoidTickActionCreator = () => ({
-  type: SUBSCRIBED,
-  payload: ''
+  payload: '',
+  type: SUBSCRIBED
 });
 
 export const unsubscribe: VoidTickActionCreator = () => ({
-  type: UNSUBSCRIBE,
-  payload: ''
+  payload: '',
+  type: UNSUBSCRIBE
 });
 export const unsubscribed: VoidTickActionCreator = () => ({
-  type: UNSUBSCRIBED,
-  payload: ''
+  payload: '',
+  type: UNSUBSCRIBED
 });
 
 export type TickActionCreator = StringTickActionCreator | VoidTickActionCreator;
