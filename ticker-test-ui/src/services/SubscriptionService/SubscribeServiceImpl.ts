@@ -1,30 +1,20 @@
-import { Factory, SingleInstance } from 'eye-oh-see';
-import { Store } from 'redux';
 import { Observable, Observer } from 'rxjs';
 import * as Stomp from 'stompjs';
 
-import { subscribed, unsubscribed } from './redux/Actions';
-import ITickAction from './redux/TickAction';
+import { subscribed, unsubscribed } from '../redux/Actions';
+import ITickAction from '../redux/TickAction';
 
-import { ConnectionService } from './ConnectionService';
-import Services from './Services';
+import { IConnectionService } from '../ConnectionService';
 
 import { defaultChannels, IChannel } from './Channels';
+import { ISubscribeService } from './ISubscribeService';
 
-export abstract class SubscribeService {
-  public abstract subscribe(sessionId: string): Observable<ITickAction>;
-  public abstract unsubscribe(): Observable<ITickAction>;
-}
+export class SubscribeServiceImpl extends ISubscribeService {
+  private connectionService: IConnectionService;
 
-@SingleInstance(SubscribeService)
-export class SubscribeServiceImpl implements SubscribeService {
-  private connectionService: ConnectionService;
-
-  constructor(
-    @Factory(ConnectionService)
-    private connectionServiceFactory: () => ConnectionService
-  ) {
-    this.connectionService = this.connectionServiceFactory();
+  constructor(connectionService: IConnectionService) {
+    super();
+    this.connectionService = connectionService;
   }
 
   public subscribe(sessionId: string): Observable<ITickAction> {

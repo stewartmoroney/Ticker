@@ -6,6 +6,7 @@
     "ag-grid": "^16.0.0",
     "ag-grid-react": "^16.0.0",
     "awesome-typescript-loader": "3.2.1",
+    "cross-env": "^5.2.0",
     "eye-oh-see": "^0.5.5",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -31,13 +32,13 @@
     "rxjs-tslint-rules": "^4.1.1",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
-
+    "uuid": "^3.3.2", 
+    "@types/uuid": "^3.4.5",
     "webpack": "^3.10.0"
-
-
   },
   "scripts": {
     "start": "react-scripts-ts start",
+    "start:mock": "cross-env REACT_APP_MOCK=true react-scripts-ts start",
     "build": "react-scripts-ts build",
     "webpack": "webpack -p",
     "test": "react-scripts-ts test --env=jsdom",

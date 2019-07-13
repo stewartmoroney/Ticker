@@ -1,11 +1,9 @@
 import { Action } from 'redux';
-import { ActionsObservable, Epic } from 'redux-observable';
+import { Epic } from 'redux-observable';
 
 import { connectEpic } from './ConnectEpic';
 import { subscribeEpic } from './SubscribeEpic';
 import { unSubscribeEpic } from './UnsubscribeEpic';
-
-import ITickerAppState from '../../state/TickerAppState';
 
 import rootReducer from './../../services/redux/Reducer';
 

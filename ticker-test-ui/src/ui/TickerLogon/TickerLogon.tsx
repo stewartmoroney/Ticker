@@ -1,15 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { InstancePerDependency } from 'eye-oh-see';
-
-import Services from '../../services/Services';
-
 import ITickAction from './../../services/redux/TickAction';
 
-import { subscribe, TickActionCreator } from '../../services/redux/Actions';
-
-import ITickerAppState from '../../state/TickerAppState';
+import { subscribe } from '../../services/redux/Actions';
 
 import TickerLogonComponent from './TickerLogonComponent';
 

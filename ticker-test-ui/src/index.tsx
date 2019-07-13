@@ -8,12 +8,14 @@ import TickerApp from './ui/TickerApp';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import Services from './services/Services';
+import Bootstraper from './services/Bootstraper';
 
+import { connect } from './services/redux/Actions';
 import createStore from './services/redux/Store';
 
+Bootstraper.bootstrap();
 const store = createStore();
-Services.bootstrap(store.dispatch);
+store.dispatch(connect());
 
 render(
   <Provider store={store}>
