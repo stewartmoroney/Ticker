@@ -21,7 +21,6 @@
     "stompjs": "2.3.3",
     "typescript": "3.5.2",
 
-    "@types/jest": "^23.3.9",
     "@types/react": "^16.8.4",
     "@types/react-dom": "^16.8.2",
     "@types/react-redux": "^7.0.1",
@@ -34,7 +33,16 @@
     "tslint-config-prettier": "^1.17.0",
     "uuid": "^3.3.2", 
     "@types/uuid": "^3.4.5",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+
+    "querystringify": "^2.0.0",
+    "diff": "^3.5.0",
+    "handlebars": "^4.1.0"
+
+
+
+
+
   },
   "scripts": {
     "start": "react-scripts-ts start",
