@@ -1,6 +1,4 @@
-import { Action } from 'redux';
-import { ActionsObservable, ofType } from 'redux-observable';
-import { Observable } from 'rxjs';
+import { ofType } from 'redux-observable';
 import { mergeMap } from 'rxjs/operators';
 
 import { UNSUBSCRIBE } from '../redux/ActionTypes';

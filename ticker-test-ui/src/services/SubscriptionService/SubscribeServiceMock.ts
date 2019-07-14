@@ -24,8 +24,8 @@ export class SubscribeServiceMock extends ISubscribeService {
     return Observable.create((observer: Observer<ITickAction>) => {
       defaultChannels.forEach((channel: IChannel) => {
         setInterval(() => {
-          const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
-          const endpoint = '/' + channel.name + '-user' + sessionId;
+          // const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
+          // const endpoint = '/' + channel.name + '-user' + sessionId;
 
           const msgData = channel.name === ChannelName.TICK ? tick() : data();
           channel.dataHandler(msgData, observer);
