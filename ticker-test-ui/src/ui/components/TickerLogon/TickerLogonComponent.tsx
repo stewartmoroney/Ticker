@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ITickAction from './../../services/redux/TickAction';
+import ITickAction from '../../../services/redux/TickAction';
 
 interface IProps {
   logon: () => ITickAction;

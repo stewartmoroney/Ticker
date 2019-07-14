@@ -3,10 +3,10 @@ import { AgGridReact } from 'ag-grid-react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { GlobalState } from '../services/epics/Epics';
+import { GlobalState } from '../../../services/epics/Epics';
 
-import '../../node_modules/ag-grid/dist/styles/ag-grid.css';
-import '../../node_modules/ag-grid/dist/styles/theme-fresh.css';
+import '../../../../node_modules/ag-grid/dist/styles/ag-grid.css';
+import '../../../../node_modules/ag-grid/dist/styles/theme-fresh.css';
 
 import './Grid.css';
 

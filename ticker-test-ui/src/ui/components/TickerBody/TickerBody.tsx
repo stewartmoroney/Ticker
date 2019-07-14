@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { GlobalState } from '../../services/epics/Epics';
+import { GlobalState } from '../../../services/epics/Epics';
 import TickerBodyComponent from './TickerBodyComponent';
 
 const mapStateToProps = (state: GlobalState) => {
