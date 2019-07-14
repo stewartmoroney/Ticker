@@ -13,6 +13,7 @@ import {
 import ITickAction from './../redux/TickAction';
 
 import ITickerAppState from './../../state/TickerAppState';
+import { ConnectionStatus } from '../../state/types';
 
 const initialState = {
   columnDefs: [
@@ -24,14 +25,14 @@ const initialState = {
   rowData: [],
   sessionId: '',
   subscribed: false,
-  tickerStatus: 'Connecting...',
+  connectionStatus: ConnectionStatus.DISCONNECTED,
   tickerValue: '<.. watiing ..>'
 };
 
 const appReducer = (state: ITickerAppState = initialState, action: ITickAction): ITickerAppState => {
   switch (action.type) {
     case CONNECTED:
-      return { ...state, connected: true, tickerStatus: 'Connected' };
+      return { ...state, connected: true, connectionStatus: ConnectionStatus.CONNECTED };
     case TICK:
       return { ...state, tickerValue: action.payload };
     case NEW_SESSION:
@@ -41,9 +42,9 @@ const appReducer = (state: ITickerAppState = initialState, action: ITickAction):
     case GRID_UPDATE:
       return { ...state, rowData: JSON.parse(action.payload).rows };
     case SUBSCRIBED:
-      return { ...state, subscribed: true, tickerStatus: 'Listening' };
+      return { ...state, subscribed: true };
     case UNSUBSCRIBED:
-      return { ...state, subscribed: false, tickerStatus: 'Not Listening' };
+      return { ...state, subscribed: false };
     default:
       return state;
   }

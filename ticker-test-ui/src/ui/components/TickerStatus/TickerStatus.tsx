@@ -6,7 +6,7 @@ import TickerStatusComponent from './TickerStatusComponent';
 const mapStateToProps = (state: GlobalState) => {
   return {
     sessionId: state.app.sessionId,
-    tickerStatus: state.app.tickerStatus
+    connectionStatus: state.app.connectionStatus
   };
 };
 

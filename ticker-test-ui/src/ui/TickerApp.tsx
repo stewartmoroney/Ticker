@@ -25,10 +25,10 @@ class TickerApp extends React.Component<IProps> {
       <MainBody>
         <TickerHeader />
         <TickerLogon />
-        <TickerStatus />
         <TickerBody />
         <TickerUnsubscribe />
         <Grid />
+        <TickerStatus />
       </MainBody>
     );
   }
