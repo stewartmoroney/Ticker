@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { unsubscribe } from '../../services/redux/Actions';
+import { unsubscribe } from '../../../services/redux/Actions';
 
-import ITickAction from './../../services/redux/TickAction';
+import ITickAction from '../../../services/redux/TickAction';
 
-import { GlobalState } from '../../services/epics/Epics';
+import { GlobalState } from '../../../services/epics/Epics';
 
 import TickerUnsubscribeComponent from './TickerUnsubscribeComponent';
 
