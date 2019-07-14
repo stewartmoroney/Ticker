@@ -1,5 +1,5 @@
 import { ColumnApi, GridApi } from 'ag-grid';
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 

@@ -8,10 +8,6 @@ import TickerStatus from './TickerStatus/TickerStatus';
 import TickerUnsubscribe from './TickerUnsubscribe/TickerUnsubscribe';
 
 export default class TickerApp extends React.Component<{}, {}> {
-  constructor(props: {}) {
-    super(props);
-  }
-
   public render() {
     return (
       <div>

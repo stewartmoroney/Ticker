@@ -1,4 +1,3 @@
-import { SingleInstance } from 'eye-oh-see';
 import { Observable, Observer } from 'rxjs';
 
 import SockJS from 'sockjs-client';
@@ -12,7 +11,6 @@ import ITickAction from '../redux/TickAction';
 import logger from '../../util/logger';
 import { IConnectionService } from './IConnectionService';
 
-@SingleInstance(IConnectionService)
 export class ConnectionServiceImpl extends IConnectionService {
   private _client!: Stomp.Client;
   private userId: string = 'aUser';
@@ -35,7 +33,7 @@ export class ConnectionServiceImpl extends IConnectionService {
           this._client.send('/app/login', { priority: 9 }, '');
         },
         e => {
-          logger.info(e);
+          logger.info(e.toString());
         }
       );
     });
