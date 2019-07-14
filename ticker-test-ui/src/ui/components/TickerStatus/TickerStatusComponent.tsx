@@ -1,16 +1,39 @@
-import * as React from 'react';
+import styled from '@emotion/styled';
+import React, { FC } from 'react';
 
-interface IProps {
+import { Theme, IThemeProps } from '../../shared';
+import { ConnectionStatus } from '../../../state/types';
+
+export interface IDataProps {
   sessionId: string;
-  tickerStatus: string;
+  connectionStatus: ConnectionStatus;
 }
 
-export default class TickerStatusComponent extends React.Component<IProps> {
-  public render() {
-    return (
-      <div>
-        {this.props.tickerStatus} - Session - {this.props.sessionId}
-      </div>
-    );
-  }
+const ConnectionStatusWrapper = styled.div`
+  width: auto;
+  margin-right: auto;
+  display: flex;
+`
+
+type StatusProps = {
+  connectionStatus: ConnectionStatus;
+  theme: Theme;
+}
+
+const Status = styled.div<StatusProps>`
+  width: 50px;
+  background-color: ${props => 
+    props.connectionStatus === ConnectionStatus.CONNECTED ? props.theme.connection.connected : props.theme.connection.disconnected
+  };
+`
+
+type IProps = IThemeProps & IDataProps;
+
+export const TickerStatusComponent: FC<IProps> = (props) => {
+  return (
+    <ConnectionStatusWrapper>
+      {props.connectionStatus}{props.sessionId && '- Session - ' + props.sessionId}
+      <Status theme={props.theme} connectionStatus={props.connectionStatus}/>
+    </ConnectionStatusWrapper>
+  );
 }

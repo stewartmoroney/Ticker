@@ -1,7 +1,9 @@
+import { ConnectionStatus } from './types';
+
 export default interface ITickerAppState {
   connected: boolean;
   subscribed: boolean;
-  tickerStatus: string;
+  connectionStatus: ConnectionStatus;
   sessionId: string;
   tickerValue: string;
   columnDefs: any[];
