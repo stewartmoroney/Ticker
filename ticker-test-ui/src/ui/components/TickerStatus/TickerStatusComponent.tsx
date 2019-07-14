@@ -10,8 +10,8 @@ export interface IDataProps {
 }
 
 const ConnectionStatusWrapper = styled.div`
-  width: 520px;
-  margin-left: auto;
+  width: auto;
+  margin-right: auto;
   display: flex;
 `
 

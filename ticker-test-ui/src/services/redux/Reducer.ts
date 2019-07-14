@@ -15,7 +15,7 @@ import ITickAction from './../redux/TickAction';
 import ITickerAppState from './../../state/TickerAppState';
 import { ConnectionStatus } from '../../state/types';
 
-const initialState = {
+export const initialState = {
   columnDefs: [
     { headerName: 'ID', field: 'id' },
     { headerName: 'Name', field: 'name' },
