@@ -1,3 +1,7 @@
+export interface IThemeProps {
+  theme: Theme;
+}
+
 export interface Theme {
     bodyBackground: string;
     bodyText: string;

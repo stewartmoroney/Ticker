@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import './index.css';
 
-import TickerApp from './ui/TickerApp';
+import TickerApp from './ui/shell/TickerApp';
 
 import registerServiceWorker from './registerServiceWorker';
 
