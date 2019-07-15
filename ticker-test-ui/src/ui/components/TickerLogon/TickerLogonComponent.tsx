@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import ITickAction from '../../../services/redux/TickAction';
+import { IAppAction } from '../../../services/redux/Actions';
 
 interface IProps {
-  logon: () => ITickAction;
+  logon: () => IAppAction;
 }
 
 export default class TickerLogonComponent extends React.Component<IProps> {

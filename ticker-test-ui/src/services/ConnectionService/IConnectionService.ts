@@ -2,9 +2,9 @@ import { Observable } from 'rxjs';
 
 import * as Stomp from 'stompjs';
 
-import ITickAction from '../redux/TickAction';
+import { IAppAction } from '../redux/Actions';
 
 export abstract class IConnectionService {
-  public abstract connect(): Observable<ITickAction>;
+  public abstract connect(): Observable<IAppAction>;
   public abstract client(): Stomp.Client;
 }

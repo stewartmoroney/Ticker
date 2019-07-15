@@ -1,4 +1,4 @@
-import ITickAction from './TickAction';
+import { Action } from 'redux';
 
 import {
   CONNECT,
@@ -12,8 +12,8 @@ import {
   UNSUBSCRIBED
 } from './ActionTypes';
 
-type StringTickActionCreator = (arg: string) => ITickAction;
-type VoidTickActionCreator = () => ITickAction;
+type StringTickActionCreator = (arg: string) => IAppAction;
+type VoidTickActionCreator = () => IAppAction;
 
 export const connect: VoidTickActionCreator = () => ({
   payload: '',
@@ -56,3 +56,8 @@ export const unsubscribed: VoidTickActionCreator = () => ({
 });
 
 export type TickActionCreator = StringTickActionCreator | VoidTickActionCreator;
+
+export interface IAppAction extends Action {
+  type: string;
+  payload: string;
+}

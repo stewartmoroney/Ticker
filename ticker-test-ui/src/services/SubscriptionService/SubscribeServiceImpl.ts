@@ -2,7 +2,7 @@ import { Observable, Observer } from 'rxjs';
 import * as Stomp from 'stompjs';
 
 import { subscribed, unsubscribed } from '../redux/Actions';
-import ITickAction from '../redux/TickAction';
+import { IAppAction } from '../redux/Actions';
 
 import { IConnectionService } from '../ConnectionService';
 
@@ -17,14 +17,14 @@ export class SubscribeServiceImpl extends ISubscribeService {
     this.connectionService = connectionService;
   }
 
-  public subscribe(sessionId: string): Observable<ITickAction> {
-    return Observable.create((observer: Observer<ITickAction>) => {
+  public subscribe(sessionId: string): Observable<IAppAction> {
+    return Observable.create((observer: Observer<IAppAction>) => {
       return this.doSubscribe(sessionId, observer);
     });
   }
 
-  public unsubscribe(): Observable<ITickAction> {
-    return Observable.create((observer: Observer<ITickAction>) => {
+  public unsubscribe(): Observable<IAppAction> {
+    return Observable.create((observer: Observer<IAppAction>) => {
       defaultChannels.forEach((channel: IChannel) => {
         this.client().send('/app/' + channel.name + '/unsubscribe', {
           priority: 9
@@ -38,7 +38,7 @@ export class SubscribeServiceImpl extends ISubscribeService {
     return this.connectionService.client();
   }
 
-  private doSubscribe(sessionId: string, observer: Observer<ITickAction>) {
+  private doSubscribe(sessionId: string, observer: Observer<IAppAction>) {
     defaultChannels.forEach((channel: IChannel) => {
       this.clientSubscribe(sessionId, observer, channel);
     });
@@ -48,7 +48,7 @@ export class SubscribeServiceImpl extends ISubscribeService {
 
   private clientSubscribe(
     sessionId: string,
-    observer: Observer<ITickAction>,
+    observer: Observer<IAppAction>,
     channel: IChannel
   ) {
     const subscribeEndpoint = '/app/' + channel.name + '/subscribe';

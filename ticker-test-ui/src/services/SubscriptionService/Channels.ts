@@ -1,4 +1,4 @@
-import ITickAction from '../redux/TickAction';
+import { IAppAction } from '../redux/Actions';
 
 import { Observer } from 'rxjs';
 
@@ -11,17 +11,17 @@ export enum ChannelName {
 
 export interface IChannel {
   name: ChannelName;
-  dataHandler: (body: string, observer: Observer<ITickAction>) => void;
+  dataHandler: (body: string, observer: Observer<IAppAction>) => void;
 }
 
 export const defaultChannels = [
   {
-    dataHandler: (body: string, observer: Observer<ITickAction>) =>
+    dataHandler: (body: string, observer: Observer<IAppAction>) =>
       observer.next(newTick(body)),
     name: ChannelName.TICK
   },
   {
-    dataHandler: (body: string, observer: Observer<ITickAction>) =>
+    dataHandler: (body: string, observer: Observer<IAppAction>) =>
       observer.next(dataUpdate(body)),
     name: ChannelName.DATA,
   }

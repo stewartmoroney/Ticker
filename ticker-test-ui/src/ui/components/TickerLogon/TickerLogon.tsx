@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import ITickAction from '../../../services/redux/TickAction';
+import { IAppAction } from '../../../services/redux/Actions';
 
 import { subscribe } from '../../../services/redux/Actions';
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state: GlobalState) => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ITickAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<IAppAction>) => {
   return {
     logon: () => dispatch(subscribe())
   };

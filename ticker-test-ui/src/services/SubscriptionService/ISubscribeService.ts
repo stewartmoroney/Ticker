@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
-import ITickAction from '../redux/TickAction';
+import { IAppAction } from '../redux/Actions';
 
 export abstract class ISubscribeService {
-  public abstract subscribe(sessionId: string): Observable<ITickAction>;
-  public abstract unsubscribe(): Observable<ITickAction>;
+  public abstract subscribe(sessionId: string): Observable<IAppAction>;
+  public abstract unsubscribe(): Observable<IAppAction>;
 }

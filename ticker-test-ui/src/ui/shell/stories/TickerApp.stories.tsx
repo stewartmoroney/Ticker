@@ -7,13 +7,17 @@ import { combineReducers, createStore } from 'redux'
 
 import TickerApp from '../TickerApp';
 import { getTheme } from './../../shared';
-import { initialState } from '../../../services/redux/Reducer';
-import ITickerAppState from '../../../state/TickerAppState';
-import ITickAction from '../../../services/redux/TickAction';
+import { initialState as datainitialState } from '../../../services/redux/reducers/dataReducer';
+import { initialState as systemIntialState } from '../../../services/redux/reducers/systemReducer';
+import { IAppAction } from '../../../services/redux/Actions';
+import { GlobalState } from '../../../services/epics/Epics';
 
-const theme = getTheme();
+const initialState: GlobalState = {
+  data: datainitialState,
+  system: systemIntialState
+}
 
-const appReducer = (state: ITickerAppState = initialState, action: ITickAction): ITickerAppState => {
+const appReducer = (state: GlobalState = initialState, action: IAppAction): GlobalState => {
   return state;
 }
 

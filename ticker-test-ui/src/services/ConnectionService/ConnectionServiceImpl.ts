@@ -6,7 +6,7 @@ import * as Stomp from 'stompjs';
 import { BACKEND_URL } from '../../Constants';
 
 import { connected, newSession } from '../redux/Actions';
-import ITickAction from '../redux/TickAction';
+import { IAppAction}  from '../redux/Actions';
 
 import logger from '../../util/logger';
 import { IConnectionService } from './IConnectionService';
@@ -16,8 +16,8 @@ export class ConnectionServiceImpl extends IConnectionService {
   private userId: string = 'aUser';
   private passsword: string = 'pass';
 
-  public connect(): Observable<ITickAction> {
-    return Observable.create((observer: Observer<ITickAction>) => {
+  public connect(): Observable<IAppAction> {
+    return Observable.create((observer: Observer<IAppAction>) => {
       const socket = new SockJS(BACKEND_URL);
       this._client = Stomp.over(socket);
       this._client.connect(

@@ -12,15 +12,19 @@ import './Grid.css';
 
 interface IProps {
   rowData: any[];
-  columnDefs: any[];
 }
 
 const mapStateToProps = (state: GlobalState) => {
   return {
-    columnDefs: state.app.columnDefs,
-    rowData: state.app.rowData
+    rowData: state.data.rowData
   };
 };
+
+const columnDefs = [
+  { headerName: 'ID', field: 'id' },
+  { headerName: 'Name', field: 'name' },
+  { headerName: 'Value', field: 'value' }
+];
 
 class Grid extends React.Component<IProps, {}> {
   private gridApi: GridApi | undefined;
@@ -41,7 +45,7 @@ class Grid extends React.Component<IProps, {}> {
     return (
       <div style={containerStyle} className="ag-fresh">
         <AgGridReact
-          columnDefs={this.props.columnDefs}
+          columnDefs={columnDefs}
           rowData={this.props.rowData}
           onGridReady={this.onGridReady}
         />

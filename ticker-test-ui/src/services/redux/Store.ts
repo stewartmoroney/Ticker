@@ -3,7 +3,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
-import rootReducer from './Reducer';
+import rootReducer from './reducers/rootReducer';
 
 import Bootstraper, { IServices } from '../Bootstraper';
 import epics, { GlobalState } from '../epics/Epics';

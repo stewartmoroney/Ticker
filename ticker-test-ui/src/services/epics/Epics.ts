@@ -5,7 +5,7 @@ import { connectEpic } from './ConnectEpic';
 import { subscribeEpic } from './SubscribeEpic';
 import { unSubscribeEpic } from './UnsubscribeEpic';
 
-import rootReducer from './../../services/redux/Reducer';
+import rootReducer from '../redux/reducers/rootReducer';
 
 export type GlobalState = ReturnType<typeof rootReducer>;
 

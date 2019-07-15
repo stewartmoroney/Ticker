@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 
 import { unsubscribe } from '../../../services/redux/Actions';
 
-import ITickAction from '../../../services/redux/TickAction';
+import { IAppAction } from '../../../services/redux/Actions';
 
 import { GlobalState } from '../../../services/epics/Epics';
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state: GlobalState) => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ITickAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<IAppAction>) => {
   return {
     unsubscribe: () => dispatch(unsubscribe())
   };

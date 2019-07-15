@@ -10,7 +10,7 @@ export const subscribeEpic: ApplicationEpic = (action$, state$, { subscribeServi
     ofType(SUBSCRIBE),
     withLatestFrom(state$),
     mergeMap(([action, state]) => {
-      const { sessionId } = state.app;
+      const { sessionId } = state.system;
       return subscribeService.subscribe(sessionId);
     })
   );
