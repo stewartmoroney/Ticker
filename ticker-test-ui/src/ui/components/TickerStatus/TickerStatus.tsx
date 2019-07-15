@@ -1,16 +1,39 @@
-import { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 
-import { GlobalState } from '../../../services/epics/Epics';
-import { TickerStatusComponent } from './TickerStatusComponent';
-import { IThemeProps } from '../../shared';
+import { Theme, IThemeProps } from '../../shared';
+import { ConnectionStatus } from '../../../state/types';
 
-const TickerStatus: FC<IThemeProps> = (props) => {
-  const connectionStatus = useSelector((state: GlobalState) => state.system.connectionStatus);
-  const sessionId = useSelector((state: GlobalState) => state.system.sessionId);
-
-  return <TickerStatusComponent  connectionStatus={connectionStatus} sessionId={sessionId} theme={props.theme}/>
+export interface IDataProps {
+  sessionId: string;
+  connectionStatus: ConnectionStatus;
 }
 
-export default withTheme(TickerStatus);
+const ConnectionStatusWrapper = styled.div`
+  width: auto;
+  margin-right: auto;
+  display: flex;
+`
+
+type StatusProps = {
+  connectionStatus: ConnectionStatus;
+  theme: Theme;
+}
+
+const Status = styled.div<StatusProps>`
+  width: 50px;
+  background-color: ${props => 
+    props.connectionStatus === ConnectionStatus.CONNECTED ? props.theme.connection.connected : props.theme.connection.disconnected
+  };
+`
+
+type IProps = IThemeProps & IDataProps;
+
+export const TickerStatus: FC<IProps> = (props) => {
+  return (
+    <ConnectionStatusWrapper>
+      {props.connectionStatus}{props.sessionId && '- Session - ' + props.sessionId}
+      <Status theme={props.theme} connectionStatus={props.connectionStatus}/>
+    </ConnectionStatusWrapper>
+  );
+}

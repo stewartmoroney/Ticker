@@ -1,10 +1,11 @@
-import { connect } from 'react-redux';
+import * as React from 'react';
 
-import { GlobalState } from '../../../services/epics/Epics';
-import TickerBodyComponent from './TickerBodyComponent';
+interface IProps {
+  value: string;
+}
 
-const mapStateToProps = (state: GlobalState) => {
-  return { value: state.data.tickerValue };
-};
-
-export default connect(mapStateToProps)(TickerBodyComponent);
+export default class TickerBody extends React.Component<IProps> {
+  public render() {
+    return <div>{this.props.value}</div>;
+  }
+}

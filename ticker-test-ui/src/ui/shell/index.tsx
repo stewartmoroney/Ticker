@@ -2,11 +2,11 @@ import styled, { withTheme } from 'styled-components';
 import * as React from 'react';
 
 import Grid from '../components/DataGrid/Grid';
-import TickerBody from '../components/TickerBody/TickerBody';
+import TickerBody from '../components/TickerBody/TickerBodyContainer';
 import TickerHeader from '../components/TickerHeader/TickerHeader';
 import TickerLogon from '../components/TickerLogon/TickerLogon';
-import TickerStatus from '../components/TickerStatus/TickerStatus';
-import TickerUnsubscribe from '../components/TickerUnsubscribe/TickerUnsubscribe';
+import TickerStatus from '../components/TickerStatus/TickerStatusContainer';
+import TickerUnsubscribe from '../components/TickerUnsubscribe/TickerUnsubscribeContainer';
 import { Theme } from '../shared';
 
 interface IProps {
@@ -18,7 +18,7 @@ const MainBody = styled.div`
   color: ${props  => props.theme.bodyText};
 `;
 
-class TickerApp extends React.Component<IProps> {
+class Shell extends React.Component<IProps> {
   public render() {
     return (
       <MainBody>
@@ -34,4 +34,4 @@ class TickerApp extends React.Component<IProps> {
 }
 
 
-export default withTheme(TickerApp)
+export default withTheme(Shell)

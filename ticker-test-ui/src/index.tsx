@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import './index.css';
 
-import TickerApp from './ui/shell/TickerApp';
+import Shell from './ui/shell';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -22,7 +22,7 @@ store.dispatch(connect());
 render(
   <ThemeProvider theme={getTheme()}>
     <Provider store={store}>
-      <TickerApp />
+      <Shell />
     </Provider>
   </ThemeProvider>
 ,

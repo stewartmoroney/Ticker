@@ -1,24 +1,22 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-
-import { unsubscribe } from '../../../services/redux/Actions';
+import * as React from 'react';
 
 import { IAppAction } from '../../../services/redux/Actions';
 
-import { GlobalState } from '../../../services/epics/Epics';
+interface IProps {
+  unsubscribe: () => IAppAction;
+}
 
-import TickerUnsubscribeComponent from './TickerUnsubscribeComponent';
+export default class TickerUnsubscribeComponent extends React.Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-const mapStateToProps = (state: GlobalState) => {
-  return {};
-};
+  public render() {
+    return <button onClick={this.handleSubmit}>Ticker Unsubscribe</button>;
+  }
 
-const mapDispatchToProps = (dispatch: Dispatch<IAppAction>) => {
-  return {
-    unsubscribe: () => dispatch(unsubscribe())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TickerUnsubscribeComponent
-);
+  private handleSubmit() {
+    this.props.unsubscribe();
+  }
+}
