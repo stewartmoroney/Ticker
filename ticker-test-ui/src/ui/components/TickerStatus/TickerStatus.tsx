@@ -1,4 +1,4 @@
-import { withTheme } from 'emotion-theming';
+import { withTheme } from 'styled-components';
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 

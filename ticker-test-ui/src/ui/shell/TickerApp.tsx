@@ -1,5 +1,4 @@
-import styled from '@emotion/styled'
-import { withTheme } from 'emotion-theming';
+import styled, { withTheme } from 'styled-components';
 import * as React from 'react';
 
 import Grid from '../components/DataGrid/Grid';

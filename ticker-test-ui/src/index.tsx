@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeProvider } from 'emotion-theming';
+import { ThemeProvider } from 'styled-components';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
