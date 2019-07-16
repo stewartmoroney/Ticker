@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 
-export default class TickerHeader extends React.Component {
-  public render() {
-    return <div>Ticker Header</div>;
-  }
+const TickerHeader:FC = () => {
+  return <div>Ticker Header</div>;
 }
+
+export default TickerHeader; 

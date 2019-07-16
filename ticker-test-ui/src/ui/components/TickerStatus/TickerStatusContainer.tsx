@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { GlobalState } from '../../../services/epics/Epics';
-import { TickerStatus } from './TickerStatus';
+import TickerStatus from './TickerStatus';
 import { IThemeProps } from '../../shared';
 
 const TickerStatusContainer: FC<IThemeProps> = (props) => {

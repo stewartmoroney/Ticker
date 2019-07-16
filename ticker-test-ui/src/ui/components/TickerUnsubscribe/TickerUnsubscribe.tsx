@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC , useCallback } from 'react';
 
 import { IAppAction } from '../../../services/redux/Actions';
 
@@ -6,17 +6,12 @@ interface IProps {
   unsubscribe: () => IAppAction;
 }
 
-export default class TickerUnsubscribeComponent extends React.Component<IProps> {
-  constructor(props: IProps) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const TickerUnsubscribeComponent:FC<IProps> = (props) => {
+  const handleSubmit = useCallback(() => {
+    props.unsubscribe();
+  }, [props.unsubscribe]);
 
-  public render() {
-    return <button onClick={this.handleSubmit}>Ticker Unsubscribe</button>;
-  }
-
-  private handleSubmit() {
-    this.props.unsubscribe();
-  }
+  return <button onClick={handleSubmit}>Ticker Unsubscribe</button>;
 }
+
+export default TickerUnsubscribeComponent;

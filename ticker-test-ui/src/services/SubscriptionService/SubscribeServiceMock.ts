@@ -15,6 +15,8 @@ import tick from './MockTicks';
 export class SubscribeServiceMock extends ISubscribeService {
   private connectionService: IConnectionService;
 
+  private intervalIds: number[] = [];
+
   constructor(connectionService: IConnectionService) {
     super();
     this.connectionService = connectionService;
@@ -23,13 +25,15 @@ export class SubscribeServiceMock extends ISubscribeService {
   public subscribe(sessionId: string): Observable<IAppAction> {
     return Observable.create((observer: Observer<IAppAction>) => {
       defaultChannels.forEach((channel: IChannel) => {
-        setInterval(() => {
-          // const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
-          // const endpoint = '/' + channel.name + '-user' + sessionId;
+        this.intervalIds.push(
+          setInterval(() => {
+            // const subscribeEndpoint = '/app/' + channel.name + '/subscribe';
+            // const endpoint = '/' + channel.name + '-user' + sessionId;
 
-          const msgData = channel.name === ChannelName.TICK ? tick() : data();
-          channel.dataHandler(msgData, observer);
-        }, 5000);
+            const msgData = this.getData(channel.name);
+            channel.dataHandler(msgData, observer);
+          }, 5000)
+        );
       });
 
       observer.next(subscribed());
@@ -38,10 +42,8 @@ export class SubscribeServiceMock extends ISubscribeService {
 
   public unsubscribe(): Observable<IAppAction> {
     return Observable.create((observer: Observer<IAppAction>) => {
-      defaultChannels.forEach((channel: IChannel) => {
-        this.client().send('/app/' + channel.name + '/unsubscribe', {
-          priority: 9
-        });
+      this.intervalIds.map(intervalId => {
+        clearInterval(intervalId);        
       });
       observer.next(unsubscribed());
     });
@@ -50,4 +52,10 @@ export class SubscribeServiceMock extends ISubscribeService {
   private client(): Stomp.Client {
     return this.connectionService.client();
   }
+
+  private getData(channel: ChannelName) {
+    return channel === ChannelName.TICK ? tick() : data();
+  }
+
+
 }

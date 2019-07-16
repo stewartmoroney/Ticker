@@ -2,11 +2,11 @@ import styled, { withTheme } from 'styled-components';
 import * as React from 'react';
 
 import Grid from '../components/DataGrid/Grid';
-import TickerBody from '../components/TickerBody/TickerBodyContainer';
-import TickerHeader from '../components/TickerHeader/TickerHeader';
-import TickerLogon from '../components/TickerLogon/TickerLogon';
-import TickerStatus from '../components/TickerStatus/TickerStatusContainer';
-import TickerUnsubscribe from '../components/TickerUnsubscribe/TickerUnsubscribeContainer';
+import TickerBody from '../components/TickerBody';
+import TickerHeader from '../components/TickerHeader';
+import TickerLogon from '../components/TickerLogon';
+import TickerStatus from '../components/TickerStatus';
+import TickerUnsubscribe from '../components/TickerUnsubscribe';
 import { Theme } from '../shared';
 
 interface IProps {

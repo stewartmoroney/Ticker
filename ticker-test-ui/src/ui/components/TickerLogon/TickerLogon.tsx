@@ -1,24 +1,21 @@
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import React, { FC, useCallback } from 'react';
 
 import { IAppAction } from '../../../services/redux/Actions';
 
-import { subscribe } from '../../../services/redux/Actions';
+interface IProps {
+  logon: () => IAppAction;
+}
 
-import TickerLogonComponent from './TickerLogonComponent';
+const TickerLogon:FC<IProps> = (props) => { 
+  const handleSubmit = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    props.logon();
+  }, [props.logon]);
 
-import { GlobalState } from '../../../services/epics/Epics';
+  return (
+    <div>
+      <button onClick={handleSubmit}>logon</button>
+    </div>
+  );
+}
 
-const mapStateToProps = (state: GlobalState) => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<IAppAction>) => {
-  return {
-    logon: () => dispatch(subscribe())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TickerLogonComponent
-);
+export default TickerLogon;

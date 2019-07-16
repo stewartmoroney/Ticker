@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { unsubscribe } from '../../../services/redux/Actions';
-
 import { IAppAction } from '../../../services/redux/Actions';
 
-import { GlobalState } from '../../../services/epics/Epics';
+import { subscribe } from '../../../services/redux/Actions';
 
-import TickerUnsubscribe from './TickerUnsubscribe';
+import TickerLogon from './TickerLogon';
+
+import { GlobalState } from '../../../services/epics/Epics';
 
 const mapStateToProps = (state: GlobalState) => {
   return {};
@@ -15,10 +15,10 @@ const mapStateToProps = (state: GlobalState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<IAppAction>) => {
   return {
-    unsubscribe: () => dispatch(unsubscribe())
+    logon: () => dispatch(subscribe())
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  TickerUnsubscribe
+  TickerLogon
 );

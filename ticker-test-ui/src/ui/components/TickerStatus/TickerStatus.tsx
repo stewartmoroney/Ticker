@@ -29,7 +29,7 @@ const Status = styled.div<StatusProps>`
 
 type IProps = IThemeProps & IDataProps;
 
-export const TickerStatus: FC<IProps> = (props) => {
+const TickerStatus: FC<IProps> = (props) => {
   return (
     <ConnectionStatusWrapper>
       {props.connectionStatus}{props.sessionId && '- Session - ' + props.sessionId}
@@ -37,3 +37,5 @@ export const TickerStatus: FC<IProps> = (props) => {
     </ConnectionStatusWrapper>
   );
 }
+
+export default TickerStatus;

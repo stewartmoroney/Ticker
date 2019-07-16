@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { TickerStatus } from '../TickerStatus';
+import TickerStatus from '../TickerStatus';
 import { ConnectionStatus } from '../../../../state/types';
 import { getTheme } from '../../../shared';
 

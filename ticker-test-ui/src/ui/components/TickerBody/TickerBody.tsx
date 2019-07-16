@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 
 interface IProps {
   value: string;
 }
 
-export default class TickerBody extends React.Component<IProps> {
-  public render() {
-    return <div>{this.props.value}</div>;
-  }
+const TickerBody: FC<IProps> = (props) => {
+  return <div>{props.value}</div>;
 }
+
+export default TickerBody;
