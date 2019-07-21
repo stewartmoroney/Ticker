@@ -1,8 +1,8 @@
-import { IAppAction } from '../redux/Actions';
+import { IAppAction } from '../redux/actions/Actions';
 
 import { Observer } from 'rxjs';
 
-import { dataUpdate, newTick  } from '../redux/Actions';
+import { dataUpdate, newTick  } from '../redux/actions/Actions';
 
 export enum ChannelName {
   TICK = 'tick',

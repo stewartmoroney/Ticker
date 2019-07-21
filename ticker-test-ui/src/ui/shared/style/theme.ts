@@ -3,8 +3,16 @@ export interface IThemeProps {
 }
 
 export interface Theme {
-    bodyBackground: string;
+    body:{
+      background: string;
+    },
+    panel:{
+      background: string;
+    },    
     bodyText: string;
+    instrumentSelector: {
+      background: string;
+    },
     connection: {
       connected: string;
       disconnected: string;
@@ -13,7 +21,15 @@ export interface Theme {
   
 export const getTheme = (): Theme => {
     return {
-      bodyBackground: '#313d58',
+      body: {
+        background: '#424957',
+      },
+      panel:{
+        background: '#394660'
+      },
+      instrumentSelector: {
+        background: '#394660',
+      },
       bodyText: '#cddae8',
       connection: {
         connected:'green',

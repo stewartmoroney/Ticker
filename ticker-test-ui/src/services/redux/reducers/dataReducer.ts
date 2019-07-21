@@ -2,9 +2,9 @@ import {
   GRID_CLEAR,
   GRID_UPDATE,
   TICK,
-} from '../ActionTypes';
+} from '../actions/ActionTypes';
 
-import { IAppAction } from '../Actions';
+import { IVoidAppAction, IStringAppAction } from '../actions/Actions';
 
 interface IDataState {
   rowData: [];
@@ -17,7 +17,7 @@ export const initialState: IDataState = {
   tickerValue: '<.. watiing ..>'
 };
 
-const dataReducer = (state: IDataState = initialState, action: IAppAction): IDataState => {
+const dataReducer = (state: IDataState = initialState, action: IVoidAppAction |IStringAppAction): IDataState => {
   switch (action.type) {
     case TICK:
       return { ...state, tickerValue: action.payload };

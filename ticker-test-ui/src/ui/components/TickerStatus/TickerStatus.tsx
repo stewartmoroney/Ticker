@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { FC } from 'react';
 
-import { Theme, IThemeProps } from '../../shared';
+import { IThemeProps } from '../../shared';
 import { ConnectionStatus } from '../../../state/types';
 
 export interface IDataProps {
@@ -9,21 +9,18 @@ export interface IDataProps {
   connectionStatus: ConnectionStatus;
 }
 
-const ConnectionStatusWrapper = styled.div`
+const ConnectionStatusWrapper = styled.div<IThemeProps>`
   width: auto;
   margin-right: auto;
   display: flex;
 `
 
-type StatusProps = {
-  connectionStatus: ConnectionStatus;
-  theme: Theme;
-}
+type StatusProps = IDataProps & IThemeProps;
 
 const Status = styled.div<StatusProps>`
   width: 50px;
-  background-color: ${props => 
-    props.connectionStatus === ConnectionStatus.CONNECTED ? props.theme.connection.connected : props.theme.connection.disconnected
+  background-color: ${({ connectionStatus, theme }) => 
+    connectionStatus === ConnectionStatus.CONNECTED ? theme.connection.connected : theme.connection.disconnected
   };
 `
 
@@ -31,9 +28,11 @@ type IProps = IThemeProps & IDataProps;
 
 const TickerStatus: FC<IProps> = (props) => {
   return (
-    <ConnectionStatusWrapper>
+    <ConnectionStatusWrapper 
+      theme={props.theme}
+    >
       {props.connectionStatus}{props.sessionId && '- Session - ' + props.sessionId}
-      <Status theme={props.theme} connectionStatus={props.connectionStatus}/>
+      <Status {...props}/>
     </ConnectionStatusWrapper>
   );
 }

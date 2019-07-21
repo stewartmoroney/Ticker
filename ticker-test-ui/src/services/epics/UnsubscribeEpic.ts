@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { mergeMap } from 'rxjs/operators';
 
-import { UNSUBSCRIBE } from '../redux/ActionTypes';
+import { UNSUBSCRIBE } from '../redux/actions/ActionTypes';
 
 import { ApplicationEpic } from './Epics';
 

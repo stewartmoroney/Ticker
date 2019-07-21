@@ -1,8 +1,8 @@
 import { Observable, Observer } from 'rxjs';
 import * as Stomp from 'stompjs';
 
-import { subscribed, unsubscribed } from '../redux/Actions';
-import { IAppAction } from '../redux/Actions';
+import { subscribed, unsubscribed } from '../redux/actions/Actions';
+import { IAppAction } from '../redux/actions/Actions';
 
 import { IConnectionService } from '../ConnectionService';
 

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { unsubscribe } from '../../../services/redux/Actions';
+import { unsubscribe } from '../../../services/redux/actions/Actions';
 
-import { IAppAction } from '../../../services/redux/Actions';
+import { IAppAction } from '../../../services/redux/actions/Actions';
 
 import { GlobalState } from '../../../services/epics/Epics';
 

@@ -1,15 +1,15 @@
 import React, { FC, useCallback } from 'react';
 
-import { IAppAction } from '../../../services/redux/Actions';
+import { IAppAction } from '../../../services/redux/actions/Actions';
 
 interface IProps {
   logon: () => IAppAction;
 }
 
-const TickerLogon:FC<IProps> = (props) => { 
+const TickerLogon:FC<IProps> = ({ logon }) => { 
   const handleSubmit = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    props.logon();
-  }, [props.logon]);
+    logon();
+  }, [logon]);
 
   return (
     <div>

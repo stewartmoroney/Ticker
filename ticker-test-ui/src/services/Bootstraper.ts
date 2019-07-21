@@ -1,10 +1,13 @@
 import { ConnectionServiceImpl, ConnectionServiceMock, IConnectionService } from './ConnectionService';
 import { ISubscribeService, SubscribeServiceImpl } from './SubscriptionService';
 import { SubscribeServiceMock } from './SubscriptionService/SubscribeServiceMock';
+import { InstrumentServiceMock } from './InstrumentService/InstrumentServiceMock';
+import { IInstrumentService } from './InstrumentService';
 
 export interface IServices {
   connectionService: IConnectionService;
   subscribeService: ISubscribeService;
+  instrumentService: IInstrumentService;
 }
 
 export default class Bootstraper {
@@ -17,7 +20,8 @@ export default class Bootstraper {
 
       this.services = {
         connectionService,
-        subscribeService: new SubscribeServiceMock(connectionService)
+        subscribeService: new SubscribeServiceMock(connectionService),
+        instrumentService: new InstrumentServiceMock()
       };
 
     } else {
@@ -25,7 +29,8 @@ export default class Bootstraper {
 
       this.services = {
         connectionService,
-        subscribeService: new SubscribeServiceImpl(connectionService)
+        subscribeService: new SubscribeServiceImpl(connectionService),
+        instrumentService: new InstrumentServiceMock()
       };
     }
   }

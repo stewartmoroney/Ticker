@@ -9,3 +9,6 @@ export const UNSUBSCRIBED = 'UNSUBSCRIBED';
 export const NEW_SESSION = 'NEW_SESSION';
 export const GRID_CLEAR = 'GRID_CLEAR';
 export const GRID_UPDATE = 'GRID_UPDATE';
+
+export const NEW_INSTRUMENT = 'newInstrument';
+export const SUBSCRIBE_INSTRUMENT = 'subscribeInstrument';
