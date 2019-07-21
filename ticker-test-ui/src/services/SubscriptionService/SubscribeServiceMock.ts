@@ -1,8 +1,8 @@
 import { Observable, Observer } from 'rxjs';
 import * as Stomp from 'stompjs';
 
-import { subscribed, unsubscribed } from '../redux/Actions';
-import { IAppAction } from '../redux/Actions';
+import { subscribed, unsubscribed } from '../redux/actions/Actions';
+import { IAppAction } from '../redux/actions/Actions';
 
 import { IConnectionService } from '../ConnectionService';
 
@@ -42,7 +42,7 @@ export class SubscribeServiceMock extends ISubscribeService {
 
   public unsubscribe(): Observable<IAppAction> {
     return Observable.create((observer: Observer<IAppAction>) => {
-      this.intervalIds.map(intervalId => {
+      this.intervalIds.forEach(intervalId => {
         clearInterval(intervalId);        
       });
       observer.next(unsubscribed());

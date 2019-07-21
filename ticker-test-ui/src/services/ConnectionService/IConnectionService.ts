@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import * as Stomp from 'stompjs';
 
-import { IAppAction } from '../redux/Actions';
+import { IAppAction } from '../redux/actions/Actions';
 
 export abstract class IConnectionService {
   public abstract connect(): Observable<IAppAction>;

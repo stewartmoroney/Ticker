@@ -3,8 +3,8 @@ import uuid from 'uuid';
 
 import * as Stomp from 'stompjs';
 
-import { connected, newSession } from '../redux/Actions';
-import { IAppAction}  from '../redux/Actions';
+import { connected, newSession } from '../redux/actions/Actions';
+import { IAppAction}  from '../redux/actions/Actions';
 
 import { IConnectionService } from './IConnectionService';
 

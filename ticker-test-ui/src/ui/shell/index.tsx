@@ -2,6 +2,7 @@ import styled, { withTheme } from 'styled-components';
 import * as React from 'react';
 
 import Grid from '../components/DataGrid/Grid';
+import InstrumentSelector from '../components/InstrumentSelector';
 import TickerBody from '../components/TickerBody';
 import TickerHeader from '../components/TickerHeader';
 import TickerLogon from '../components/TickerLogon';
@@ -14,24 +15,33 @@ interface IProps {
 }
 
 const MainBody = styled.div`
-  background-color: ${props  => props.theme.bodyBackground};
+  background-color: ${props  => props.theme.body.background};
+  width: 500px;
+  display: flex;
+`;
+
+const MainPanel = styled.div`
+  background-color: ${props  => props.theme.panel.background};
   color: ${props  => props.theme.bodyText};
+  margin: 15px;
 `;
 
 class Shell extends React.Component<IProps> {
   public render() {
     return (
       <MainBody>
-        <TickerHeader />
-        <TickerLogon />
-        <TickerBody />
-        <TickerUnsubscribe />
-        <Grid />
-        <TickerStatus />
+        <MainPanel>
+          <TickerHeader />
+          <TickerLogon />
+          <TickerBody />
+          <TickerUnsubscribe />
+          <InstrumentSelector/>
+          <Grid />
+          <TickerStatus />
+        </MainPanel>
       </MainBody>
     );
   }
 }
-
 
 export default withTheme(Shell)

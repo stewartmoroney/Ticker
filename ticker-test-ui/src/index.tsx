@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Bootstraper from './services/Bootstraper';
 
-import { connect } from './services/redux/Actions';
+import { connect } from './services/redux/actions/Actions';
 import createStore from './services/redux/Store';
 import { getTheme } from './ui/shared';
 

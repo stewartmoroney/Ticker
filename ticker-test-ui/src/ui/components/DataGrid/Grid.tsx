@@ -38,8 +38,7 @@ class Grid extends React.Component<IProps, {}> {
 
   public render() {
     const containerStyle = {
-      height: 115,
-      width: 500
+      height: 115
     };
 
     return (
