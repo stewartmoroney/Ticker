@@ -24,6 +24,7 @@ const InstrumentSelector:FC<IProps> = ({ instruments, toggleSubscribe, subscribe
     {Array.from(instruments.values()).map(instrument => {
       const isSubscribed = !!subscribedInstrumentIds.find(sId => instrument.id === sId); 
       return <InstrumentToggle
+        key={instrument.id}
         instrument={instrument}
         subscribed={isSubscribed} 
         toggle={toggleSubscribe}
