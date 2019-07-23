@@ -11,12 +11,17 @@ import {
   UNSUBSCRIBE,
   UNSUBSCRIBED,
   GRID_CLEAR,
-  SUBSCRIBE_INSTRUMENT
+  SUBSCRIBE_INSTRUMENT,
+  UNSUBSCRIBE_INSTRUMENT
 } from './ActionTypes';
-import { IInstrumentAction } from './InstrumentActions';
+import { IInstrumentAction, IPriceAction, ISubscribeAction } from './InstrumentActions';
 
 export interface IStringAppAction extends Action {
-  type: typeof TICK | typeof NEW_SESSION | typeof GRID_UPDATE| typeof SUBSCRIBE_INSTRUMENT;
+  type: typeof TICK | 
+  typeof NEW_SESSION | 
+  typeof GRID_UPDATE| 
+  typeof SUBSCRIBE_INSTRUMENT |
+  typeof UNSUBSCRIBE_INSTRUMENT;
   payload: string;
 }
 export interface IVoidAppAction extends Action {
@@ -28,7 +33,6 @@ export interface IVoidAppAction extends Action {
   typeof UNSUBSCRIBED |
   typeof GRID_CLEAR;
 }
-
 
 export type StringActionCreator = (arg: string) => IStringAppAction;
 export type VoidTickActionCreator = () => IVoidAppAction;
@@ -67,7 +71,6 @@ export const unsubscribed: VoidTickActionCreator = ():IVoidAppAction => ({
   type: UNSUBSCRIBED
 });
 
+// export type TickActionCreator = StringActionCreator | VoidTickActionCreator;
 
-export type TickActionCreator = StringActionCreator | VoidTickActionCreator;
-
-export type IAppAction = IStringAppAction | IVoidAppAction | IInstrumentAction;
+export type IAppAction = IStringAppAction | IVoidAppAction | ISubscribeAction | IInstrumentAction | IPriceAction;

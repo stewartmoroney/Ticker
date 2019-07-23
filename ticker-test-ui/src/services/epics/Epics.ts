@@ -8,14 +8,17 @@ import { unSubscribeEpic } from './UnsubscribeEpic';
 import rootReducer from '../redux/reducers/rootReducer';
 import { instrumentEpic } from './InstrumentEpic';
 import { IServices } from '../Bootstraper';
+import { subscribeInstrumentEpic } from './SubscribeInstrumentEpic';
+import { IAppAction } from '../redux/actions';
 
 export type GlobalState = ReturnType<typeof rootReducer>;
 
 export type ApplicationEpic<
-  T extends Action = Action
+  T extends IAppAction = IAppAction
 > = Epic<T, T, GlobalState, IServices>;
 
 export default [connectEpic,
+  subscribeInstrumentEpic,
   instrumentEpic,
   subscribeEpic,
   unSubscribeEpic

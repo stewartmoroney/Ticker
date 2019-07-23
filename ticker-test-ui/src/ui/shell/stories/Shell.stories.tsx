@@ -10,6 +10,7 @@ import { getTheme } from './../../shared';
 import { initialState as dataInitialState } from '../../../services/redux/reducers/dataReducer';
 import { initialState as systemIntialState } from '../../../services/redux/reducers/systemReducer';
 import { initialState as instrumentsIntialState } from '../../../services/redux/reducers/instrumentReducer';
+import { initialState as instrumentsPricelState } from '../../../services/redux/reducers/priceReducer';
 import { IAppAction } from '../../../services/redux/actions/Actions';
 import { GlobalState } from '../../../services/epics/Epics';
 import uuid from 'uuid';
@@ -21,6 +22,7 @@ const StoryBackground = styled.div`
 const initialState: GlobalState = {
   data: dataInitialState,
   instruments: instrumentsIntialState,
+  prices: instrumentsPricelState,
   system: {
     ...systemIntialState,
     sessionId: uuid()

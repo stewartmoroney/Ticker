@@ -12,3 +12,5 @@ export const GRID_UPDATE = 'GRID_UPDATE';
 
 export const NEW_INSTRUMENT = 'newInstrument';
 export const SUBSCRIBE_INSTRUMENT = 'subscribeInstrument';
+export const UNSUBSCRIBE_INSTRUMENT = 'unsubscribeInstrument';
+export const INSTRUMENT_PRICE = 'instrumentPrice';
