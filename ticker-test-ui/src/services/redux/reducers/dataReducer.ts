@@ -1,29 +1,24 @@
-import {
-  GRID_CLEAR,
-  GRID_UPDATE,
-  TICK,
-} from '../actions/ActionTypes';
+import { ActionTypes } from '../actions';
 
-import { IVoidAppAction, IStringAppAction } from '../actions/Actions';
+import { IAppAction } from '../actions';
 
 interface IDataState {
   rowData: [];
   tickerValue: string;
 };
 
-
 export const initialState: IDataState = {
   rowData: [],
   tickerValue: '<.. watiing ..>'
 };
 
-const dataReducer = (state: IDataState = initialState, action: IVoidAppAction |IStringAppAction): IDataState => {
+const dataReducer = (state: IDataState = initialState, action: IAppAction): IDataState => {
   switch (action.type) {
-    case TICK:
+    case ActionTypes.TICK:
       return { ...state, tickerValue: action.payload };
-    case GRID_CLEAR:
+    case ActionTypes.GRID_CLEAR:
       return { ...state, rowData: [] };
-    case GRID_UPDATE:
+    case ActionTypes.GRID_UPDATE:
       return { ...state, rowData: JSON.parse(action.payload).rows };
     default:
       return state;

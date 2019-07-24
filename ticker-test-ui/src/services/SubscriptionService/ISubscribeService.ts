@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { IAppAction } from '../redux/actions/Actions';
+import { IAppAction } from '../redux/actions';
 
 export abstract class ISubscribeService {
   public abstract subscribe(sessionId: string): Observable<IAppAction>;

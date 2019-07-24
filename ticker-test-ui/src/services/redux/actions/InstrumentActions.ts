@@ -1,54 +1,47 @@
 import { Action } from 'redux';
 
-import { Instrument, Price } from '../../../state/types';
+import { Instrument } from '../../../state/types';
 
-import {
-NEW_INSTRUMENT, SUBSCRIBE_INSTRUMENT, INSTRUMENT_PRICE, UNSUBSCRIBE_INSTRUMENT 
-} from './ActionTypes';
-import { IStringAppAction, StringActionCreator } from './Actions';
+import { ActionTypes } from './ActionTypes';
 
-
-export interface ISubscribeAction {
+export interface IInstrumentSubscribeAction extends Action {
   payload: string,
-  type: typeof SUBSCRIBE_INSTRUMENT
+  type: typeof ActionTypes.SUBSCRIBE_INSTRUMENT
 }
-
-export const subscribeInstrument = (id: string): ISubscribeAction => {
+export const subscribeInstrument = (id: string): IInstrumentSubscribeAction => {
   return {
     payload: id,
-    type: SUBSCRIBE_INSTRUMENT
+    type: ActionTypes.SUBSCRIBE_INSTRUMENT
   };
-}
-
-export const unsubscribeInstrument: StringActionCreator = (id: string): IStringAppAction => {
-  return {
-    payload: id,
-    type: UNSUBSCRIBE_INSTRUMENT
-  };
-}
+};
 
 export interface IInstrumentAction extends Action {
   payload: Instrument;
-  type: typeof NEW_INSTRUMENT;
+  type: typeof ActionTypes.NEW_INSTRUMENT;
 }
-
-type InstrumentActionCreator = (i: Instrument) => IInstrumentAction;
-export const newInstrument: InstrumentActionCreator = (newInstrument: Instrument): IInstrumentAction => {
+export const newInstrument = (newInstrument: Instrument): IInstrumentAction => {
   return {
     payload: newInstrument,
-    type: NEW_INSTRUMENT
+    type: ActionTypes.NEW_INSTRUMENT
   };
-}
+};
 
-export interface IPriceAction extends Action {
-  payload: Price;
-  type: typeof INSTRUMENT_PRICE;
+export interface ISubscribedAction extends Action {
+  type: typeof ActionTypes.SUBSCRIBED
 }
+export const subscribed = ():ISubscribedAction => ({
+  type: ActionTypes.SUBSCRIBED
+});
 
-type PriceActionCreator = (price: Price) => IPriceAction;
-export const newPrice: PriceActionCreator = (price: Price): IPriceAction => {
-  return {
-    payload: price,
-    type: INSTRUMENT_PRICE
-  };
+export interface IUnsubscribeAction extends Action {
+  type: typeof ActionTypes.UNSUBSCRIBE
 }
+export const unsubscribe = ():IUnsubscribeAction => ({
+  type: ActionTypes.UNSUBSCRIBE
+});
+export interface IUnsubscribedAction extends Action {
+  type: typeof ActionTypes.UNSUBSCRIBED
+}
+export const unsubscribed = ():IUnsubscribedAction => ({
+  type: ActionTypes.UNSUBSCRIBED
+});

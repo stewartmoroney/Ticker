@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { IAppAction } from '../../../services/redux/actions/Actions';
-
-import { subscribe } from '../../../services/redux/actions/Actions';
+import { IAppAction, subscribe } from '../../../services/redux/actions';
 
 import TickerLogon from './TickerLogon';
 

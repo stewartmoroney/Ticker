@@ -11,7 +11,7 @@ import { initialState as dataInitialState } from '../../../services/redux/reduce
 import { initialState as systemIntialState } from '../../../services/redux/reducers/systemReducer';
 import { initialState as instrumentsIntialState } from '../../../services/redux/reducers/instrumentReducer';
 import { initialState as instrumentsPricelState } from '../../../services/redux/reducers/priceReducer';
-import { IAppAction } from '../../../services/redux/actions/Actions';
+import { IAppAction } from '../../../services/redux/actions';
 import { GlobalState } from '../../../services/epics/Epics';
 import uuid from 'uuid';
 

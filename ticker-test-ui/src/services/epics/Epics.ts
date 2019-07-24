@@ -1,8 +1,7 @@
-import { Action } from 'redux';
 import { Epic } from 'redux-observable';
 
 import { connectEpic } from './ConnectEpic';
-import { subscribeEpic } from './SubscribeEpic';
+import { subscribePricesEpic } from './SubscribePricesEpic';
 import { unSubscribeEpic } from './UnsubscribeEpic';
 
 import rootReducer from '../redux/reducers/rootReducer';
@@ -20,6 +19,6 @@ export type ApplicationEpic<
 export default [connectEpic,
   subscribeInstrumentEpic,
   instrumentEpic,
-  subscribeEpic,
+  subscribePricesEpic,
   unSubscribeEpic
 ];

@@ -1,5 +1,5 @@
 import { Instrument } from './../../../state/types';
-import { NEW_INSTRUMENT, IInstrumentAction } from '../actions';
+import { ActionTypes, IInstrumentAction } from '../actions';
 
 type IInstrumentsState = Map<string, Instrument>;
 
@@ -9,7 +9,7 @@ export const initialState:IInstrumentsState = (() => {
 
 const instrumentReducer = (state: IInstrumentsState = initialState, action: IInstrumentAction): IInstrumentsState  => { 
   const newState = new Map<string, Instrument>(state);
-  if(action.type === NEW_INSTRUMENT) {
+  if(action.type === ActionTypes.NEW_INSTRUMENT) {
     newState.set(action.payload.id, {id:action.payload.id});
   }
   return newState
