@@ -5,7 +5,6 @@ import Grid from '../components/DataGrid/Grid';
 import InstrumentSelector from '../components/InstrumentSelector';
 import TickerBody from '../components/TickerBody';
 import TickerHeader from '../components/TickerHeader';
-import TickerLogon from '../components/TickerLogon';
 import TickerStatus from '../components/TickerStatus';
 import TickerUnsubscribe from '../components/TickerUnsubscribe';
 import { Theme } from '../shared';
@@ -32,7 +31,6 @@ class Shell extends React.Component<IProps> {
       <MainBody>
         <MainPanel>
           <TickerHeader />
-          <TickerLogon />
           <TickerBody />
           <TickerUnsubscribe />
           <InstrumentSelector/>

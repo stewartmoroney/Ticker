@@ -15,12 +15,12 @@ export class ConnectionServiceMock extends IConnectionService {
     return Observable.create((observer: Observer<IAppAction>) => {
       setTimeout(() => {
         observer.next(connected());
-      }, 1000);
+      }, 200);
 
       setTimeout(() => {
         const sessionId = uuid();
         observer.next(newSession(sessionId));
-      }, 1000);
+      }, 200);
     });
   }
 

@@ -1,16 +1,26 @@
 import { ofType } from 'redux-observable';
-import { mergeMap, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, withLatestFrom, map } from 'rxjs/operators';
 
-import { ActionTypes } from '../redux/actions';
+import { ActionTypes, IAppAction, INewSessionAction, newPrice } from '../redux/actions';
 
 import { ApplicationEpic } from './Epics';
+import { Price } from '../../state/types';
 
-export const subscribePricesEpic: ApplicationEpic = (action$, state$, { subscribeService }) =>
+const mapToPrice = (instrumentId: string, price: number):Price => {
+  return {
+    instrumentId: instrumentId,
+    value: price,
+  };
+}
+
+export const subscribePricesEpic: ApplicationEpic = (action$, state$, { instrumentPriceService }) =>
   action$.pipe(
-    ofType(ActionTypes.SUBSCRIBE),
+    ofType<IAppAction, INewSessionAction>(ActionTypes.NEW_SESSION),
     withLatestFrom(state$),
     mergeMap(([action, state]) => {
-      const { sessionId } = state.system;
-      return subscribeService.subscribe(sessionId);
+      const { payload } = action;
+      return instrumentPriceService.subscribeToPrices(payload).pipe(
+        map(price => newPrice(mapToPrice(payload, price))) 
+      )
     })
   );

@@ -1,7 +1,15 @@
-import { IConnectAction, IConnectedAction, INewSessionAction } from './ConnectionActions';
+import { 
+    IConnectAction, 
+    IConnectedAction, 
+    INewSessionAction, 
+    ISubscribeAction, 
+    ISubscribedAction, 
+    IUnsubscribeAction, 
+    IUnsubscribedAction 
+} from './ConnectionActions';
 import { IDataAction, ITickAction, IGridClearAction } from './DataActions';
-import { IPriceAction, IPriceSubscribeAction } from './PriceActions';
-import { IInstrumentSubscribeAction, IInstrumentAction, ISubscribedAction, IUnsubscribeAction, IUnsubscribedAction } from './InstrumentActions';
+import { IPriceAction, IInstrumentSubscribeAction, IInstrumentSubscribeAckAction } from './PriceActions';
+import { IInstrumentAction } from './InstrumentActions';
 
 export * from './ActionTypes';
 export * from './ConnectionActions';
@@ -23,7 +31,8 @@ ISubscribedAction |
 IUnsubscribeAction |
 IUnsubscribedAction |
 
-IPriceSubscribeAction |
+ISubscribeAction |
 IPriceAction | 
-IInstrumentAction 
+IInstrumentAction |
+IInstrumentSubscribeAckAction 
 ;
