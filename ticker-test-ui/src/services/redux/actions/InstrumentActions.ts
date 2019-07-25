@@ -6,7 +6,7 @@ import { ActionTypes } from './ActionTypes';
 
 export interface IInstrumentSubscribeAction extends Action {
   payload: string,
-  type: typeof ActionTypes.SUBSCRIBE_INSTRUMENT
+  type: ActionTypes.SUBSCRIBE_INSTRUMENT
 }
 export const subscribeInstrument = (id: string): IInstrumentSubscribeAction => {
   return {
@@ -17,7 +17,7 @@ export const subscribeInstrument = (id: string): IInstrumentSubscribeAction => {
 
 export interface IInstrumentAction extends Action {
   payload: Instrument;
-  type: typeof ActionTypes.NEW_INSTRUMENT;
+  type: ActionTypes.NEW_INSTRUMENT;
 }
 export const newInstrument = (newInstrument: Instrument): IInstrumentAction => {
   return {
@@ -27,20 +27,20 @@ export const newInstrument = (newInstrument: Instrument): IInstrumentAction => {
 };
 
 export interface ISubscribedAction extends Action {
-  type: typeof ActionTypes.SUBSCRIBED
+  type: ActionTypes.SUBSCRIBED
 }
 export const subscribed = ():ISubscribedAction => ({
   type: ActionTypes.SUBSCRIBED
 });
 
 export interface IUnsubscribeAction extends Action {
-  type: typeof ActionTypes.UNSUBSCRIBE
+  type: ActionTypes.UNSUBSCRIBE
 }
 export const unsubscribe = ():IUnsubscribeAction => ({
   type: ActionTypes.UNSUBSCRIBE
 });
 export interface IUnsubscribedAction extends Action {
-  type: typeof ActionTypes.UNSUBSCRIBED
+  type: ActionTypes.UNSUBSCRIBED
 }
 export const unsubscribed = ():IUnsubscribedAction => ({
   type: ActionTypes.UNSUBSCRIBED

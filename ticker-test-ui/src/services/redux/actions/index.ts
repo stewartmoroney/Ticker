@@ -9,7 +9,7 @@ export * from './DataActions';
 export * from './InstrumentActions';
 export * from './PriceActions';
 
-export type  IAppAction =
+export type IAppAction =
 IConnectAction |
 IConnectedAction |
 INewSessionAction |
@@ -26,5 +26,4 @@ IUnsubscribedAction |
 IPriceSubscribeAction |
 IPriceAction | 
 IInstrumentAction 
-
 ;

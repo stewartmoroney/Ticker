@@ -3,14 +3,14 @@ import { Action } from 'redux';
 import { ActionTypes } from './ActionTypes';
 
 export interface IConnectAction extends Action {
-  type: typeof ActionTypes.CONNECT
+  type: ActionTypes.CONNECT
 }
 export const connect = ():IConnectAction => ({
   type: ActionTypes.CONNECT
 });
 
 export interface IConnectedAction extends Action {
-  type: typeof ActionTypes.CONNECTED
+  type: ActionTypes.CONNECTED
 }
 export const connected = ():IConnectedAction => ({
   type:ActionTypes.CONNECTED
@@ -18,7 +18,7 @@ export const connected = ():IConnectedAction => ({
 
 export interface INewSessionAction extends Action {
   payload: string
-  type: typeof ActionTypes.NEW_SESSION
+  type: ActionTypes.NEW_SESSION
 }
 export const newSession = (s: string):INewSessionAction => ({
   payload: s,

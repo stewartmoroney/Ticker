@@ -5,7 +5,7 @@ import { ActionTypes } from './ActionTypes';
 
 export interface IGridClearAction extends Action {
   payload: string
-  type: typeof ActionTypes.GRID_CLEAR
+  type: ActionTypes.GRID_CLEAR
 }
 export const clearGrid = (s: string):IGridClearAction => ({
   payload: s,
@@ -14,7 +14,7 @@ export const clearGrid = (s: string):IGridClearAction => ({
 
 export interface ITickAction extends Action {
   payload: string
-  type: typeof ActionTypes.TICK
+  type: ActionTypes.TICK
 }
 export const newTick = (s: string):ITickAction => ({
   payload: s,
@@ -23,7 +23,7 @@ export const newTick = (s: string):ITickAction => ({
 
 export interface IDataAction extends Action {
   payload: string
-  type: typeof ActionTypes.GRID_UPDATE
+  type: ActionTypes.GRID_UPDATE
 }
 export const dataUpdate = (s: string):IDataAction => ({
   payload: s,
