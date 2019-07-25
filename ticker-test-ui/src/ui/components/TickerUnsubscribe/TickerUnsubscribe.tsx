@@ -1,6 +1,6 @@
 import React, { FC , useCallback } from 'react';
 
-import { IAppAction } from '../../../services/redux/actions/Actions';
+import { IAppAction } from '../../../services/redux/actions';
 
 interface IProps {
   unsubscribe: () => IAppAction;

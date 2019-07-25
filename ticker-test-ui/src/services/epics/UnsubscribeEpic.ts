@@ -1,13 +1,13 @@
 import { ofType } from 'redux-observable';
 import { mergeMap } from 'rxjs/operators';
 
-import { UNSUBSCRIBE } from '../redux/actions/ActionTypes';
+import { ActionTypes } from '../redux/actions';
 
 import { ApplicationEpic } from './Epics';
 
 export const unSubscribeEpic: ApplicationEpic = (action$, state$, { subscribeService })  =>
   action$.pipe(
-    ofType(UNSUBSCRIBE),
+    ofType(ActionTypes.UNSUBSCRIBE),
     mergeMap(action => {
       return subscribeService.unsubscribe();
     })

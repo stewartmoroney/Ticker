@@ -1,11 +1,6 @@
-import {
-  CONNECTED,
-  NEW_SESSION,
-  SUBSCRIBED,
-  UNSUBSCRIBED
-} from '../actions/ActionTypes';
+import { ActionTypes } from '../actions';
 
-import { IAppAction } from '../actions/Actions';
+import { IAppAction } from '../actions';
 
 import { ConnectionStatus } from '../../../state/types';
 
@@ -25,13 +20,13 @@ export const initialState: ISystemState = {
 
 const systemReducer = (state: ISystemState = initialState, action: IAppAction ): ISystemState => {
   switch (action.type) {
-    case CONNECTED:
+    case ActionTypes.CONNECTED:
       return { ...state, connected: true, connectionStatus: ConnectionStatus.CONNECTED };
-    case NEW_SESSION:
+    case ActionTypes.NEW_SESSION:
       return { ...state, sessionId: action.payload };
-    case SUBSCRIBED:
+    case ActionTypes.SUBSCRIBED:
       return { ...state, subscribed: true };
-    case UNSUBSCRIBED:
+    case ActionTypes.UNSUBSCRIBED:
       return { ...state, subscribed: false };
     default:
       return state;

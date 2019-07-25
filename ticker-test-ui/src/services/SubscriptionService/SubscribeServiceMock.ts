@@ -1,8 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 import * as Stomp from 'stompjs';
 
-import { subscribed, unsubscribed } from '../redux/actions/Actions';
-import { IAppAction } from '../redux/actions/Actions';
+import { IAppAction, subscribed, unsubscribed } from '../redux/actions';
 
 import { IConnectionService } from '../ConnectionService';
 
@@ -56,6 +55,4 @@ export class SubscribeServiceMock extends ISubscribeService {
   private getData(channel: ChannelName) {
     return channel === ChannelName.TICK ? tick() : data();
   }
-
-
 }

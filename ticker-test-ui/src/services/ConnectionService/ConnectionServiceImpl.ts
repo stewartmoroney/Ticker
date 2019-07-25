@@ -5,8 +5,8 @@ import * as Stomp from 'stompjs';
 
 import { BACKEND_URL } from '../../Constants';
 
-import { connected, newSession } from '../redux/actions/Actions';
-import { IAppAction}  from '../redux/actions/Actions';
+import { connected, newSession } from '../redux/actions'
+import { IAppAction}  from '../redux/actions';
 
 import logger from '../../util/logger';
 import { IConnectionService } from './IConnectionService';

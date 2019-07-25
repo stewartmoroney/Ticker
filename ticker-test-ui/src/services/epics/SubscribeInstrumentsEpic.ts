@@ -2,11 +2,11 @@ import { ofType } from 'redux-observable';
 import { mergeMap, map} from 'rxjs/operators';
 
 import { ApplicationEpic } from './Epics';
-import { CONNECTED, newInstrument } from '../redux/actions';
+import { ActionTypes, newInstrument, INewSessionAction, IAppAction } from '../redux/actions';
 
-export const instrumentEpic: ApplicationEpic = (action$, state$, { instrumentService }) => 
+export const subscribeInstrumentsEpic: ApplicationEpic = (action$, state$, { instrumentService }) => 
   action$.pipe(
-    ofType(CONNECTED),
+    ofType<IAppAction, INewSessionAction>(ActionTypes.NEW_SESSION),
     mergeMap(action => {
       return instrumentService.subscribe().pipe(
         map(instrument => newInstrument(instrument))

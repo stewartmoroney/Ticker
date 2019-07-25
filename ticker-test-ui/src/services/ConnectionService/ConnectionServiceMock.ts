@@ -3,8 +3,8 @@ import uuid from 'uuid';
 
 import * as Stomp from 'stompjs';
 
-import { connected, newSession } from '../redux/actions/Actions';
-import { IAppAction}  from '../redux/actions/Actions';
+import { connected, newSession } from '../redux/actions';
+import { IAppAction}  from '../redux/actions';
 
 import { IConnectionService } from './IConnectionService';
 
@@ -15,12 +15,12 @@ export class ConnectionServiceMock extends IConnectionService {
     return Observable.create((observer: Observer<IAppAction>) => {
       setTimeout(() => {
         observer.next(connected());
-      }, 1000);
+      }, 200);
 
       setTimeout(() => {
         const sessionId = uuid();
         observer.next(newSession(sessionId));
-      }, 1000);
+      }, 200);
     });
   }
 
