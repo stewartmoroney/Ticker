@@ -1,3 +1,3 @@
-import TickerHeader from './TickerHeader';
+import AppHeader from './AppHeader';
 
-export default TickerHeader;
+export default AppHeader;
