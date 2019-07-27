@@ -15,11 +15,12 @@ interface IProps {
 
 const MainBody = styled.div`
   background-color: ${props  => props.theme.body.background};
-  width: 500px;
+  width: 420px;
   display: flex;
 `;
 
 const MainPanel = styled.div`
+  width: 400px;
   background-color: ${props  => props.theme.panel.background};
   color: ${props  => props.theme.bodyText};
   margin: 15px;
