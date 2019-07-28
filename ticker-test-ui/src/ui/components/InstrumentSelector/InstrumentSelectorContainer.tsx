@@ -17,10 +17,14 @@ const InstrumentSelectorContainer: FC<IThemeProps> = (props) => {
     return state.instruments
   });
   
+  const subscribedInstrumentIds = useSelector((state: GlobalState) => {
+    return state.prices.subscribedInstruments
+  });
+
   return <InstrumentSelector
       theme={props.theme}
       instruments={instruments}
-      subscribedInstrumentIds={['2']}
+      subscribedInstrumentIds={subscribedInstrumentIds}
       toggleSubscribe={toggle}>        
   </InstrumentSelector>;
 }

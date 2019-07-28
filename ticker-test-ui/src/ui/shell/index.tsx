@@ -33,9 +33,9 @@ class Shell extends React.Component<IProps> {
         <MainPanel>
           <AppHeader />
           <TickerBody />
-          <TickerUnsubscribe />
           <InstrumentSelector/>
           <Grid />
+          <TickerUnsubscribe />
           <TickerStatus />
         </MainPanel>
       </MainBody>
