@@ -31,7 +31,6 @@ const priceReducer = (state: IPriceState = initialState, action: IAppAction): IP
       return { ...state, subscribedInstruments: newSubscriptions }
     };
     default:
-      debugger;
       return state;
   }
 }

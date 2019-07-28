@@ -6,7 +6,7 @@ import { storiesOf } from '@storybook/react';
 import { createStore } from 'redux'
 
 import Shell from '..';
-import { getTheme } from './../../shared';
+import { getTheme, defaultTheme } from './../../shared';
 import { initialState as dataInitialState } from '../../../services/redux/reducers/dataReducer';
 import { initialState as systemIntialState } from '../../../services/redux/reducers/systemReducer';
 import { initialState as instrumentsIntialState } from '../../../services/redux/reducers/instrumentReducer';
@@ -37,7 +37,7 @@ const store = createStore(appReducer)
 
 storiesOf('shell', module)
   .add('default layout', () => (
-    <ThemeProvider theme={getTheme()}>
+    <ThemeProvider theme={getTheme(defaultTheme)}>
       <Provider store={store}>
         <StoryBackground>
           <Shell />

@@ -12,8 +12,8 @@ const HeaderText = styled.div`
 `;
 
 const AppLogoPosition = styled.div`
-  height: 50px;
-  width: 50px;
+  height: 55px;
+  width: 55px;
   float: right;
 `;
 

@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { storiesOf } from '@storybook/react';
-import { getTheme } from '../../../shared';
+import { getTheme, defaultTheme } from '../../../shared';
 
 import AppLogo from './../AppLogo';
 
@@ -22,7 +22,7 @@ const LogoWrapper = styled.div`
 storiesOf('AppLogo', module)
   .add('Header', () => (
     <Background>
-      <ThemeProvider theme={getTheme()}>
+      <ThemeProvider theme={getTheme(defaultTheme)}>
         <LogoWrapper>
           <AppLogo/>
         </LogoWrapper>
