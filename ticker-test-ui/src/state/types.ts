@@ -11,3 +11,5 @@ export interface Price{
 export interface Instrument{
   id: string;
 }
+
+export type ThemeName = 'light' | 'dark';

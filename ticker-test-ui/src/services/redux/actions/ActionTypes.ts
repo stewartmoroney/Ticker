@@ -1,4 +1,5 @@
 export enum ActionTypes {
+  TOGGLE_THEME = 'TOGGLE_THEME',
   CONNECT = 'CONNECT',
   CONNECTED = 'CONNECTED',
   SUBSCRIBE = 'SUBSCRIBE',

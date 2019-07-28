@@ -4,10 +4,10 @@ import { ThemeProvider } from 'styled-components';
 
 import { storiesOf } from '@storybook/react';
 import InstrumentSelector from '../InstrumentSelector';
-import { getTheme } from '../../../shared';
+import { getTheme, defaultTheme } from '../../../shared';
 import { Instrument } from './../../../../state/types';
 
-const theme = getTheme();
+const theme = getTheme(defaultTheme);
 
 const instruments: Map<string, Instrument> = (() => {
   const ins = new Map<string, Instrument>();
@@ -27,7 +27,7 @@ const toggleCLick = () => {
 
 storiesOf('InstrumentSelector', module)
   .add('No Instruments', () => (
-    <ThemeProvider theme={getTheme()}>
+    <ThemeProvider theme={theme}>
       <InstrumentSelector
           theme={theme}
           instruments={new Map<string, Instrument>()}
@@ -37,7 +37,7 @@ storiesOf('InstrumentSelector', module)
     </ThemeProvider>
   ))
   .add('Has Instruments', () => (
-    <ThemeProvider theme={getTheme()}>
+    <ThemeProvider theme={theme}>
       <InstrumentSelector 
           theme={theme}
           instruments={instruments}

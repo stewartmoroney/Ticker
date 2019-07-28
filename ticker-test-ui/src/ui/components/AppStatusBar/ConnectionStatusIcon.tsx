@@ -31,7 +31,7 @@ const Status = styled.div<StatusProps>`
 
 type IProps = IThemeProps & IDataProps;
 
-const TickerStatus: FC<IProps> = (props) => {
+const ConnectionStatusIcon: FC<IProps> = (props) => {
   const statusText = useCallback(() => {
     return props.connectionStatus + ' ' + (props.sessionId && '- Session - ' + props.sessionId);
   }, [props.connectionStatus, props.sessionId]);
@@ -48,4 +48,4 @@ const TickerStatus: FC<IProps> = (props) => {
   );
 }
 
-export default TickerStatus;
+export default ConnectionStatusIcon;

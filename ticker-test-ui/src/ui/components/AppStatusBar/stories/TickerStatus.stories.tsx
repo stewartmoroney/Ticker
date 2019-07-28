@@ -1,21 +1,21 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TickerStatus from '../TickerStatus';
+import ConnectionStatusIcon from '../ConnectionStatusIcon';
 import { ConnectionStatus } from '../../../../state/types';
-import { getTheme } from '../../../shared';
+import { getTheme, defaultTheme } from '../../../shared';
 
-const theme = getTheme();
+const theme = getTheme(defaultTheme);
 
-storiesOf('TickerStaus', module)
+storiesOf('Connection Status Icon', module)
   .add('disconnected', () => (
-    <TickerStatus 
+    <ConnectionStatusIcon 
         connectionStatus={ConnectionStatus.DISCONNECTED}
         sessionId={'asession'}
         theme={theme}
     />
   ))
   .add('connected', () => (
-    <TickerStatus 
+    <ConnectionStatusIcon 
         connectionStatus={ConnectionStatus.CONNECTED}
         sessionId={'asession'}
         theme={theme}
