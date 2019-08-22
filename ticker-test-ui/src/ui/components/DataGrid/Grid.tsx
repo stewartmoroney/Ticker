@@ -1,16 +1,18 @@
-import { ColumnApi, GridApi } from 'ag-grid';
+import { ColumnApi, GridApi } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import styled from 'styled-components';
+
 import { GlobalState } from '../../../services/epics/Epics';
 
-import '../../../../node_modules/ag-grid/dist/styles/ag-grid.css';
-import '../../../../node_modules/ag-grid/dist/styles/theme-fresh.css';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
-import './Grid.css';
+import { IThemeProps } from '../../shared';
 
-interface IProps {
+interface IGridProps {
   rowData: any[];
 }
 
@@ -26,29 +28,52 @@ const columnDefs = [
   { headerName: 'Value', field: 'value' }
 ];
 
+const GridStyle = styled.div`
+  border: ${props => 
+    {return "1px solid" + props.theme.border}
+  };
+  && .ag-header-cell {
+    color: ${props => props.theme.bodyText};
+    background-color: ${props => props.theme.panel.background};
+    border: none;
+  }
+
+  && .ag-header {
+    border: none;
+  }
+
+  && .ag-row {
+    background-color: ${props => props.theme.panel.background};
+    border: none;
+  }
+
+  && .ag-cell {
+    color: ${props => props.theme.bodyText};
+    border: none;
+  }
+`;
+
+type IProps = IGridProps & IThemeProps
+
 class Grid extends React.Component<IProps, {}> {
   private gridApi: GridApi | undefined;
   private columnApi: ColumnApi | undefined;
 
   constructor(props: IProps) {
     super(props);
-
     this.onGridReady = this.onGridReady.bind(this);
   }
 
   public render() {
-    const containerStyle = {
-      height: 115
-    };
-
     return (
-      <div style={containerStyle} className="ag-fresh">
+      <GridStyle style={{height: 115}}
+         className="ag-balham">
         <AgGridReact
           columnDefs={columnDefs}
           rowData={this.props.rowData}
           onGridReady={this.onGridReady}
         />
-      </div>
+      </GridStyle>
     );
   }
 

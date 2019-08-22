@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 
-import Grid from '../components/DataGrid/Grid';
+import Grid from '../components/DataGrid';
 import InstrumentSelector from '../components/InstrumentSelector';
 import TickerBody from '../components/TickerBody';
 import AppHeader from '../components/TickerHeader';
