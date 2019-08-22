@@ -13,6 +13,7 @@ export interface Theme {
     panel:{
       background: string;
     },    
+    border: string,    
     bodyText: string;
     connection: {
       connected: string;
@@ -30,6 +31,7 @@ export const getTheme = (themeName: ThemeName): Theme => {
     panel:{
       background: '#394660'
     },
+    border:'#4d5e80',
     bodyText: '#f0f2f4',
     connection: {
       connected:'green',
@@ -38,11 +40,12 @@ export const getTheme = (themeName: ThemeName): Theme => {
   } :
   {
     body: {
-      background: '#586174',
+      background: '#8f9ebc',
     },
     panel:{
       background: '#eff1f5'
     },
+    border:'#afbacf',
     bodyText: '#586174',
     connection: {
       connected:'green',
