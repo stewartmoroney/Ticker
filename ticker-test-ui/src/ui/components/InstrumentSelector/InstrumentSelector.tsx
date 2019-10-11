@@ -13,6 +13,7 @@ interface IDataProps {
 
 const InstrumentSelectorPanel = styled.div`
   height: 100px;
+  background-color: ${props  => props.theme.panel.background};
 `;
 
 type IProps = IDataProps & IThemeProps;

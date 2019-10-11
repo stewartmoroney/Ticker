@@ -26,10 +26,10 @@ export const getTheme = (themeName: ThemeName): Theme => {
   return themeName === 'dark' ? 
   {
     body: {
-      background: '#f0f2f4',
+      background: '#303b50',
     },
     panel:{
-      background: '#394660'
+      background: '#262f40'
     },
     border:'#4d5e80',
     bodyText: '#f0f2f4',
@@ -40,7 +40,7 @@ export const getTheme = (themeName: ThemeName): Theme => {
   } :
   {
     body: {
-      background: '#8f9ebc',
+      background: '#e0e4eb',
     },
     panel:{
       background: '#eff1f5'

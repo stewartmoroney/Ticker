@@ -13,17 +13,13 @@ import { GlobalState } from '../../services/epics/Epics';
 
 import { getTheme } from './../shared';
 
-const MainBody = styled.div`
-  background-color: ${props  => props.theme.body.background};
-  width: 410px;
-  display: flex;
-`;
-
 const MainPanel = styled.div`
-  width: 400px;
-  background-color: ${props  => props.theme.panel.background};
+  width: 100%;
+  display: grid;
+  background-color: ${props  => props.theme.body.background};
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-row-gap: 4px; 
   color: ${props  => props.theme.bodyText};
-  margin: 5px;
 `;
 
 const Shell: FC<IThemeProps> = (props) => {
@@ -32,16 +28,14 @@ const Shell: FC<IThemeProps> = (props) => {
   });
 
   return <ThemeProvider theme={getTheme(themeName)}>
-    <MainBody>
-        <MainPanel>
-          <AppHeader />
-          <TickerBody />
-          <InstrumentSelector/>
-          <Grid />
-          <TickerUnsubscribe />
-          <AppStatusBar />
-        </MainPanel>
-      </MainBody>
+    <MainPanel>
+      <AppHeader />
+      <TickerBody />
+      <InstrumentSelector/>
+      <Grid />
+      <TickerUnsubscribe />
+      <AppStatusBar />
+    </MainPanel>
 </ThemeProvider>
 }
 
