@@ -9,6 +9,7 @@ import ThemeSelector from '../ThemeSelector';
 
 const StatusBar = styled.div`
   display: flex;
+  background-color: ${props  => props.theme.panel.background};
 `;
 
 const AppStatusBarContainer: FC<IThemeProps> = (props) => {
