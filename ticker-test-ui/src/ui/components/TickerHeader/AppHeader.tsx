@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import AppLogo from './AppLogo';
 
 const HeaderPanel = styled.div`
-  width: 100%;
   background-color: ${props  => props.theme.panel.background};
   display: inline-block;
 `;

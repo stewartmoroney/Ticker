@@ -9,8 +9,8 @@ export interface IDataProps {
   connectionStatus: ConnectionStatus;
 }
 
-const ConnectionStatusWrapper = styled.div<IThemeProps>`
-  margin-right: 0px;
+const ConnectionStatusWrapper = styled.div`
+  margin-right: 2px;
   margin-left: auto;
 `
 
@@ -23,10 +23,6 @@ const Status = styled.div<StatusProps>`
     connectionStatus === ConnectionStatus.CONNECTED ? theme.connection.connected : theme.connection.disconnected
   };
   border-radius: 50%;
-  top: 4px;
-  position: relative;
-  float: right;
-  margin-right: 2px;
 `
 
 type IProps = IThemeProps & IDataProps;
@@ -35,12 +31,9 @@ const ConnectionStatusIcon: FC<IProps> = (props) => {
   const statusText = useCallback(() => {
     return props.connectionStatus + ' ' + (props.sessionId && '- Session - ' + props.sessionId);
   }, [props.connectionStatus, props.sessionId]);
-  
-      
+     
   return (
-    <ConnectionStatusWrapper 
-      theme={props.theme}
-    >      
+    <ConnectionStatusWrapper>      
       <abbr title={statusText()}> 
         <Status {...props}/>
       </abbr>

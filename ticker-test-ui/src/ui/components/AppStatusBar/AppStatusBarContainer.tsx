@@ -9,6 +9,8 @@ import ThemeSelector from '../ThemeSelector';
 
 const StatusBar = styled.div`
   display: flex;
+  height: 20px;
+  line-height: 20px;
   background-color: ${props  => props.theme.panel.background};
 `;
 
