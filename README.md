@@ -6,7 +6,7 @@ A react/redux app that subscribes via web socket to a java backend and receives 
 
 ## To run server
 
-mvn clean install
+gradle build
 run TicketTestServerApp
 
 ## To run client
