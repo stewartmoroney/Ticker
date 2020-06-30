@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-  value: string;
+  id: string;
+  timeStamp: string;
 }
 
 const Panel = styled.div`
@@ -10,7 +11,7 @@ const Panel = styled.div`
 `;
 
 const TickerBody: FC<IProps> = (props) => {
-  return <Panel>{props.value}</Panel>;
+  return <Panel>{props.id} - {props.timeStamp}</Panel>;
 }
 
 export default TickerBody;

@@ -4,7 +4,10 @@ import { GlobalState } from '../../../services/epics/Epics';
 import TickerBody from './TickerBody';
 
 const mapStateToProps = (state: GlobalState) => {
-  return { value: state.data.tickerValue };
+  return { 
+    id: state.data.tickerValue.id, 
+    timeStamp: state.data.tickerValue.timeStamp
+  };
 };
 
 export default connect(mapStateToProps)(TickerBody);

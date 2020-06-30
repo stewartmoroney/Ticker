@@ -4,18 +4,24 @@ import { IAppAction } from '../actions';
 
 interface IDataState {
   rowData: [];
-  tickerValue: string;
+  tickerValue: {
+    id: string,
+    timeStamp: string
+  };
 };
 
 export const initialState: IDataState = {
   rowData: [],
-  tickerValue: '<.. watiing ..>'
+  tickerValue: {
+    id: '',
+    timeStamp: ''
+  } 
 };
 
 const dataReducer = (state: IDataState = initialState, action: IAppAction): IDataState => {
   switch (action.type) {
     case ActionTypes.TICK:
-      return { ...state, tickerValue: action.payload };
+      return { ...state, tickerValue: JSON.parse(action.payload) };
     case ActionTypes.GRID_CLEAR:
       return { ...state, rowData: [] };
     case ActionTypes.GRID_UPDATE:
