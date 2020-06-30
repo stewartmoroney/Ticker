@@ -7,8 +7,10 @@ import com.sm.ticker.server.stomp.SessionController;
 import com.sm.ticker.server.stomp.StompSender;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Slf4j
+@Configuration
+@EnableScheduling
 @Controller
 @AllArgsConstructor
 public class DataController {
