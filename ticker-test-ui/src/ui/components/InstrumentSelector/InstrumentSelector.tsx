@@ -8,7 +8,7 @@ import InstrumentToggle from './InstrumentToggleContainer';
 interface IDataProps {
   instruments: Instrument[];
   subscribedInstrumentIds: string[];
-  toggleSubscribe: (id: string) => void;
+  toggleSubscribe: (id: string, subscribed: boolean) => void;
 }
 
 const InstrumentSelectorPanel = styled.div`

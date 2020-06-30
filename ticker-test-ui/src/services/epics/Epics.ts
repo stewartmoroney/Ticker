@@ -12,6 +12,7 @@ import { unSubscribeEpic } from './UnsubscribeEpic';
 import rootReducer from '../redux/reducers/rootReducer';
 import { IServices } from '../Bootstraper';
 import { IAppAction } from '../redux/actions';
+import { unsubscribePriceEpic } from './UnsubscribePriceEpic';
 
 export type GlobalState = ReturnType<typeof rootReducer>;
 
@@ -24,5 +25,6 @@ export default [connectEpic,
   subscribePricesEpic,
   subscribeInstrumentsEpic,
   subscribePriceEpic,
+  unsubscribePriceEpic,
   unSubscribeEpic
 ];

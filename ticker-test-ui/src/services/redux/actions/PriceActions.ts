@@ -18,10 +18,23 @@ export interface IInstrumentSubscribeAction extends Action {
   payload: string,
   type: ActionTypes.SUBSCRIBE_INSTRUMENT
 }
+
+export interface IInstrumentUnsubscribeAction extends Action {
+  payload: string,
+  type: ActionTypes.UNSUBSCRIBE_INSTRUMENT
+}
+
 export const subscribeInstrument = (id: string): IInstrumentSubscribeAction => {
   return {
     payload: id,
     type: ActionTypes.SUBSCRIBE_INSTRUMENT
+  };
+};
+
+export const unsubscribeInstrument = (id: string): IInstrumentUnsubscribeAction => {
+  return {
+    payload: id,
+    type: ActionTypes.UNSUBSCRIBE_INSTRUMENT
   };
 };
 

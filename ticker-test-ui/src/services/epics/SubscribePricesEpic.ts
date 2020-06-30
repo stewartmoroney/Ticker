@@ -1,26 +1,15 @@
 import { ofType } from 'redux-observable';
-import { mergeMap, withLatestFrom, map } from 'rxjs/operators';
+import { mergeMap, withLatestFrom } from 'rxjs/operators';
 
-import { ActionTypes, IAppAction, INewSessionAction, newPrice } from '../redux/actions';
+import { ActionTypes, IAppAction, IConnectedAction } from '../redux/actions';
 
 import { ApplicationEpic } from './Epics';
-import { Price } from '../../state/types';
 
-const mapToPrice = (instrumentId: string, price: number):Price => {
-  return {
-    instrumentId: instrumentId,
-    value: price,
-  };
-}
-
-export const subscribePricesEpic: ApplicationEpic = (action$, state$, { instrumentPriceService }) =>
+export const subscribePricesEpic: ApplicationEpic = (action$, state$, { priceService, webSocketService }) =>
   action$.pipe(
-    ofType<IAppAction, INewSessionAction>(ActionTypes.NEW_SESSION),
+    ofType<IAppAction, IConnectedAction>(ActionTypes.CONNECTED),
     withLatestFrom(state$),
     mergeMap(([action, state]) => {
-      const { payload } = action;
-      return instrumentPriceService.subscribeToPrices(payload).pipe(
-        map(price => newPrice(mapToPrice(payload, price))) 
-      )
+      return priceService.subscribe(webSocketService.webSocket())
     })
   );

@@ -10,7 +10,8 @@ import InstrumentToggle from '../InstrumentToggle';
 const theme = getTheme(defaultTheme);
 
 const instrument: Instrument = {
-  id: '1'
+  id: '1',
+  name: 'a'
 };
 
 const toggleCLick = () => {
