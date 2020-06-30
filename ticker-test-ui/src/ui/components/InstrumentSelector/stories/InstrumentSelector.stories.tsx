@@ -9,17 +9,13 @@ import { Instrument } from './../../../../state/types';
 
 const theme = getTheme(defaultTheme);
 
-const instruments: Map<string, Instrument> = (() => {
-  const ins = new Map<string, Instrument>();
-  ins.set('1', {
-    id: '1'
-  });
-    
-  ins.set('2', {
-    id: '3'
-  });
-  return ins;
-})();
+const instruments: Instrument[] = [
+{  
+  id: '1'
+},
+{
+  id: '2'
+}];
 
 const toggleCLick = () => {
   alert('');  
@@ -30,7 +26,7 @@ storiesOf('InstrumentSelector', module)
     <ThemeProvider theme={theme}>
       <InstrumentSelector
           theme={theme}
-          instruments={new Map<string, Instrument>()}
+          instruments= {[]}
           subscribedInstrumentIds = {[]}
           toggleSubscribe={toggleCLick}
       />

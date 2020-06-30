@@ -6,7 +6,7 @@ import { Instrument } from './../../../state/types';
 import InstrumentToggle from './InstrumentToggleContainer';
 
 interface IDataProps {
-  instruments: Map<string, Instrument>;
+  instruments: Instrument[];
   subscribedInstrumentIds: string[];
   toggleSubscribe: (id: string) => void;
 }
@@ -20,17 +20,18 @@ type IProps = IDataProps & IThemeProps;
 
 const InstrumentSelector:FC<IProps> = ({ instruments, toggleSubscribe, subscribedInstrumentIds }) => {
   return <InstrumentSelectorPanel>
-    {Array.from(instruments.values()).map(instrument => {
-      const isSubscribed = !!subscribedInstrumentIds.find(sId => instrument.id === sId); 
-      return <InstrumentToggle
-        key={instrument.id}
-        instrument={instrument}
-        subscribed={isSubscribed} 
-        toggle={toggleSubscribe}
-      >
-      {instrument.id}
-    </InstrumentToggle>
-    })
+    {
+      instruments.map(instrument => {
+        const isSubscribed = !!subscribedInstrumentIds.find(sId => instrument.id === sId); 
+        return <InstrumentToggle
+          key={instrument.id}
+          instrument={instrument}
+          subscribed={isSubscribed} 
+          toggle={toggleSubscribe}
+        >
+        {instrument.id}
+      </InstrumentToggle>
+      })
     }
   </InstrumentSelectorPanel>;
 }
