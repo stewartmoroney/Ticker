@@ -7,27 +7,23 @@ import { createStore } from 'redux'
 
 import Shell from '..';
 import { getTheme, defaultTheme } from './../../shared';
-import { initialState as dataInitialState } from '../../../services/redux/reducers/dataReducer';
 import { initialState as systemIntialState } from '../../../services/redux/reducers/systemReducer';
 import { initialState as instrumentsIntialState } from '../../../services/redux/reducers/instrumentReducer';
 import { initialState as instrumentsPricelState } from '../../../services/redux/reducers/priceReducer';
 import { initialState as subscriptionState } from '../../../services/redux/reducers/subscriptionReducer';
 import { IAppAction } from '../../../services/redux/actions';
 import { GlobalState } from '../../../services/epics/Epics';
-import uuid from 'uuid';
 
 const StoryBackground = styled.div`
   background-color: black;
 `;
 
 const initialState: GlobalState = {
-  data: dataInitialState,
   instruments: instrumentsIntialState,
   prices: instrumentsPricelState,
   subscriptions: subscriptionState,
   system: {
-    ...systemIntialState,
-    sessionId: uuid()
+    ...systemIntialState
   }
 }
 
