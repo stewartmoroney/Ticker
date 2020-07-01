@@ -1,5 +1,4 @@
 import React, { FC, useCallback } from 'react';
-import { IAppAction } from '../../../services/redux/actions';
 import { useDispatch } from 'react-redux';
 import { withTheme } from 'styled-components';
 import { toggleTheme } from '../../../services/redux/actions/ThemeActions';
