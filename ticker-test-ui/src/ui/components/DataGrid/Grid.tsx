@@ -1,106 +1,39 @@
-import { ColumnApi, GridApi } from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
-import * as React from 'react';
-import { connect } from 'react-redux';
-
-import styled from 'styled-components';
-
-import { GlobalState } from '../../../services/epics/Epics';
-
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { withTheme } from 'styled-components';
 import { IThemeProps } from '../../shared';
-import { Price } from '../../../state/types';
+import { Price, Instrument } from '../../../state/types';
+import GridRow from './GridRow';
+import { GlobalState } from '../../../services/epics/Epics';
+import { Table, Header, Row, Cell, NoData } from './gridStyles';
 
-interface IGridProps {
-  prices: Price[];
-  subscribedInstruments: string[];
+type IProps = IThemeProps;
+
+const Grid:FC<IProps> = () => {
+    const prices = useSelector((state: GlobalState) => state.prices);
+    const instruments = useSelector((state: GlobalState) => state.instruments);
+
+    return <Table>
+        <Header>
+            <Cell>Name</Cell>
+            <Cell>Price</Cell>
+        </Header>        
+
+        {
+        prices.length > 0 ? 
+        prices
+        .map((price: Price) => {
+            const instrument = instruments.find((instrument: Instrument) => {
+                return instrument.id === price.instrumentId;
+            })
+            return instrument ? <GridRow 
+                price={price} 
+                instrument={instrument}
+            ></GridRow> : null
+        })
+        : <Row><NoData>No data available</NoData></Row>  
+        }
+    </Table>
 }
-
-const mapStateToProps = (state: GlobalState) => {
-  return {
-    prices: state.prices,
-    subscribedInstruments: state.subscriptions.subscribedInstruments
-  };
-};
-
-const columnDefs = [
-  { headerName: 'Name', field: 'name' },
-  { headerName: 'Value', field: 'value' }
-];
-
-const GridStyle = styled.div`
-  border: ${props => 
-    {return "1px solid" + props.theme.border}
-  };
-  && .ag-header-cell {
-    color: ${props => props.theme.bodyText};
-    background-color: ${props => props.theme.panel.background};
-    border: none;
-  }
-
-  && .ag-header {
-    border: none;
-  }
-
-  && .ag-row {
-    background-color: ${props => props.theme.panel.background};
-    border: none;
-  }
-
-  && .ag-cell {
-    color: ${props => props.theme.bodyText};
-    border: none;
-  }
-`;
-
-type IProps = IGridProps & IThemeProps
-
-class Grid extends React.Component<IProps, {}> {
-  private gridApi: GridApi | undefined;
-  private columnApi: ColumnApi | undefined;
-
-  constructor(props: IProps) {
-    super(props);
-    this.onGridReady = this.onGridReady.bind(this);
-  }
-
-  public render() {
-    const rowData = mapToRowData(this.props.prices, this.props.subscribedInstruments)
-
-    return (
-      <GridStyle style={{height: 115}}
-         className="ag-balham">
-        <AgGridReact
-          columnDefs={columnDefs}
-          rowData={rowData}
-          onGridReady={this.onGridReady}
-        />
-      </GridStyle>
-    );
-  }
-
-  private onGridReady(params: any) {
-    this.gridApi = params.api;
-    this.columnApi = params.columnApi;
-
-    if (this.gridApi) {
-       this.gridApi.sizeColumnsToFit();
-    }
-  }
-}
-
-const mapToRowData = (prices: Price[], subscriptions: string[]) => {
-  return prices.filter((p: Price) => {
-    return subscriptions.includes(p.instrumentId);
-  })
-  .map((p: Price) => {
-    return {
-      name: p.instrumentId,
-      value: p.value
-    }
-  })
-}
-
-export default connect(mapStateToProps)(Grid);
+  
+export default withTheme(Grid);

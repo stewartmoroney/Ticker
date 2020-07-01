@@ -15,7 +15,7 @@ export class PriceServiceMock implements IPriceService {
           value: (Math.random() * 1234),
         };
         observer.next(newPrice(price));
-      }, 2500);
+      }, 500);
 
       return;
     }); 
