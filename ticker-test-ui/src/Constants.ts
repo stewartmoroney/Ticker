@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'http://127.0.0.1:9700/ticker';
+export const WS_URL = 'ws://localhost:8080/app';

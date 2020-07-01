@@ -1,8 +1,7 @@
 import { Observable } from "rxjs";
 import { IWebSocketService } from "./IWebSocketService";
 import { connected, IAppAction } from "../redux/actions";
-
-const WS_URL = 'ws://localhost:8080/app';
+import { WS_URL } from "../../Constants";
 
 export class WebSocketServiceImpl extends IWebSocketService {
     private ws!: WebSocket;
