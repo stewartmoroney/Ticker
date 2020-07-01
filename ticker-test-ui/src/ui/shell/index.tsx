@@ -3,7 +3,6 @@ import styled, { ThemeProvider, withTheme } from 'styled-components';
 
 import Grid from '../components/DataGrid';
 import InstrumentSelector from '../components/InstrumentSelector';
-import TickerBody from '../components/TickerBody';
 import AppHeader from '../components/TickerHeader';
 import AppStatusBar from '../components/AppStatusBar';
 import TickerUnsubscribe from '../components/TickerUnsubscribe';
@@ -30,7 +29,6 @@ const Shell: FC<IThemeProps> = (props) => {
   return <ThemeProvider theme={getTheme(themeName)}>
     <MainPanel>
       <AppHeader />
-      <TickerBody />
       <InstrumentSelector/>
       <Grid />
       <TickerUnsubscribe />
