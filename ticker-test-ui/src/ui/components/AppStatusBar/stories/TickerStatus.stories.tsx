@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import ConnectionStatusIcon from '../ConnectionStatusIcon';
 import { ConnectionStatus } from '../../../../state/types';
@@ -8,14 +9,18 @@ const theme = getTheme(defaultTheme);
 
 storiesOf('Connection Status Icon', module)
   .add('disconnected', () => (
-    <ConnectionStatusIcon 
-        connectionStatus={ConnectionStatus.DISCONNECTED}
-        sessionId={'asession'}
-    />
+    <ThemeProvider theme={getTheme(defaultTheme)}>
+      <ConnectionStatusIcon 
+          connectionStatus={ConnectionStatus.DISCONNECTED}
+          sessionId={'asession'}
+      />
+    </ThemeProvider>
   ))
   .add('connected', () => (
-    <ConnectionStatusIcon 
-        connectionStatus={ConnectionStatus.CONNECTED}
-        sessionId={'asession'}
-    />
+    <ThemeProvider theme={getTheme(defaultTheme)}>
+      <ConnectionStatusIcon 
+          connectionStatus={ConnectionStatus.CONNECTED}
+          sessionId={'asession'}
+      />
+  </ThemeProvider>
   ));   
