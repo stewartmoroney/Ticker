@@ -6,6 +6,9 @@ export const Table = styled.div`
     };
 `;
 
+export const GridRows = styled.div`
+`;
+
 export const Row = styled.div`
     height: 25px;
     line-height: 25px;
