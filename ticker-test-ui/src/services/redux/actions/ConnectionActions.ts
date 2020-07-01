@@ -15,3 +15,11 @@ export interface IConnectedAction extends Action {
 export const connected = ():IConnectedAction => ({
   type:ActionTypes.CONNECTED
 });
+
+export interface IDisconnectedAction extends Action {
+  type: ActionTypes.DISCONNECTED
+}
+export const disconnected = ():IDisconnectedAction => ({
+  type:ActionTypes.DISCONNECTED
+});
+

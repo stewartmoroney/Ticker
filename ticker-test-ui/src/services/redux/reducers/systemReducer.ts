@@ -27,7 +27,9 @@ const systemReducer = (state: ISystemState = initialState, action: IAppAction ):
   switch (action.type) {
     case ActionTypes.CONNECTED:
       return { ...state, connected: true, connectionStatus: ConnectionStatus.CONNECTED };
-    case ActionTypes.TOGGLE_THEME:
+      case ActionTypes.DISCONNECTED:
+        return { ...state, connected: false, connectionStatus: ConnectionStatus.DISCONNECTED };
+      case ActionTypes.TOGGLE_THEME:
         return { ...state, themeName: flipTheme(state.themeName) };
     default:
       return state;

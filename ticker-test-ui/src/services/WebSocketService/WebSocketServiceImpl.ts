@@ -1,7 +1,8 @@
 import { Observable } from "rxjs";
 import { IWebSocketService } from "./IWebSocketService";
-import { connected, IAppAction } from "../redux/actions";
+import { connected, disconnected, IAppAction } from "../redux/actions";
 import { WS_URL } from "../../Constants";
+import { threadId } from "worker_threads";
 
 export class WebSocketServiceImpl extends IWebSocketService {
     private ws!: WebSocket;
@@ -11,8 +12,13 @@ export class WebSocketServiceImpl extends IWebSocketService {
             this.ws = new WebSocket(WS_URL);    
             this.ws.onopen = (evt: Event) => {
                 observer.next(connected());
-                observer.complete();
-            };    
+            };
+            this.ws.onclose = (evt: Event) => {
+                observer.next(disconnected());
+            };
+            this.ws.onerror = (evt: Event) => {
+                observer.next(disconnected());
+            };
           });
     }
     webSocket(): WebSocket {

@@ -1,6 +1,7 @@
 import { 
     IConnectAction, 
     IConnectedAction, 
+    IDisconnectedAction
 } from './ConnectionActions';
 import { IPriceAction, IInstrumentSubscribeAction, IInstrumentSubscribeAckAction, IInstrumentUnsubscribeAction } from './PriceActions';
 import { IInstrumentAction } from './InstrumentActions';
@@ -15,6 +16,7 @@ export * from './ThemeActions';
 export type IAppAction =
 IConnectAction |
 IConnectedAction |
+IDisconnectedAction |
 
 IThemeAction| 
 
