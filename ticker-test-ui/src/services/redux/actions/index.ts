@@ -8,7 +8,7 @@ import {
     IUnsubscribedAction 
 } from './ConnectionActions';
 import { IDataAction, ITickAction, IGridClearAction } from './DataActions';
-import { IPriceAction, IInstrumentSubscribeAction, IInstrumentSubscribeAckAction } from './PriceActions';
+import { IPriceAction, IInstrumentSubscribeAction, IInstrumentSubscribeAckAction, IInstrumentUnsubscribeAction } from './PriceActions';
 import { IInstrumentAction } from './InstrumentActions';
 import { IThemeAction } from './ThemeActions';
 
@@ -38,5 +38,6 @@ IUnsubscribedAction |
 ISubscribeAction |
 IPriceAction | 
 IInstrumentAction |
-IInstrumentSubscribeAckAction 
+IInstrumentSubscribeAckAction |
+IInstrumentUnsubscribeAction
 ;

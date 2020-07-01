@@ -11,10 +11,12 @@ const theme = getTheme(defaultTheme);
 
 const instruments: Instrument[] = [
 {  
-  id: '1'
+  id: '1',
+  name: 'a'
 },
 {
-  id: '2'
+  id: '2',
+  name: 'b'
 }];
 
 const toggleCLick = () => {

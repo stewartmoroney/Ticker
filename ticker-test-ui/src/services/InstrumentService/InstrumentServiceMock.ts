@@ -7,14 +7,16 @@ import { Instrument } from "./././../../state/types";
 const mockinstruments: Instrument[] = [
   {
     id: '1',
+    name: "a",
   },
   {
     id: '2',
+    name: "b",
   }
 ];
 
 export class InstrumentServiceMock implements IInstrumentService {
-  public subscribe = (): Observable<Instrument> => {
+  public subscribe = (webSocket: WebSocket): Observable<Instrument> => {
     return Observable.create((observer: Observer<Instrument>) => {
       mockinstruments.forEach(mockinstrument => {
         observer.next(mockinstrument);

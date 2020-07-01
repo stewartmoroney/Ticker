@@ -8,7 +8,7 @@ import { Instrument } from './../../../state/types';
 export interface IDataProps {
   instrument: Instrument;
   subscribed: boolean;
-  toggle: (id: string) => void;
+  toggle: (id: string, subscribed: boolean) => void;
 }
 
 type IProps = IDataProps & IThemeProps;
@@ -19,8 +19,8 @@ const InstrumentButton = styled(Button)`
 
 const InstrumentToggle:FC<IProps> = ({ instrument, subscribed, toggle }) => {
   const toggleClick = useCallback(()=> {
-    toggle(instrument.id);
-  },[instrument.id, toggle]);
+    toggle(instrument.id, subscribed);
+  },[instrument.id, subscribed, toggle]);
 
   return <InstrumentButton
     variant="outlined"

@@ -3,14 +3,21 @@ import { ISubscribeService, SubscribeServiceImpl } from './SubscriptionService';
 import { SubscribeServiceMock } from './SubscriptionService/SubscribeServiceMock';
 import { InstrumentServiceMock } from './InstrumentService/InstrumentServiceMock';
 import { IInstrumentService } from './InstrumentService';
-import { InstrumentPriceService } from './InstrumentPriceService/InstrumentPriceService';
-import { IInstrumentPriceService } from './InstrumentPriceService';
+import { PriceSubscribeService } from './PriceSubscriptionService/PriceSubscribeService';
+import { IPriceSubscribeService } from './PriceSubscriptionService';
+import { IWebSocketService } from './WebSocketService/IWebSocketService';
+import { WebSocketServiceImpl } from './WebSocketService/WebSocketServiceImpl';
+import { InstrumentServiceImpl } from './InstrumentService/InstrumentServiceImpl';
+import { IPriceService } from './PriceService';
+import { PriceServiceMock } from './PriceService/PriceServiceMock';
 
 export interface IServices {
   connectionService: IConnectionService;
-  subscribeService: ISubscribeService;
   instrumentService: IInstrumentService;
-  instrumentPriceService: IInstrumentPriceService;
+  priceSubscribeService: IPriceSubscribeService;
+  priceService: IPriceService;
+  subscribeService: ISubscribeService;
+  webSocketService: IWebSocketService
 }
 
 export default class Bootstraper {
@@ -23,9 +30,11 @@ export default class Bootstraper {
 
       this.services = {
         connectionService,
-        subscribeService: new SubscribeServiceMock(connectionService),
         instrumentService: new InstrumentServiceMock(),
-        instrumentPriceService: new InstrumentPriceService()
+        priceSubscribeService: new PriceSubscribeService(),
+        priceService: new PriceServiceMock(),
+        subscribeService: new SubscribeServiceMock(connectionService),
+        webSocketService: new WebSocketServiceImpl()
       };
 
     } else {
@@ -33,9 +42,11 @@ export default class Bootstraper {
 
       this.services = {
         connectionService,
+        instrumentService: new InstrumentServiceImpl(),
+        priceSubscribeService: new PriceSubscribeService(),
+        priceService: new PriceServiceMock(),
         subscribeService: new SubscribeServiceImpl(connectionService),
-        instrumentService: new InstrumentServiceMock(),
-        instrumentPriceService: new InstrumentPriceService()
+        webSocketService: new WebSocketServiceImpl()
       };
     }
   }

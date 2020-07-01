@@ -5,12 +5,17 @@ import { withTheme } from 'styled-components';
 import { IThemeProps } from '../../shared';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalState } from '../../../services/epics/Epics';
-import { subscribeInstrument } from '../../../services/redux/actions';
+import { subscribeInstrument, unsubscribeInstrument } from '../../../services/redux/actions';
 
 const InstrumentSelectorContainer: FC<IThemeProps> = (props) => {
   const dispatch = useDispatch();
-  const toggle = useCallback((id: string) => {
-    dispatch(subscribeInstrument(id));
+  const toggle = useCallback((id: string, subscribed: boolean) => {
+    if(subscribed) {
+      dispatch(unsubscribeInstrument(id));
+    } else {
+      dispatch(subscribeInstrument(id));
+
+    }
   }, [dispatch]);
 
   const instruments = useSelector((state: GlobalState) => {
@@ -18,7 +23,7 @@ const InstrumentSelectorContainer: FC<IThemeProps> = (props) => {
   });
   
   const subscribedInstrumentIds = useSelector((state: GlobalState) => {
-    return state.prices.subscribedInstruments
+    return state.subscriptions.subscribedInstruments
   });
 
   return <InstrumentSelector
