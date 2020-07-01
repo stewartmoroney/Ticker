@@ -11,6 +11,7 @@ const GridData:FC = () => {
     const rows = instruments
     .map((instrument: Instrument) => {
         return <GridRow 
+            key={instrument.id}
             instrument={instrument}
         ></GridRow>
     })
