@@ -5,7 +5,6 @@ import Grid from '../components/DataGrid';
 import InstrumentSelector from '../components/InstrumentSelector';
 import AppHeader from '../components/TickerHeader';
 import AppStatusBar from '../components/AppStatusBar';
-import TickerUnsubscribe from '../components/TickerUnsubscribe';
 import { IThemeProps } from '../shared';
 import { useSelector } from 'react-redux';
 import { GlobalState } from '../../services/epics/Epics';
@@ -31,7 +30,6 @@ const Shell: FC<IThemeProps> = (props) => {
       <AppHeader />
       <InstrumentSelector/>
       <Grid />
-      <TickerUnsubscribe />
       <AppStatusBar />
     </MainPanel>
 </ThemeProvider>
