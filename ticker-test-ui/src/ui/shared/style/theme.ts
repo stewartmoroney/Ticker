@@ -15,6 +15,10 @@ export interface Theme {
     },    
     border: string,    
     bodyText: string;
+    subscriptions: {
+      subscribed: string;
+      unsubscribed: string;
+    },
     connection: {
       connected: string;
       disconnected: string;
@@ -33,6 +37,10 @@ export const getTheme = (themeName: ThemeName): Theme => {
     },
     border:'#4d5e80',
     bodyText: '#f0f2f4',
+    subscriptions: {
+      subscribed: '#3f51b5',
+      unsubscribed: '#f50057',
+    },
     connection: {
       connected:'green',
       disconnected: 'red'
@@ -47,6 +55,10 @@ export const getTheme = (themeName: ThemeName): Theme => {
     },
     border:'#afbacf',
     bodyText: '#586174',
+    subscriptions: {
+      subscribed: '#3f51b5',
+      unsubscribed: '#f50057',
+    },
     connection: {
       connected:'green',
       disconnected: 'red'

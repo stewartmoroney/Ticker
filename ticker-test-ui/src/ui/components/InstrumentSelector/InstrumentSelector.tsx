@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { Instrument } from './../../../state/types';
-import InstrumentToggle from './InstrumentToggleContainer';
+import InstrumentToggle from './InstrumentToggle';
 
 interface IProps {
   instruments: Instrument[];
@@ -11,6 +11,7 @@ interface IProps {
 }
 
 const InstrumentSelectorPanel = styled.div`
+  display: flex;
   height: 100px;
   background-color: ${props  => props.theme.panel.background};
 `;

@@ -1,19 +1,24 @@
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
 
 import { Instrument } from './../../../state/types';
 
-export interface IDataProps {
+export interface IProps {
   instrument: Instrument;
   subscribed: boolean;
   toggle: (id: string, subscribed: boolean) => void;
 }
 
-type IProps = IDataProps;
-
-const InstrumentButton = styled(Button)`
-  background-color: 'azure';
+const InstrumentButton = styled.div<{subscribed : boolean}>`
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props  => 
+    props.subscribed ? props.theme.subscriptions.subscribed : props.theme.subscriptions.unsubscribed
+  };
+  text-align: center;
 `;
 
 const InstrumentToggle:FC<IProps> = ({ instrument, subscribed, toggle }) => {
@@ -22,14 +27,10 @@ const InstrumentToggle:FC<IProps> = ({ instrument, subscribed, toggle }) => {
   },[instrument.id, subscribed, toggle]);
 
   return <InstrumentButton
-    variant="outlined"
-    disableRipple={true}
-    disableFocusRipple={true}
-    disableTouchRipple={true}
-    color={subscribed ? 'primary' : 'secondary'}
+    subscribed={subscribed}
     onClick={toggleClick}
     >
-      {instrument.id}
+      {instrument.name}
     </InstrumentButton>;
 }
  
