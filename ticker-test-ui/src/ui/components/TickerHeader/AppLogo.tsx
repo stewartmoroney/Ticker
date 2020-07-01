@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const circleWidth=25;
+const circleWidth=38;
 
 const SVG = styled.svg`
   width: 100%;

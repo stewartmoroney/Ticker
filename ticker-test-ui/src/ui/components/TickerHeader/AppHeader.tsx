@@ -4,17 +4,18 @@ import AppLogo from './AppLogo';
 
 const HeaderPanel = styled.div`
   background-color: ${props  => props.theme.panel.background};
-  display: inline-block;
+  display: flex;
 `;
 
 const HeaderText = styled.div`
   text-align: center;
+  font-size: 50px;
+  flex-basis: calc(100% - 80px);
 `;
 
 const AppLogoPosition = styled.div`
-  height: 55px;
-  width: 55px;
-  float: right;
+  height: 80px;
+  width: 80px;
 `;
 
 const AppHeader:FC = () => {
