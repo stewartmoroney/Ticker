@@ -3,7 +3,7 @@ export interface Request {
     body: MessageBody;
 }
 
-type MessageBody  = InstrumentRequest | InstrumentPriceRequest;
+type MessageBody  = InstrumentRequest | SubscribePriceRequest;
 
 interface InstrumentRequest {
     uid: String;
@@ -15,14 +15,14 @@ export type InstrumentRequestMessage = {
     body: InstrumentRequest;
 }
 
-interface InstrumentPriceRequest {
+interface SubscribePriceRequest {
     instrumentId: String;
 }
 
-export const InstrumentPriceRequestMessageType = 'InstrumentPriceRequest';
-export type InstrumentPriceRequestMessage = {
-    type: typeof InstrumentPriceRequestMessageType;
-    body: InstrumentPriceRequest;
+export const PriceSubscribeRequestMessageType = 'SubscribePriceRequest';
+export type PriceSubscribeRequestMessage = {
+    type: typeof PriceSubscribeRequestMessageType;
+    body: SubscribePriceRequest;
 }
 
 
@@ -30,8 +30,8 @@ interface UnsubscribeInstrumentPriceRequest {
     instrumentId: String;
 }
 
-export const UnsubscribeInstrumentPriceRequestMessageType = 'UnsubscribeInstrumentPriceRequest';
-export type UnsubscribeInstrumentPriceRequestMessage = {
-    type: typeof UnsubscribeInstrumentPriceRequestMessageType;
+export const UnsubscribePriceRequestMessageType = 'UnsubscribePriceRequest';
+export type UnsubscribePriceRequestMessage = {
+    type: typeof UnsubscribePriceRequestMessageType;
     body: UnsubscribeInstrumentPriceRequest;
 }

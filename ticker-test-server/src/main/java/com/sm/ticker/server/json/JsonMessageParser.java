@@ -5,10 +5,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.sm.ticker.server.handlers.InstrumentPriceRequestHandler;
+import com.sm.ticker.server.handlers.SubscribePriceRequestHandler;
 import com.sm.ticker.server.handlers.InstrumentRequestHandler;
-import com.sm.ticker.server.messages.InstrumentPriceRequest;
+import com.sm.ticker.server.handlers.UnsubscribePriceRequestHandler;
+import com.sm.ticker.server.messages.SubscribePriceRequest;
 import com.sm.ticker.server.messages.InstrumentRequest;
+import com.sm.ticker.server.messages.UnsubscribePriceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
@@ -20,7 +22,10 @@ public class JsonMessageParser {
     private InstrumentRequestHandler instrumentRequestHandler;
 
     @Autowired
-    private InstrumentPriceRequestHandler instrumentPriceRequestHandler;
+    private SubscribePriceRequestHandler instrumentPriceRequestHandler;
+
+    @Autowired
+    private UnsubscribePriceRequestHandler unsubscribePriceRequestHandler;
 
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -38,14 +43,13 @@ public class JsonMessageParser {
                     InstrumentRequest instrumentRequest = mapper.treeToValue(bodyNode, InstrumentRequest.class);
                     instrumentRequestHandler.handle(session, instrumentRequest);
                 }
-                case "InstrumentPriceRequest" -> {
-                    InstrumentPriceRequest instrumentPriceRequest = mapper.treeToValue(bodyNode, InstrumentPriceRequest.class);
-                    instrumentPriceRequestHandler.handle(session, instrumentPriceRequest);
+                case "SubscribePriceRequest" -> {
+                    SubscribePriceRequest subscribePriceRequest = mapper.treeToValue(bodyNode, SubscribePriceRequest.class);
+                    instrumentPriceRequestHandler.handle(session, subscribePriceRequest);
                 }
-                case "UnsubscribeInstrumentPriceRequest" -> {
-
-
-
+                case "UnsubscribePriceRequest" -> {
+                    UnsubscribePriceRequest unsubscribePriceRequest = mapper.treeToValue(bodyNode, UnsubscribePriceRequest.class);
+                    unsubscribePriceRequestHandler.handle(session, unsubscribePriceRequest);
                 }
                 default -> {
                     System.out.println("msg arrived");

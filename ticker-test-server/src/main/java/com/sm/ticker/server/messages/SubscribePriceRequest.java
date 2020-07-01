@@ -1,10 +1,10 @@
 package com.sm.ticker.server.messages;
 
-public class InstrumentPriceRequest extends Message {
+public class SubscribePriceRequest extends Message {
     private String instrumentId;
 
-    public InstrumentPriceRequest(){}
-    public InstrumentPriceRequest(String instrumentId) {
+    public SubscribePriceRequest(){}
+    public SubscribePriceRequest(String instrumentId) {
         this.instrumentId = instrumentId;
     }
 

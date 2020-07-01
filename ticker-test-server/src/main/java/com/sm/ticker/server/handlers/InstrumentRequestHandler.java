@@ -5,7 +5,7 @@ import com.sm.ticker.server.messages.InstrumentRequest;
 import com.sm.ticker.server.messages.InstrumentResponse;
 import com.sm.ticker.server.model.Instrument;
 import com.sm.ticker.server.service.message.MessageService;
-import com.sm.ticker.server.session.SessionService;
+import com.sm.ticker.server.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;

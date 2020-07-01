@@ -1,4 +1,4 @@
-package com.sm.ticker.server.session;
+package com.sm.ticker.server.service.session;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
