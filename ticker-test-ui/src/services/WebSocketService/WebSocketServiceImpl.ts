@@ -2,7 +2,6 @@ import { Observable } from "rxjs";
 import { IWebSocketService } from "./IWebSocketService";
 import { connected, disconnected, IAppAction } from "../redux/actions";
 import { WS_URL } from "../../Constants";
-import { threadId } from "worker_threads";
 
 export class WebSocketServiceImpl extends IWebSocketService {
     private ws!: WebSocket;

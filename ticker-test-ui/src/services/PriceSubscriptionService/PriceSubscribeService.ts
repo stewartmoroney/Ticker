@@ -1,7 +1,7 @@
 import { Observer, Observable } from "rxjs";
 
 import { IPriceSubscribeService } from './index';
-import { PriceSubscribeRequestMessage, PriceSubscribeRequestMessageType as PriceSubscribeRequestMessageType, UnsubscribePriceRequestMessage, UnsubscribePriceRequestMessageType  } from "../messages";
+import { PriceSubscribeRequestMessage, PriceSubscribeRequestMessageType, UnsubscribePriceRequestMessage, UnsubscribePriceRequestMessageType  } from "../messages";
 
 export class PriceSubscribeService implements IPriceSubscribeService {    
   public sendSubscribeRequest = (webSocket: WebSocket, id: string): Observable<boolean> => {
