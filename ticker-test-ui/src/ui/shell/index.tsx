@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import styled, { ThemeProvider, withTheme } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Grid from '../components/DataGrid';
 import InstrumentSelector from '../components/InstrumentSelector';
 import AppHeader from '../components/TickerHeader';
 import AppStatusBar from '../components/AppStatusBar';
-import { IThemeProps } from '../shared';
 import { useSelector } from 'react-redux';
 import { GlobalState } from '../../services/epics/Epics';
 
@@ -20,7 +19,7 @@ const MainPanel = styled.div`
   color: ${props  => props.theme.bodyText};
 `;
 
-const Shell: FC<IThemeProps> = (props) => {
+const Shell: FC = () => {
   const themeName = useSelector((state: GlobalState) => {
     return state.system.themeName;
   });
@@ -35,4 +34,4 @@ const Shell: FC<IThemeProps> = (props) => {
 </ThemeProvider>
 }
 
-export default withTheme(Shell)
+export default Shell

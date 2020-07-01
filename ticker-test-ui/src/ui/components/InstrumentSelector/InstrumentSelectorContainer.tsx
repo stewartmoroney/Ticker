@@ -1,13 +1,11 @@
 import React, { FC, useCallback } from 'react';
 
 import InstrumentSelector from './InstrumentSelector';
-import { withTheme } from 'styled-components';
-import { IThemeProps } from '../../shared';
 import { useDispatch, useSelector } from 'react-redux';
 import { GlobalState } from '../../../services/epics/Epics';
 import { subscribeInstrument, unsubscribeInstrument } from '../../../services/redux/actions';
 
-const InstrumentSelectorContainer: FC<IThemeProps> = (props) => {
+const InstrumentSelectorContainer: FC = () => {
   const dispatch = useDispatch();
   const toggle = useCallback((id: string, subscribed: boolean) => {
     if(subscribed) {
@@ -27,11 +25,10 @@ const InstrumentSelectorContainer: FC<IThemeProps> = (props) => {
   });
 
   return <InstrumentSelector
-      theme={props.theme}
       instruments={instruments}
       subscribedInstrumentIds={subscribedInstrumentIds}
       toggleSubscribe={toggle}>        
   </InstrumentSelector>;
 }
 
-export default withTheme(InstrumentSelectorContainer);
+export default InstrumentSelectorContainer;

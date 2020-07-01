@@ -27,7 +27,6 @@ storiesOf('InstrumentSelector', module)
   .add('No Instruments', () => (
     <ThemeProvider theme={theme}>
       <InstrumentSelector
-          theme={theme}
           instruments= {[]}
           subscribedInstrumentIds = {[]}
           toggleSubscribe={toggleCLick}
@@ -37,7 +36,6 @@ storiesOf('InstrumentSelector', module)
   .add('Has Instruments', () => (
     <ThemeProvider theme={theme}>
       <InstrumentSelector 
-          theme={theme}
           instruments={instruments}
           subscribedInstrumentIds = {['1']}
           toggleSubscribe={toggleCLick}

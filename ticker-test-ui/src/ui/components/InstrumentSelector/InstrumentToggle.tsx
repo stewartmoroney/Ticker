@@ -2,7 +2,6 @@ import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 
-import { IThemeProps } from '../../shared';
 import { Instrument } from './../../../state/types';
 
 export interface IDataProps {
@@ -11,7 +10,7 @@ export interface IDataProps {
   toggle: (id: string, subscribed: boolean) => void;
 }
 
-type IProps = IDataProps & IThemeProps;
+type IProps = IDataProps;
 
 const InstrumentButton = styled(Button)`
   background-color: 'azure';

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React, { FC, useCallback } from 'react';
 
-import { IThemeProps } from '../../shared';
 import { ConnectionStatus } from '../../../state/types';
 
 export interface IDataProps {
@@ -14,20 +13,18 @@ const ConnectionStatusWrapper = styled.div`
   margin-left: auto;
 `
 
-type StatusProps = IDataProps & IThemeProps;
-
-const Status = styled.div<StatusProps>`
+const Status = styled.div<{connectionStatus: ConnectionStatus}>`
   width: 10px;
   height: 10px;
-  background-color: ${({ connectionStatus, theme }) => 
-    connectionStatus === ConnectionStatus.CONNECTED ? theme.connection.connected : theme.connection.disconnected
+
+  background-color: ${props => 
+    props.connectionStatus === ConnectionStatus.CONNECTED ? props.theme.connection.connected : props.theme.connection.disconnected
   };
+  
   border-radius: 50%;
 `
 
-type IProps = IThemeProps & IDataProps;
-
-const ConnectionStatusIcon: FC<IProps> = (props) => {
+const ConnectionStatusIcon: FC<IDataProps> = (props) => {
   const statusText = useCallback(() => {
     return props.connectionStatus + ' ' + (props.sessionId && '- Session - ' + props.sessionId);
   }, [props.connectionStatus, props.sessionId]);
@@ -35,7 +32,7 @@ const ConnectionStatusIcon: FC<IProps> = (props) => {
   return (
     <ConnectionStatusWrapper>      
       <abbr title={statusText()}> 
-        <Status {...props}/>
+        <Status connectionStatus={props.connectionStatus}/>
       </abbr>
     </ConnectionStatusWrapper>
   );

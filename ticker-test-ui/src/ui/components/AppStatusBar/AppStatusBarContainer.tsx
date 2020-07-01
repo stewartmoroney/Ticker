@@ -1,10 +1,9 @@
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { GlobalState } from '../../../services/epics/Epics';
 import ConnectionStatusIcon from './ConnectionStatusIcon';
-import { IThemeProps } from '../../shared';
 import ThemeSelector from '../ThemeSelector';
 
 const StatusBar = styled.div`
@@ -14,14 +13,14 @@ const StatusBar = styled.div`
   background-color: ${props  => props.theme.panel.background};
 `;
 
-const AppStatusBarContainer: FC<IThemeProps> = (props) => {
+const AppStatusBarContainer: FC = () => {
   const connectionStatus = useSelector((state: GlobalState) => state.system.connectionStatus);
   const sessionId = useSelector((state: GlobalState) => state.system.sessionId);
 
  return <StatusBar>
     <ThemeSelector/>
-    <ConnectionStatusIcon connectionStatus={connectionStatus} sessionId={sessionId} theme={props.theme}/>
+    <ConnectionStatusIcon connectionStatus={connectionStatus} sessionId={sessionId}/>
   </StatusBar> 
 }
 
-export default withTheme(AppStatusBarContainer);
+export default AppStatusBarContainer;

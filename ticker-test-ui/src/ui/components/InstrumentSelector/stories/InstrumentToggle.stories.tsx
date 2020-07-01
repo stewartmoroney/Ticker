@@ -22,7 +22,6 @@ storiesOf('InstrumentToggle', module)
   .add('Subscribed Instrument', () => (
     <ThemeProvider theme={theme}>
       <InstrumentToggle 
-          theme={theme}
           instrument={instrument}
           subscribed={true}
           toggle={toggleCLick}
@@ -32,7 +31,6 @@ storiesOf('InstrumentToggle', module)
   .add('Not Subscribed Instruments', () => (
     <ThemeProvider theme={theme}>
       <InstrumentToggle 
-          theme={theme}
           instrument={instrument}
           subscribed={false}
           toggle={toggleCLick}

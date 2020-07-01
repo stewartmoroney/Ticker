@@ -11,13 +11,11 @@ storiesOf('Connection Status Icon', module)
     <ConnectionStatusIcon 
         connectionStatus={ConnectionStatus.DISCONNECTED}
         sessionId={'asession'}
-        theme={theme}
     />
   ))
   .add('connected', () => (
     <ConnectionStatusIcon 
         connectionStatus={ConnectionStatus.CONNECTED}
         sessionId={'asession'}
-        theme={theme}
     />
   ));   
