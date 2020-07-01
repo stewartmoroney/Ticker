@@ -12,10 +12,7 @@ run TicketTestServerApp
 ## To run client
 requires node 
 npm
-yarn
 
 ## To run client
-yarn
-
-yarn start
-yarn start:mock
+npm install
+npm start
