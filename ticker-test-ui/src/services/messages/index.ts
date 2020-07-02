@@ -16,6 +16,7 @@ export type InstrumentRequestMessage = {
 }
 
 interface SubscribePriceRequest {
+    correlationId: String;
     instrumentId: String;
 }
 
@@ -27,6 +28,7 @@ export type PriceSubscribeRequestMessage = {
 
 
 interface UnsubscribeInstrumentPriceRequest {
+    correlationId: String;
     instrumentId: String;
 }
 

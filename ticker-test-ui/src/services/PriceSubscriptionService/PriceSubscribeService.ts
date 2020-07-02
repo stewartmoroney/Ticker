@@ -2,21 +2,19 @@ import { Observer, Observable } from "rxjs";
 
 import { IPriceSubscribeService } from './index';
 import { PriceSubscribeRequestMessage, PriceSubscribeRequestMessageType, UnsubscribePriceRequestMessage, UnsubscribePriceRequestMessageType  } from "../messages";
+import uuid from "uuid";
 
 export class PriceSubscribeService implements IPriceSubscribeService {    
   public sendSubscribeRequest = (webSocket: WebSocket, id: string): Observable<boolean> => {
     return Observable.create((observer: Observer<boolean>) => {
-      console.log('Sub to Instrument prices');
-
+      const correlationId = uuid();
+      
       webSocket.addEventListener("message", function (evt: MessageEvent) {
-        // const data = JSON.parse(evt.data);
-        // console.log('mesage arrived - ' + data);
-        //ack
-        // if(data.type === 'InstrumentResponse') {
-        //   data.instruments.map((instrument: Instrument) => {
-        //     observer.next(instrument);
-        //   });
-        // }
+        const data = JSON.parse(evt.data);
+        if(data.type === 'SubscribePriceResponse' && data.correlationId === correlationId) {
+            // observer.next(priceSubscribeAck);
+            observer.complete();
+          }
       })      
 
       const req : PriceSubscribeRequestMessage = 
@@ -24,7 +22,8 @@ export class PriceSubscribeService implements IPriceSubscribeService {
           type: PriceSubscribeRequestMessageType,
           body: 
           {
-              instrumentId: id
+              instrumentId: id,
+              correlationId
           }
       };
 
@@ -37,17 +36,14 @@ export class PriceSubscribeService implements IPriceSubscribeService {
 
   public sendUnsubscribeRequest = (webSocket: WebSocket, id: string): Observable<boolean> => {
     return Observable.create((observer: Observer<boolean>) => {
-      console.log('UnSub to Instrument prices');
+      const correlationId = uuid();
 
       webSocket.addEventListener("message", function (evt: MessageEvent) {
-        // const data = JSON.parse(evt.data);
-        // console.log('mesage arrived - ' + data);
-        // ack
-        // if(data.type === 'InstrumentResponse') {
-        //   data.instruments.map((instrument: Instrument) => {
-        //     observer.next(instrument);
-        //   });
-        // }
+        const data = JSON.parse(evt.data);
+        if(data.type === 'UnsubscribePriceResponse' && data.correlationId === correlationId) {
+          // observer.next(priceUnsubscribeAck);
+          observer.complete();
+        }
       })      
 
       const req : UnsubscribePriceRequestMessage = 
@@ -55,7 +51,9 @@ export class PriceSubscribeService implements IPriceSubscribeService {
           type: UnsubscribePriceRequestMessageType,
           body: 
           {
-              instrumentId: id
+              instrumentId: id,
+              correlationId
+
           }
       };
 
