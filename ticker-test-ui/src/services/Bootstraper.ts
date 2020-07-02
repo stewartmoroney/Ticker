@@ -1,23 +1,22 @@
-import { InstrumentServiceMock } from './InstrumentService/InstrumentServiceMock';
-import { IInstrumentService } from './InstrumentService';
-import { PriceSubscribeService } from './PriceSubscriptionService/PriceSubscribeService';
-import { IPriceSubscribeService } from './PriceSubscriptionService';
-import { IWebSocketService } from './WebSocketService/IWebSocketService';
-import { WebSocketServiceImpl } from './WebSocketService/WebSocketServiceImpl';
-import { InstrumentServiceImpl } from './InstrumentService/InstrumentServiceImpl';
-import { IPriceService } from './PriceService';
-import { PriceServiceMock } from './PriceService/PriceServiceMock';
-import { PriceServiceImpl } from './PriceService/PriceServiceImpl';
+import { IInstrumentService } from "./InstrumentService";
+import { InstrumentServiceImpl } from "./InstrumentService/InstrumentServiceImpl";
+import { InstrumentServiceMock } from "./InstrumentService/InstrumentServiceMock";
+import { IPriceService } from "./PriceService";
+import { PriceServiceImpl } from "./PriceService/PriceServiceImpl";
+import { PriceServiceMock } from "./PriceService/PriceServiceMock";
+import { IPriceSubscribeService } from "./PriceSubscriptionService";
+import { PriceSubscribeService } from "./PriceSubscriptionService/PriceSubscribeService";
+import { IWebSocketService } from "./WebSocketService/IWebSocketService";
+import { WebSocketServiceImpl } from "./WebSocketService/WebSocketServiceImpl";
 
 export interface IServices {
   instrumentService: IInstrumentService;
   priceSubscribeService: IPriceSubscribeService;
   priceService: IPriceService;
-  webSocketService: IWebSocketService
+  webSocketService: IWebSocketService;
 }
 
 export default class Bootstraper {
-
   public static services: IServices;
 
   public static bootstrap() {
@@ -28,7 +27,6 @@ export default class Bootstraper {
         priceService: new PriceServiceMock(),
         webSocketService: new WebSocketServiceImpl()
       };
-
     } else {
       this.services = {
         instrumentService: new InstrumentServiceImpl(),

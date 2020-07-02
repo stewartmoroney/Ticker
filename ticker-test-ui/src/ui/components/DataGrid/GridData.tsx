@@ -1,23 +1,18 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { Instrument } from '../../../state/types';
-import { GridRows }  from './gridStyles';
-import GridRow from './GridRow';
-import { GlobalState } from '../../../services/epics/Epics';
+import React, { FC } from "react";
+import { useSelector } from "react-redux";
 
-const GridData:FC = () => {
-    const instruments = useSelector((state: GlobalState) => state.instruments);
+import { GlobalState } from "../../../services/redux/GlobalState";
+import { Instrument } from "../../../state/types";
+import GridRow from "./GridRow";
+import { GridRows } from "./gridStyles";
 
-    const rows = instruments
-    .map((instrument: Instrument) => {
-        return <GridRow 
-            key={instrument.id}
-            instrument={instrument}
-        ></GridRow>
-    })
-    return <GridRows>
-        {rows}
-    </GridRows>;
-}
-  
+const GridData: FC = () => {
+  const instruments = useSelector((state: GlobalState) => state.instruments);
+
+  const rows = instruments.map((instrument: Instrument) => (
+    <GridRow key={instrument.id} instrument={instrument}></GridRow>
+  ));
+  return <GridRows>{rows}</GridRows>;
+};
+
 export default GridData;

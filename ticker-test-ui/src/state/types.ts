@@ -1,16 +1,16 @@
 export enum ConnectionStatus {
-  DISCONNECTED = 'disconnected',
-  CONNECTED = 'connected',
+  DISCONNECTED = "disconnected",
+  CONNECTED = "connected"
 }
 
-export interface Price{
+export interface Price {
   instrumentId: string;
   value: number;
 }
 
-export interface Instrument{
+export interface Instrument {
   id: string;
   name: string;
 }
 
-export type ThemeName = 'light' | 'dark';
+export type ThemeName = "light" | "dark";

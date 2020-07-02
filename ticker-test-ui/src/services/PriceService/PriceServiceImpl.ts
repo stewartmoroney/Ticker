@@ -1,14 +1,15 @@
-import { IPriceService } from ".";
 import { Observable, Observer } from "rxjs";
+
 import { Price } from "../../state/types";
-import { newPrice, IAppAction } from "../redux/actions";
+import { IAppAction, newPrice } from "../redux/actions";
+import { IPriceService } from ".";
 
 export class PriceServiceImpl implements IPriceService {
-  public subscribe = (webSocket: WebSocket): Observable<IAppAction> => {
-    return Observable.create((observer: Observer<IAppAction>) => {
-      webSocket.addEventListener("message", function (evt: MessageEvent) {
+  public subscribe = (webSocket: WebSocket): Observable<IAppAction> =>
+    Observable.create((observer: Observer<IAppAction>) => {
+      webSocket.addEventListener("message", function(evt: MessageEvent) {
         const data = JSON.parse(evt.data);
-        if(data.type === 'PriceUpdate') {
+        if (data.type === "PriceUpdate") {
           const price: Price = data.price;
           observer.next(newPrice(price));
         }
@@ -17,6 +18,5 @@ export class PriceServiceImpl implements IPriceService {
       return () => {
         //do unsub here
       };
-    }); 
-  }
-};
+    });
+}
