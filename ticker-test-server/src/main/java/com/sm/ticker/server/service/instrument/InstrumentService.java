@@ -7,13 +7,12 @@ import org.springframework.stereotype.Component;
 public class InstrumentService {
 
     private Instrument[] instruments = {
-        new Instrument("1", "a"),
-        new Instrument("2", "b"),
-        new Instrument("3", "c")
+        new Instrument("1", "ins1"),
+        new Instrument("2", "ins2"),
+        new Instrument("3", "ins3")
     };
 
     public synchronized Instrument[] getInstruments() {
         return instruments;
     }
-
 }
