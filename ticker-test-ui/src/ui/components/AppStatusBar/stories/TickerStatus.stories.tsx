@@ -1,26 +1,27 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { storiesOf } from '@storybook/react';
-import ConnectionStatusIcon from '../ConnectionStatusIcon';
-import { ConnectionStatus } from '../../../../state/types';
-import { getTheme, defaultTheme } from '../../../shared';
+import { storiesOf } from "@storybook/react";
+import React from "react";
+import { ThemeProvider } from "styled-components";
+
+import { ConnectionStatus } from "../../../../state/types";
+import { defaultTheme, getTheme } from "../../../shared";
+import ConnectionStatusIcon from "../ConnectionStatusIcon";
 
 const theme = getTheme(defaultTheme);
 
-storiesOf('Connection Status Icon', module)
-  .add('disconnected', () => (
+storiesOf("Connection Status Icon", module)
+  .add("disconnected", () => (
     <ThemeProvider theme={getTheme(defaultTheme)}>
-      <ConnectionStatusIcon 
-          connectionStatus={ConnectionStatus.DISCONNECTED}
-          sessionId={'asession'}
+      <ConnectionStatusIcon
+        connectionStatus={ConnectionStatus.DISCONNECTED}
+        sessionId={"asession"}
       />
     </ThemeProvider>
   ))
-  .add('connected', () => (
+  .add("connected", () => (
     <ThemeProvider theme={getTheme(defaultTheme)}>
-      <ConnectionStatusIcon 
-          connectionStatus={ConnectionStatus.CONNECTED}
-          sessionId={'asession'}
+      <ConnectionStatusIcon
+        connectionStatus={ConnectionStatus.CONNECTED}
+        sessionId={"asession"}
       />
-  </ThemeProvider>
-  ));   
+    </ThemeProvider>
+  ));

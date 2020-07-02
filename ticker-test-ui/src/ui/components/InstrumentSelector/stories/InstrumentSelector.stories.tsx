@@ -1,44 +1,44 @@
-import React from 'react';
+import { storiesOf } from "@storybook/react";
+import React from "react";
+import { ThemeProvider } from "styled-components";
 
-import { ThemeProvider } from 'styled-components';
-
-import { storiesOf } from '@storybook/react';
-import InstrumentSelector from '../InstrumentSelector';
-import { getTheme, defaultTheme } from '../../../shared';
-import { Instrument } from './../../../../state/types';
+import { defaultTheme, getTheme } from "../../../shared";
+import InstrumentSelector from "../InstrumentSelector";
+import { Instrument } from "./../../../../state/types";
 
 const theme = getTheme(defaultTheme);
 
 const instruments: Instrument[] = [
-{  
-  id: '1',
-  name: 'a'
-},
-{
-  id: '2',
-  name: 'b'
-}];
+  {
+    id: "1",
+    name: "a"
+  },
+  {
+    id: "2",
+    name: "b"
+  }
+];
 
 const toggleCLick = () => {
-  alert('');  
+  alert("");
 };
 
-storiesOf('InstrumentSelector', module)
-  .add('No Instruments', () => (
+storiesOf("InstrumentSelector", module)
+  .add("No Instruments", () => (
     <ThemeProvider theme={theme}>
       <InstrumentSelector
-          instruments= {[]}
-          subscribedInstrumentIds = {[]}
-          toggleSubscribe={toggleCLick}
+        instruments={[]}
+        subscribedInstrumentIds={[]}
+        toggleSubscribe={toggleCLick}
       />
     </ThemeProvider>
   ))
-  .add('Has Instruments', () => (
+  .add("Has Instruments", () => (
     <ThemeProvider theme={theme}>
-      <InstrumentSelector 
-          instruments={instruments}
-          subscribedInstrumentIds = {['1']}
-          toggleSubscribe={toggleCLick}
+      <InstrumentSelector
+        instruments={instruments}
+        subscribedInstrumentIds={["1"]}
+        toggleSubscribe={toggleCLick}
       />
     </ThemeProvider>
-  ));   
+  ));

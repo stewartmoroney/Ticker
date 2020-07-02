@@ -1,3 +1,3 @@
-import InstrumentSelector from './InstrumentSelectorContainer';
+import InstrumentSelector from "./InstrumentSelectorContainer";
 
 export default InstrumentSelector;

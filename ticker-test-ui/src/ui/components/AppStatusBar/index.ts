@@ -1,3 +1,3 @@
-import AppStatusBarContainer from './AppStatusBarContainer';
+import AppStatusBarContainer from "./AppStatusBarContainer";
 
 export default AppStatusBarContainer;

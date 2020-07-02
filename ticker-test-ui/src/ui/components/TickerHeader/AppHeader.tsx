@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
-import styled from 'styled-components';
-import AppLogo from './AppLogo';
+import React, { FC } from "react";
+import styled from "styled-components";
+
+import AppLogo from "./AppLogo";
 
 const HeaderPanel = styled.div`
-  background-color: ${props  => props.theme.panel.background};
+  background-color: ${props => props.theme.panel.background};
   display: flex;
 `;
 
@@ -18,13 +19,13 @@ const AppLogoPosition = styled.div`
   width: 80px;
 `;
 
-const AppHeader:FC = () => {
-  return <HeaderPanel>
-    <HeaderText>Ticker Test App</HeaderText>   
+const AppHeader: FC = () => (
+  <HeaderPanel>
+    <HeaderText>Ticker Test App</HeaderText>
     <AppLogoPosition>
-      <AppLogo/>
-    </AppLogoPosition>   
-  </HeaderPanel>  
-}
+      <AppLogo />
+    </AppLogoPosition>
+  </HeaderPanel>
+);
 
-export default AppHeader; 
+export default AppHeader;

@@ -1,11 +1,9 @@
-import React from 'react';
+import { storiesOf } from "@storybook/react";
+import React from "react";
+import styled, { ThemeProvider } from "styled-components";
 
-import styled, { ThemeProvider } from 'styled-components';
-
-import { storiesOf } from '@storybook/react';
-import { getTheme, defaultTheme } from '../../../shared';
-
-import AppLogo from './../AppLogo';
+import { defaultTheme, getTheme } from "../../../shared";
+import AppLogo from "./../AppLogo";
 
 const Background = styled.div`
   width: 100%;
@@ -19,13 +17,12 @@ const LogoWrapper = styled.div`
   outline: 1px solid white;
 `;
 
-storiesOf('AppLogo', module)
-  .add('Header', () => (
-    <Background>
-      <ThemeProvider theme={getTheme(defaultTheme)}>
-        <LogoWrapper>
-          <AppLogo/>
-        </LogoWrapper>
-      </ThemeProvider>
-    </Background>
-  ));   
+storiesOf("AppLogo", module).add("Header", () => (
+  <Background>
+    <ThemeProvider theme={getTheme(defaultTheme)}>
+      <LogoWrapper>
+        <AppLogo />
+      </LogoWrapper>
+    </ThemeProvider>
+  </Background>
+));

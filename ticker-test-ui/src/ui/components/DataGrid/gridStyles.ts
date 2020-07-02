@@ -1,23 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Table = styled.div`
-    border: ${props => 
-        {return "1px solid" + props.theme.border}
-    };
+  border: ${props => "1px solid" + props.theme.border};
 `;
 
-export const GridRows = styled.div`
-`;
+export const GridRows = styled.div``;
 
 export const Row = styled.div`
-    height: 25px;
-    line-height: 25px;
-    display: flex;  
+  height: 25px;
+  line-height: 25px;
+  display: flex;
 `;
 
 export const NoData = styled(Row)`
-    width: 100%;
-    justify-content: center;
+  width: 100%;
+  justify-content: center;
 `;
 
 export const Header = styled(Row)`
@@ -25,5 +22,5 @@ export const Header = styled(Row)`
 `;
 
 export const Cell = styled.div`
-    width: 50%
+  width: 50%;
 `;

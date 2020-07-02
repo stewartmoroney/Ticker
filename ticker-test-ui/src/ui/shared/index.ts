@@ -1,1 +1,1 @@
-export * from './style/theme';
+export * from "./style/theme";

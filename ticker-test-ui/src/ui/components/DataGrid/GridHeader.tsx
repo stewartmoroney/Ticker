@@ -1,11 +1,12 @@
-import React, { FC } from 'react';
-import { Header, Cell } from './gridStyles';
+import React, { FC } from "react";
 
-const GridHeader:FC = () => {
-return <Header>
+import { Cell, Header } from "./gridStyles";
+
+const GridHeader: FC = () => (
+  <Header>
     <Cell>Name</Cell>
     <Cell>Price</Cell>
-</Header> 
-}
-  
+  </Header>
+);
+
 export default GridHeader;
