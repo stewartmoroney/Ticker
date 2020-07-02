@@ -11,10 +11,7 @@
         "groups": [
           ["^\\u0000"],
           ["^@?\\w"],
-          [
-            "^(config|helpers|hooks|locales|model|services|shared|state|ui)(/|$)",
-            "^\\."
-          ]
+          ["^(services|state|ui|util)(/|$)", "^\\."]
         ]
       }
     ],
