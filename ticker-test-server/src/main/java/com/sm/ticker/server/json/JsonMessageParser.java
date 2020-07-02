@@ -11,11 +11,13 @@ import com.sm.ticker.server.handlers.UnsubscribePriceRequestHandler;
 import com.sm.ticker.server.messages.SubscribePriceRequest;
 import com.sm.ticker.server.messages.InstrumentRequest;
 import com.sm.ticker.server.messages.UnsubscribePriceRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
 
 @Component
+@Slf4j
 public class JsonMessageParser {
 
     @Autowired
@@ -52,7 +54,7 @@ public class JsonMessageParser {
                     unsubscribePriceRequestHandler.handle(session, unsubscribePriceRequest);
                 }
                 default -> {
-                    System.out.println("msg arrived");
+                    log.debug("unknown msg type " + msgType);
                 }
             }
         }
