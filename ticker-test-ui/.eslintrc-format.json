@@ -1,0 +1,28 @@
+{
+  "extends": ["plugin:import/typescript"],
+  "plugins": ["prettier", "import", "simple-import-sort", "jest"],
+  "rules": {
+    "prettier/prettier": "warn",
+    "import/order": "off",
+    "import/newline-after-import": "warn",
+    "simple-import-sort/sort": [
+      "warn",
+      {
+        "groups": [
+          ["^\\u0000"],
+          ["^@?\\w"],
+          [
+            "^(config|helpers|hooks|locales|model|services|shared|state|ui)(/|$)",
+            "^\\."
+          ]
+        ]
+      }
+    ],
+    "arrow-body-style": ["warn", "as-needed"],
+    "object-shorthand": "warn",
+    "no-useless-rename": "warn",
+    "jest/no-focused-tests": "error",
+    "import/no-self-import": "error",
+    "import/no-cycle": "error"
+  }
+}

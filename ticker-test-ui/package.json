@@ -32,7 +32,9 @@
     "storybook": "start-storybook  -p 6006 -c .storybook",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "eslint -c ./.eslintrc-format.json ./src",
+    "format-fix": "eslint -c ./.eslintrc-format.json ./src --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -67,7 +69,23 @@
     "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-simple-import-sort": "^5.0.1",
+    "husky": "^4.2.5",
     "lint-staged": "^9.4.3",
     "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(ts|tsx)": [
+      "eslint -c ./.eslintrc-format.json --fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
