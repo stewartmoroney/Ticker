@@ -6,8 +6,6 @@ import './index.css';
 
 import Shell from './ui/shell';
 
-import registerServiceWorker from './registerServiceWorker';
-
 import Bootstraper from './services/Bootstraper';
 
 import { connect } from './services/redux/actions';
@@ -24,4 +22,3 @@ render(
 ,
   document.getElementById('root') as HTMLElement
 );
-registerServiceWorker();
