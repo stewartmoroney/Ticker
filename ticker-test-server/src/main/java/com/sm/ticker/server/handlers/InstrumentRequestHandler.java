@@ -35,8 +35,7 @@ public class InstrumentRequestHandler extends MessageHandler<InstrumentRequest>{
     private void sendInstruments(WebSocketSession session, Instrument[] instruments) {
         try {
             InstrumentResponse resp = new InstrumentResponse(instruments);
-            var strValue = mapper.writeValueAsString(resp);
-            messageService.send(session, strValue);
+            messageService.send(session, resp);
         } catch (IOException e) {
             e.printStackTrace();
         }
