@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sm.ticker.server.messages.InstrumentRequest;
 import com.sm.ticker.server.messages.InstrumentResponse;
 import com.sm.ticker.server.model.Instrument;
+import com.sm.ticker.server.service.instrument.InstrumentService;
 import com.sm.ticker.server.service.message.MessageService;
 import com.sm.ticker.server.service.session.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,14 @@ public class InstrumentRequestHandler extends MessageHandler<InstrumentRequest>{
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private InstrumentService instrumentService;
+
     private ObjectMapper mapper = new ObjectMapper();
-    private Instrument[] instruments = {
-            new Instrument("1", "a"),
-            new Instrument("2", "b"),
-            new Instrument("3", "c")
-    };
 
     @Override
     public void handle(WebSocketSession session, InstrumentRequest message) {
-        sendInstruments(session, instruments);
+        sendInstruments(session, instrumentService.getInstruments());
     }
 
     private void sendInstruments(WebSocketSession session, Instrument[] instruments) {
