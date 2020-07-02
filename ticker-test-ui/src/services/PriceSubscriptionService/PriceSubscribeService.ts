@@ -9,8 +9,8 @@ export class PriceSubscribeService implements IPriceSubscribeService {
       console.log('Sub to Instrument prices');
 
       webSocket.addEventListener("message", function (evt: MessageEvent) {
-        const data = JSON.parse(evt.data);
-        console.log('mesage arrived - ' + data);
+        // const data = JSON.parse(evt.data);
+        // console.log('mesage arrived - ' + data);
         //ack
         // if(data.type === 'InstrumentResponse') {
         //   data.instruments.map((instrument: Instrument) => {
@@ -40,8 +40,8 @@ export class PriceSubscribeService implements IPriceSubscribeService {
       console.log('UnSub to Instrument prices');
 
       webSocket.addEventListener("message", function (evt: MessageEvent) {
-        const data = JSON.parse(evt.data);
-        console.log('mesage arrived - ' + data);
+        // const data = JSON.parse(evt.data);
+        // console.log('mesage arrived - ' + data);
         // ack
         // if(data.type === 'InstrumentResponse') {
         //   data.instruments.map((instrument: Instrument) => {

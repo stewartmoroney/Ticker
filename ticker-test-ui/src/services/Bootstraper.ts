@@ -7,6 +7,7 @@ import { WebSocketServiceImpl } from './WebSocketService/WebSocketServiceImpl';
 import { InstrumentServiceImpl } from './InstrumentService/InstrumentServiceImpl';
 import { IPriceService } from './PriceService';
 import { PriceServiceMock } from './PriceService/PriceServiceMock';
+import { PriceServiceImpl } from './PriceService/PriceServiceImpl';
 
 export interface IServices {
   instrumentService: IInstrumentService;
@@ -32,7 +33,7 @@ export default class Bootstraper {
       this.services = {
         instrumentService: new InstrumentServiceImpl(),
         priceSubscribeService: new PriceSubscribeService(),
-        priceService: new PriceServiceMock(),
+        priceService: new PriceServiceImpl(),
         webSocketService: new WebSocketServiceImpl()
       };
     }

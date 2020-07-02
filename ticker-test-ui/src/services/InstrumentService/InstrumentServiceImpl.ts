@@ -11,7 +11,6 @@ export class InstrumentServiceImpl implements IInstrumentService {
 
       webSocket.addEventListener("message", function (evt: MessageEvent) {
         const data = JSON.parse(evt.data);
-        console.log('mesage arrived - ' + data);
         if(data.type === 'InstrumentResponse') {
           data.instruments.forEach((instrument: Instrument) => {
             observer.next(instrument);
