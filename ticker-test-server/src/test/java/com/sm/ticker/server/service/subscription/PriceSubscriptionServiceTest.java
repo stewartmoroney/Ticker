@@ -2,7 +2,10 @@ package com.sm.ticker.server.service.subscription;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PriceSubscriptionServiceTest {
 
@@ -47,5 +50,27 @@ class PriceSubscriptionServiceTest {
 
         priceSubscriptionService.subscribe(SESSION_1, INSTRUMENT_1);
         assertEquals(priceSubscriptionService.getSubscriptionsForSession(SESSION_1).size(), 1);
+    }
+
+    @Test
+    public void shouldClearSubscriptionsForSession() {
+        priceSubscriptionService.subscribe(SESSION_1, INSTRUMENT_1);
+        priceSubscriptionService.subscribe(SESSION_1, INSTRUMENT_2);
+
+        priceSubscriptionService.clearSubscriptions(SESSION_1);
+        assertEquals(priceSubscriptionService.getSubscriptionsForSession(SESSION_1).size(), 0);
+    }
+
+    @Test
+    public void shouldReturnSessionsForInstrument() {
+        priceSubscriptionService.subscribe(SESSION_1, INSTRUMENT_1);
+        priceSubscriptionService.subscribe(SESSION_1, INSTRUMENT_2);
+
+        priceSubscriptionService.subscribe(SESSION_2, INSTRUMENT_1);
+        priceSubscriptionService.subscribe(SESSION_2, INSTRUMENT_2);
+
+        assertEquals(priceSubscriptionService.getSubscribedSessionIds(INSTRUMENT_1).size(), 2);
+        assertTrue(priceSubscriptionService.getSubscribedSessionIds(INSTRUMENT_1).contains(SESSION_1));
+        assertTrue(priceSubscriptionService.getSubscribedSessionIds(INSTRUMENT_1).contains(SESSION_2));
     }
 }
