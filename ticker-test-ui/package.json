@@ -33,8 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "format": "eslint -c ./.eslintrc-format.json ./src",
-    "format-fix": "eslint -c ./.eslintrc-format.json ./src --fix"
+    "format": "eslint ./src -c ./.eslintrc-format.json --ext .ts,.tsx",
+    "format-fix": "eslint ./src -c ./.eslintrc-format.json --ext .ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
