@@ -11,10 +11,22 @@ const instrumentReducer = (
 ): IInstrumentsState => {
   const newState = state;
   if (action.type === ActionTypes.NEW_INSTRUMENT) {
-    return newState.concat({
-      id: action.payload.id,
-      name: action.payload.name
-    });
+    const newInstruments = [...state];
+    const index = state.findIndex(
+      instrument => instrument.id === action.payload.id
+    );
+
+    if (index !== -1) {
+      newInstruments.splice(index, 1);
+    }
+    newInstruments.push(action.payload);
+
+    return newInstruments;
+
+    // return newState.concat({
+    //   id: action.payload.id,
+    //   name: action.payload.name
+    // });
   }
   return newState;
 };

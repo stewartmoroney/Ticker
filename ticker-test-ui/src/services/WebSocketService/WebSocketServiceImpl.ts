@@ -16,9 +16,7 @@ export class WebSocketServiceImpl extends IWebSocketService {
       this.ws.onclose = (evt: Event) => {
         observer.next(disconnected());
       };
-      this.ws.onerror = (evt: Event) => {
-        observer.next(disconnected());
-      };
+      this.ws.onerror = (evt: Event) => {};
     });
   }
   webSocket(): WebSocket {
