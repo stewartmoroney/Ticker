@@ -6,8 +6,6 @@ import { ConnectionStatus } from "../../../../state/types";
 import { defaultTheme, getTheme } from "../../../shared";
 import ConnectionStatusIcon from "../ConnectionStatusIcon";
 
-const theme = getTheme(defaultTheme);
-
 storiesOf("Connection Status Icon", module)
   .add("disconnected", () => (
     <ThemeProvider theme={getTheme(defaultTheme)}>

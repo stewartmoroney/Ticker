@@ -22,11 +22,6 @@ const instrumentReducer = (
     newInstruments.push(action.payload);
 
     return newInstruments;
-
-    // return newState.concat({
-    //   id: action.payload.id,
-    //   name: action.payload.name
-    // });
   }
   return newState;
 };
