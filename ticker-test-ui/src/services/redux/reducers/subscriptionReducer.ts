@@ -13,7 +13,7 @@ const subscriptionReducer = (
   action: IAppAction
 ): ISubscriptionState => {
   switch (action.type) {
-    case ActionTypes.SUBSCRIBE_INSTRUMENT: {
+    case ActionTypes.SUBSCRIBE_INSTRUMENT_ACK: {
       const subscriptions = [...state.subscribedInstruments];
       const index = state.subscribedInstruments.indexOf(action.payload);
       if (index === -1) {
@@ -21,7 +21,7 @@ const subscriptionReducer = (
       }
       return { ...state, subscribedInstruments: subscriptions };
     }
-    case ActionTypes.UNSUBSCRIBE_INSTRUMENT: {
+    case ActionTypes.UNSUBSCRIBE_INSTRUMENT_ACK: {
       const subscriptions = [...state.subscribedInstruments];
       const index = state.subscribedInstruments.indexOf(action.payload);
       if (index !== -1) {

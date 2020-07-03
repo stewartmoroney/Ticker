@@ -23,7 +23,7 @@ export class PriceSubscribeService implements IPriceSubscribeService {
           data.type === "SubscribePriceResponse" &&
           data.correlationId === correlationId
         ) {
-          // observer.next(priceSubscribeAck);
+          observer.next(true);
           observer.complete();
         }
       });
@@ -55,7 +55,7 @@ export class PriceSubscribeService implements IPriceSubscribeService {
           data.type === "UnsubscribePriceResponse" &&
           data.correlationId === correlationId
         ) {
-          // observer.next(priceUnsubscribeAck);
+          observer.next(true);
           observer.complete();
         }
       });

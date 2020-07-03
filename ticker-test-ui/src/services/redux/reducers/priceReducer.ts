@@ -9,18 +9,31 @@ const priceReducer = (
   state: IPriceState = initialState,
   action: IAppAction
 ): IPriceState => {
-  if (action.type === ActionTypes.INSTRUMENT_PRICE) {
-    const newPrices = [...state];
-    const index = state.findIndex(
-      price => price.instrumentId === action.payload.instrumentId
-    );
+  switch (action.type) {
+    case ActionTypes.INSTRUMENT_PRICE: {
+      const newPrices = [...state];
+      const index = state.findIndex(
+        price => price.instrumentId === action.payload.instrumentId
+      );
 
-    if (index !== -1) {
-      newPrices.splice(index, 1);
+      if (index !== -1) {
+        newPrices.splice(index, 1);
+      }
+      newPrices.push(action.payload);
+
+      return newPrices;
     }
-    newPrices.push(action.payload);
+    case ActionTypes.UNSUBSCRIBE_INSTRUMENT_ACK: {
+      const newPrices = [...state];
+      const index = state.findIndex(
+        price => price.instrumentId === action.payload
+      );
 
-    return newPrices;
+      if (index !== -1) {
+        newPrices.splice(index, 1);
+      }
+      return newPrices;
+    }
   }
 
   return state;

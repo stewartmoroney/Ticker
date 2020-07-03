@@ -7,6 +7,7 @@ import { IInstrumentAction } from "./InstrumentActions";
 import {
   IInstrumentSubscribeAckAction,
   IInstrumentSubscribeAction,
+  IInstrumentUnsubscribeAckAction,
   IInstrumentUnsubscribeAction,
   IPriceAction
 } from "./PriceActions";
@@ -27,4 +28,5 @@ export type IAppAction =
   | IPriceAction
   | IInstrumentAction
   | IInstrumentSubscribeAckAction
-  | IInstrumentUnsubscribeAction;
+  | IInstrumentUnsubscribeAction
+  | IInstrumentUnsubscribeAckAction;

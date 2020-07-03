@@ -5,7 +5,8 @@ export enum ActionTypes {
   DISCONNECTED = "DISCONNECTED",
   NEW_INSTRUMENT = "newInstrument",
   SUBSCRIBE_INSTRUMENT = "subscribeInstrument",
-  ACK = "ack",
+  SUBSCRIBE_INSTRUMENT_ACK = "subscribeInstrumentAck",
   UNSUBSCRIBE_INSTRUMENT = "unsubscribeInstrument",
+  UNSUBSCRIBE_INSTRUMENT_ACK = "unsubscribeInstrumentAck",
   INSTRUMENT_PRICE = "instrumentPrice"
 }

@@ -17,17 +17,17 @@ export interface IInstrumentSubscribeAction extends Action {
   type: ActionTypes.SUBSCRIBE_INSTRUMENT;
 }
 
-export interface IInstrumentUnsubscribeAction extends Action {
-  payload: string;
-  type: ActionTypes.UNSUBSCRIBE_INSTRUMENT;
-}
-
 export const subscribeInstrument = (
   id: string
 ): IInstrumentSubscribeAction => ({
   payload: id,
   type: ActionTypes.SUBSCRIBE_INSTRUMENT
 });
+
+export interface IInstrumentUnsubscribeAction extends Action {
+  payload: string;
+  type: ActionTypes.UNSUBSCRIBE_INSTRUMENT;
+}
 
 export const unsubscribeInstrument = (
   id: string
@@ -37,8 +37,23 @@ export const unsubscribeInstrument = (
 });
 
 export interface IInstrumentSubscribeAckAction extends Action {
-  type: ActionTypes.ACK;
+  payload: string;
+  type: ActionTypes.SUBSCRIBE_INSTRUMENT_ACK;
 }
-export const ack = (): IInstrumentSubscribeAckAction => ({
-  type: ActionTypes.ACK
+export const subscribeAck = (
+  instrumentId: string
+): IInstrumentSubscribeAckAction => ({
+  payload: instrumentId,
+  type: ActionTypes.SUBSCRIBE_INSTRUMENT_ACK
+});
+
+export interface IInstrumentUnsubscribeAckAction extends Action {
+  payload: string;
+  type: ActionTypes.UNSUBSCRIBE_INSTRUMENT_ACK;
+}
+export const unsubscribeAck = (
+  instrumentId: string
+): IInstrumentUnsubscribeAckAction => ({
+  payload: instrumentId,
+  type: ActionTypes.UNSUBSCRIBE_INSTRUMENT_ACK
 });

@@ -1,6 +1,5 @@
 package com.sm.ticker.server.handlers;
 
-import com.sm.ticker.server.messages.SubscribePriceResponse;
 import com.sm.ticker.server.messages.UnsubscribePriceRequest;
 import com.sm.ticker.server.messages.UnsubscribePriceResponse;
 import com.sm.ticker.server.service.message.MessageService;
