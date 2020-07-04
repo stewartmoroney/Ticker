@@ -23,9 +23,7 @@ export class InstrumentServiceImpl implements IInstrumentService {
 
       const req: InstrumentRequestMessage = {
         type: InstrumentRequestMessageType,
-        body: {
-          uid: "myUid"
-        }
+        body: {}
       };
 
       webSocket.send(JSON.stringify(req));

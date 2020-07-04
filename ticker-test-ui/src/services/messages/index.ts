@@ -5,9 +5,7 @@ export interface Request {
 
 type MessageBody = InstrumentRequest | SubscribePriceRequest;
 
-interface InstrumentRequest {
-  uid: String;
-}
+interface InstrumentRequest {}
 
 export const InstrumentRequestMessageType = "InstrumentRequest";
 export type InstrumentRequestMessage = {
