@@ -1,10 +1,8 @@
 import { cold, hot } from "jest-marbles";
 
+import { IServices } from "..";
 import { connect, connected } from "../redux/actions";
 import { IWebSocketService } from "../WebSocketService/IWebSocketService";
-import { IInstrumentService } from "./../InstrumentService";
-import { IPriceService } from "./../PriceService";
-import { IPriceSubscribeService } from "./../PriceSubscriptionService";
 import { connectEpic } from "./connectEpic";
 
 describe("ConnectEpic", () => {
@@ -25,14 +23,11 @@ describe("ConnectEpic", () => {
     >("../WebSocketService/IWebSocketService");
     mockWebSocketService.connect = mockConnect;
 
-    const services = {
-      instrumentService: jest.genMockFromModule<IInstrumentService>(
-        "../instrumentService"
-      ),
-      priceSubscribeService: jest.genMockFromModule<IPriceSubscribeService>(
-        "../PriceSubscriptionService"
-      ),
-      priceService: jest.genMockFromModule<IPriceService>("../PriceService"),
+    const services: IServices = {
+      priceUnsubscribe: jest.fn(),
+      instrumentSubscribe: jest.fn(),
+      priceSubscribe: jest.fn(),
+      pricesSubscribe: jest.fn(),
       webSocketService: mockWebSocketService
     };
 

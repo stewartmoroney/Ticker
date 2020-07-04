@@ -1,20 +1,15 @@
 import { cold, hot, Scheduler, time } from "jest-marbles";
 
+import { IServices } from "..";
 import { connect, disconnected } from "../redux/actions";
 import { IWebSocketService } from "../WebSocketService/IWebSocketService";
-import { IInstrumentService } from "./../InstrumentService";
-import { IPriceService } from "./../PriceService";
-import { IPriceSubscribeService } from "./../PriceSubscriptionService";
 import { disconnectEpic } from "./disconnectEpic";
 
-const services = {
-  instrumentService: jest.genMockFromModule<IInstrumentService>(
-    "../instrumentService"
-  ),
-  priceSubscribeService: jest.genMockFromModule<IPriceSubscribeService>(
-    "../PriceSubscriptionService"
-  ),
-  priceService: jest.genMockFromModule<IPriceService>("../PriceService"),
+const services: IServices = {
+  priceUnsubscribe: jest.fn(),
+  instrumentSubscribe: jest.fn(),
+  priceSubscribe: jest.fn(),
+  pricesSubscribe: jest.fn(),
   webSocketService: jest.genMockFromModule<IWebSocketService>(
     "../WebSocketService/IWebSocketService"
   )
