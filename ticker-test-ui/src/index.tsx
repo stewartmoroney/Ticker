@@ -4,12 +4,10 @@ import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 
-import Bootstraper from "./services/Bootstraper";
 import createStore from "./services/redux";
 import { connect } from "./services/redux/actions";
 import Shell from "./ui/shell";
 
-Bootstraper.bootstrap();
 const store = createStore();
 store.dispatch(connect());
 

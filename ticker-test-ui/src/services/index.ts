@@ -16,7 +16,7 @@ export interface IServices {
   webSocketService: IWebSocketService;
 }
 
-export default class Bootstraper {
+export class Bootstraper {
   public static services: IServices;
 
   public static bootstrap() {
@@ -37,3 +37,21 @@ export default class Bootstraper {
     }
   }
 }
+
+export default () => {
+  if (process.env.REACT_APP_MOCK) {
+    return {
+      instrumentService: new InstrumentServiceMock(),
+      priceSubscribeService: new PriceSubscribeService(),
+      priceService: new PriceServiceMock(),
+      webSocketService: new WebSocketServiceImpl()
+    };
+  } else {
+    return {
+      instrumentService: new InstrumentServiceImpl(),
+      priceSubscribeService: new PriceSubscribeService(),
+      priceService: new PriceServiceImpl(),
+      webSocketService: new WebSocketServiceImpl()
+    };
+  }
+};

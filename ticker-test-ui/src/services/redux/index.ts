@@ -1,23 +1,23 @@
-import { Action } from "redux";
+import { Action, Store } from "redux";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 
-import Bootstraper, { IServices } from "../Bootstraper";
+import initServices, { IServices } from "../";
 import epics from "../epics";
 import { GlobalState } from "./GlobalState";
 import rootReducer from "./reducers/rootReducer";
 
-export default () => {
+export default (): Store => {
   const middleware = createEpicMiddleware<
     Action,
     Action,
     GlobalState,
     IServices
   >({
-    dependencies: Bootstraper.services
+    dependencies: initServices()
   });
-  const store = createStore(
+  const store: Store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(middleware))
   );
