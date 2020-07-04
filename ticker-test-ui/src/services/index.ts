@@ -16,28 +16,6 @@ export interface IServices {
   webSocketService: IWebSocketService;
 }
 
-export class Bootstraper {
-  public static services: IServices;
-
-  public static bootstrap() {
-    if (process.env.REACT_APP_MOCK) {
-      this.services = {
-        instrumentService: new InstrumentServiceMock(),
-        priceSubscribeService: new PriceSubscribeService(),
-        priceService: new PriceServiceMock(),
-        webSocketService: new WebSocketServiceImpl()
-      };
-    } else {
-      this.services = {
-        instrumentService: new InstrumentServiceImpl(),
-        priceSubscribeService: new PriceSubscribeService(),
-        priceService: new PriceServiceImpl(),
-        webSocketService: new WebSocketServiceImpl()
-      };
-    }
-  }
-}
-
 export default () => {
   if (process.env.REACT_APP_MOCK) {
     return {
