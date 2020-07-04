@@ -1,34 +1,40 @@
-import { IInstrumentService } from "./InstrumentService";
-import { InstrumentServiceImpl } from "./InstrumentService/InstrumentServiceImpl";
-import { InstrumentServiceMock } from "./InstrumentService/InstrumentServiceMock";
-import { IPriceService } from "./PriceService";
-import { PriceServiceImpl } from "./PriceService/PriceServiceImpl";
-import { PriceServiceMock } from "./PriceService/PriceServiceMock";
-import { IPriceSubscribeService } from "./PriceSubscriptionService";
-import { PriceSubscribeService } from "./PriceSubscriptionService/PriceSubscribeService";
+import { instrumentSubscribe } from "./InstrumentService";
+import instrumentSubscribeImpl from "./InstrumentService/instrumentServiceImpl";
+import instrumentSubscribeMock from "./InstrumentService/instrumentServiceMock";
+import { subscribePrices } from "./PriceService";
+import subscribePricesImpl from "./PriceService/subscribePricesImpl";
+import subscribePricesMock from "./PriceService/subscribePricesMock";
+import { priceSubscribe, priceUnsubscribe } from "./PriceSubscriptionService";
+import {
+  priceSubscribeImpl,
+  priceUnsubscribeImpl
+} from "./PriceSubscriptionService/PriceSubscribeService";
 import { IWebSocketService } from "./WebSocketService/IWebSocketService";
 import { WebSocketServiceImpl } from "./WebSocketService/WebSocketServiceImpl";
 
 export interface IServices {
-  instrumentService: IInstrumentService;
-  priceSubscribeService: IPriceSubscribeService;
-  priceService: IPriceService;
+  instrumentSubscribe: instrumentSubscribe;
+  priceSubscribe: priceSubscribe;
+  priceUnsubscribe: priceUnsubscribe;
+  pricesSubscribe: subscribePrices;
   webSocketService: IWebSocketService;
 }
 
-export default () => {
+export default (): IServices => {
   if (process.env.REACT_APP_MOCK) {
     return {
-      instrumentService: new InstrumentServiceMock(),
-      priceSubscribeService: new PriceSubscribeService(),
-      priceService: new PriceServiceMock(),
+      instrumentSubscribe: instrumentSubscribeMock,
+      pricesSubscribe: subscribePricesMock,
+      priceSubscribe: priceSubscribeImpl,
+      priceUnsubscribe: priceUnsubscribeImpl,
       webSocketService: new WebSocketServiceImpl()
     };
   } else {
     return {
-      instrumentService: new InstrumentServiceImpl(),
-      priceSubscribeService: new PriceSubscribeService(),
-      priceService: new PriceServiceImpl(),
+      instrumentSubscribe: instrumentSubscribeImpl,
+      pricesSubscribe: subscribePricesImpl,
+      priceSubscribe: priceSubscribeImpl,
+      priceUnsubscribe: priceUnsubscribeImpl,
       webSocketService: new WebSocketServiceImpl()
     };
   }

@@ -7,70 +7,68 @@ import {
   UnsubscribePriceRequestMessage,
   UnsubscribePriceRequestMessageType
 } from "../messages";
-import { IPriceSubscribeService } from "./index";
+import { priceSubscribe, priceUnsubscribe } from ".";
 
-export class PriceSubscribeService implements IPriceSubscribeService {
-  public sendSubscribeRequest = (
-    webSocket: WebSocket,
-    id: string
-  ): Observable<boolean> =>
-    Observable.create((observer: Observer<boolean>) => {
-      const correlationId = uuid();
+export const priceSubscribeImpl: priceSubscribe = (
+  webSocket: WebSocket,
+  id: string
+): Observable<boolean> =>
+  Observable.create((observer: Observer<boolean>) => {
+    const correlationId = uuid();
 
-      webSocket.addEventListener("message", function(evt: MessageEvent) {
-        const data = JSON.parse(evt.data);
-        if (
-          data.type === "SubscribePriceResponse" &&
-          data.correlationId === correlationId
-        ) {
-          observer.next(true);
-          observer.complete();
-        }
-      });
-
-      const req: PriceSubscribeRequestMessage = {
-        type: PriceSubscribeRequestMessageType,
-        body: {
-          instrumentId: id,
-          correlationId
-        }
-      };
-
-      webSocket.send(JSON.stringify(req));
-      return () => {
-        //do unsub here
-      };
+    webSocket.addEventListener("message", function(evt: MessageEvent) {
+      const data = JSON.parse(evt.data);
+      if (
+        data.type === "SubscribePriceResponse" &&
+        data.correlationId === correlationId
+      ) {
+        observer.next(true);
+        observer.complete();
+      }
     });
 
-  public sendUnsubscribeRequest = (
-    webSocket: WebSocket,
-    id: string
-  ): Observable<boolean> =>
-    Observable.create((observer: Observer<boolean>) => {
-      const correlationId = uuid();
+    const req: PriceSubscribeRequestMessage = {
+      type: PriceSubscribeRequestMessageType,
+      body: {
+        instrumentId: id,
+        correlationId
+      }
+    };
 
-      webSocket.addEventListener("message", function(evt: MessageEvent) {
-        const data = JSON.parse(evt.data);
-        if (
-          data.type === "UnsubscribePriceResponse" &&
-          data.correlationId === correlationId
-        ) {
-          observer.next(true);
-          observer.complete();
-        }
-      });
+    webSocket.send(JSON.stringify(req));
+    return () => {
+      //do unsub here
+    };
+  });
 
-      const req: UnsubscribePriceRequestMessage = {
-        type: UnsubscribePriceRequestMessageType,
-        body: {
-          instrumentId: id,
-          correlationId
-        }
-      };
+export const priceUnsubscribeImpl: priceUnsubscribe = (
+  webSocket: WebSocket,
+  id: string
+): Observable<boolean> =>
+  Observable.create((observer: Observer<boolean>) => {
+    const correlationId = uuid();
 
-      webSocket.send(JSON.stringify(req));
-      return () => {
-        //do unsub here
-      };
+    webSocket.addEventListener("message", function(evt: MessageEvent) {
+      const data = JSON.parse(evt.data);
+      if (
+        data.type === "UnsubscribePriceResponse" &&
+        data.correlationId === correlationId
+      ) {
+        observer.next(true);
+        observer.complete();
+      }
     });
-}
+
+    const req: UnsubscribePriceRequestMessage = {
+      type: UnsubscribePriceRequestMessageType,
+      body: {
+        instrumentId: id,
+        correlationId
+      }
+    };
+
+    webSocket.send(JSON.stringify(req));
+    return () => {
+      //do unsub here
+    };
+  });

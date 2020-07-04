@@ -12,13 +12,13 @@ import { ApplicationEpic } from "./ApplicationEpic";
 export const subscribeInstrumentsEpic: ApplicationEpic = (
   action$,
   state$,
-  { webSocketService, instrumentService }
+  { webSocketService, instrumentSubscribe }
 ) =>
   action$.pipe(
     ofType<IAppAction, IConnectedAction>(ActionTypes.CONNECTED),
     mergeMap(action =>
-      instrumentService
-        .subscribe(webSocketService.webSocket())
-        .pipe(map(instrument => newInstrument(instrument)))
+      instrumentSubscribe(webSocketService.webSocket()).pipe(
+        map(instrument => newInstrument(instrument))
+      )
     )
   );

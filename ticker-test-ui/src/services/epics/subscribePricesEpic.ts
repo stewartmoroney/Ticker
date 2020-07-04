@@ -7,9 +7,9 @@ import { ApplicationEpic } from "./ApplicationEpic";
 export const subscribePricesEpic: ApplicationEpic = (
   action$,
   state$,
-  { priceService, webSocketService }
+  { pricesSubscribe, webSocketService }
 ) =>
   action$.pipe(
     ofType<IAppAction, IConnectedAction>(ActionTypes.CONNECTED),
-    mergeMap(action => priceService.subscribe(webSocketService.webSocket()))
+    mergeMap(action => pricesSubscribe(webSocketService.webSocket()))
   );
