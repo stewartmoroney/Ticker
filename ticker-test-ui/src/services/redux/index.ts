@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 
 import Bootstraper, { IServices } from "../Bootstraper";
-import epics from "../epics/Epics";
+import epics from "../epics";
 import { GlobalState } from "./GlobalState";
 import rootReducer from "./reducers/rootReducer";
 

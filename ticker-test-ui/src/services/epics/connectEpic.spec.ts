@@ -5,7 +5,7 @@ import { IWebSocketService } from "../WebSocketService/IWebSocketService";
 import { IInstrumentService } from "./../InstrumentService";
 import { IPriceService } from "./../PriceService";
 import { IPriceSubscribeService } from "./../PriceSubscriptionService";
-import { connectEpic } from "./ConnectEpic";
+import { connectEpic } from "./connectEpic";
 
 describe("ConnectEpic", () => {
   it("should connect web socket service on ActionTypes.CONNECT", () => {

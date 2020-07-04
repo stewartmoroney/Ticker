@@ -5,8 +5,8 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 
 import Bootstraper from "./services/Bootstraper";
+import createStore from "./services/redux";
 import { connect } from "./services/redux/actions";
-import createStore from "./services/redux/Store";
 import Shell from "./ui/shell";
 
 Bootstraper.bootstrap();

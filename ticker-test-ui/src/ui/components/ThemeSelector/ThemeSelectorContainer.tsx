@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { toggleTheme } from "../../../services/redux/actions/ThemeActions";
+import { toggleTheme } from "../../../services/redux/actions";
 import ThemeSelector from "./ThemeSelector";
 
 const ThemeSelectorContainer: FC = () => {

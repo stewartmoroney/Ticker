@@ -2,22 +2,22 @@ import {
   IConnectAction,
   IConnectedAction,
   IDisconnectedAction
-} from "./ConnectionActions";
-import { IInstrumentAction } from "./InstrumentActions";
+} from "./connectionActions";
+import { IInstrumentAction } from "./instrumentActions";
 import {
   IInstrumentSubscribeAckAction,
   IInstrumentSubscribeAction,
   IInstrumentUnsubscribeAckAction,
   IInstrumentUnsubscribeAction,
   IPriceAction
-} from "./PriceActions";
-import { IThemeAction } from "./ThemeActions";
+} from "./priceActions";
+import { IThemeAction } from "./themeActions";
 
 export * from "./ActionTypes";
-export * from "./ConnectionActions";
-export * from "./InstrumentActions";
-export * from "./PriceActions";
-export * from "./ThemeActions";
+export * from "./connectionActions";
+export * from "./instrumentActions";
+export * from "./priceActions";
+export * from "./themeActions";
 
 export type IAppAction =
   | IConnectAction

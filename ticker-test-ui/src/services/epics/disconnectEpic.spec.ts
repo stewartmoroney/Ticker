@@ -5,7 +5,7 @@ import { IWebSocketService } from "../WebSocketService/IWebSocketService";
 import { IInstrumentService } from "./../InstrumentService";
 import { IPriceService } from "./../PriceService";
 import { IPriceSubscribeService } from "./../PriceSubscriptionService";
-import { disconnectEpic } from "./DisconnectedEpic";
+import { disconnectEpic } from "./disconnectEpic";
 
 const services = {
   instrumentService: jest.genMockFromModule<IInstrumentService>(
