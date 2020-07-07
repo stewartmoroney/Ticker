@@ -28,16 +28,12 @@ public class InstrumentRequestHandler extends MessageHandler<InstrumentRequest>{
     private ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    public void handle(WebSocketSession session, InstrumentRequest message) {
+    public void handle(WebSocketSession session, InstrumentRequest message) throws IOException {
         sendInstruments(session, instrumentService.getInstruments());
     }
 
-    private void sendInstruments(WebSocketSession session, Instrument[] instruments) {
-        try {
-            InstrumentResponse resp = new InstrumentResponse(instruments);
-            messageService.send(session, resp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void sendInstruments(WebSocketSession session, Instrument[] instruments) throws IOException {
+        InstrumentResponse resp = new InstrumentResponse(instruments);
+        messageService.send(session, resp);
     }
 }
