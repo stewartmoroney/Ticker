@@ -1,41 +1,48 @@
-import { instrumentSubscribe } from "./InstrumentService";
-import instrumentSubscribeImpl from "./InstrumentService/instrumentServiceImpl";
-import instrumentSubscribeMock from "./InstrumentService/instrumentServiceMock";
-import { subscribePrices } from "./PriceService";
-import subscribePricesImpl from "./PriceService/subscribePricesImpl";
-import subscribePricesMock from "./PriceService/subscribePricesMock";
+import {
+  instrumentSubscribe,
+  subscribedInstruments
+} from "./InstrumentService";
+import {
+  sendInstrumentSubscription,
+  subscribedInstrumentsImpl
+} from "./InstrumentService/instrumentServiceImpl";
+import {
+  sendInstrumentSubscriptionMock,
+  subscribedInstrumentsMock
+} from "./InstrumentService/instrumentServiceMock";
+import { subscribedPrices } from "./PriceService";
+import subscribedPricesImpl from "./PriceService/subscribedPricesImpl";
+import subscribedPricesMock from "./PriceService/subscribedPricesMock";
 import { priceSubscribe, priceUnsubscribe } from "./PriceSubscriptionService";
 import {
   priceSubscribeImpl,
   priceUnsubscribeImpl
 } from "./PriceSubscriptionService/PriceSubscribeService";
-import { IWebSocketService } from "./WebSocketService/IWebSocketService";
-import { WebSocketServiceImpl } from "./WebSocketService/WebSocketServiceImpl";
 
 export interface IServices {
   instrumentSubscribe: instrumentSubscribe;
   priceSubscribe: priceSubscribe;
   priceUnsubscribe: priceUnsubscribe;
-  pricesSubscribe: subscribePrices;
-  webSocketService: IWebSocketService;
+  subscribedPrices: subscribedPrices;
+  subscribedInstruments: subscribedInstruments;
 }
 
 export default (): IServices => {
   if (process.env.REACT_APP_MOCK) {
     return {
-      instrumentSubscribe: instrumentSubscribeMock,
-      pricesSubscribe: subscribePricesMock,
+      instrumentSubscribe: sendInstrumentSubscriptionMock,
       priceSubscribe: priceSubscribeImpl,
       priceUnsubscribe: priceUnsubscribeImpl,
-      webSocketService: new WebSocketServiceImpl()
+      subscribedPrices: subscribedPricesMock,
+      subscribedInstruments: subscribedInstrumentsMock
     };
   } else {
     return {
-      instrumentSubscribe: instrumentSubscribeImpl,
-      pricesSubscribe: subscribePricesImpl,
+      instrumentSubscribe: sendInstrumentSubscription,
       priceSubscribe: priceSubscribeImpl,
       priceUnsubscribe: priceUnsubscribeImpl,
-      webSocketService: new WebSocketServiceImpl()
+      subscribedPrices: subscribedPricesImpl,
+      subscribedInstruments: subscribedInstrumentsImpl
     };
   }
 };

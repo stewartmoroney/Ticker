@@ -1,36 +1,35 @@
-import { Observable, Observer } from "rxjs";
+import { filter, mergeMap } from "rxjs/operators";
 
 import { Instrument } from "../../state/types";
+import { Message } from "../getMessages$";
+import { getTransport } from "../getTransport";
 import {
   InstrumentRequestMessage,
   InstrumentRequestMessageType
 } from "../messages";
-import { instrumentSubscribe } from ".";
+import subscribe from "./../subscribe";
 
-const subscribe: instrumentSubscribe = (
-  webSocket: WebSocket
-): Observable<Instrument> =>
-  Observable.create((observer: Observer<Instrument>) => {
-    console.log("Sub to Instruments");
+type InstrumentResponseMessage = {
+  type: "InstrumentResponse";
+  instruments: Instrument[];
+};
 
-    webSocket.addEventListener("message", function(evt: MessageEvent) {
-      const data = JSON.parse(evt.data);
-      if (data.type === "InstrumentResponse") {
-        data.instruments.forEach((instrument: Instrument) => {
-          observer.next(instrument);
-        });
-      }
-    });
+const isInstrumentMessage = (
+  data: Message
+): data is InstrumentResponseMessage => data.type === "InstrumentResponse";
 
-    const req: InstrumentRequestMessage = {
-      type: InstrumentRequestMessageType,
-      body: {}
-    };
+export const sendInstrumentSubscription = (): void => {
+  const transport = getTransport();
+  const req: InstrumentRequestMessage = {
+    type: InstrumentRequestMessageType,
+    body: {}
+  };
 
-    webSocket.send(JSON.stringify(req));
-    return () => {
-      //do unsub here
-    };
-  });
+  transport.send(JSON.stringify(req));
+};
 
-export default subscribe;
+export const subscribedInstrumentsImpl = () =>
+  subscribe().pipe(
+    filter(isInstrumentMessage),
+    mergeMap(message => message.instruments)
+  );

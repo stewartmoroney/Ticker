@@ -74,6 +74,7 @@
     "jest-junit": "^9.0.0",
     "jest-marbles": "^2.5.1",
     "lint-staged": "^9.4.3",
+    "mock-socket": "^9.0.3",
     "prettier": "^1.19.1"
   },
   "husky": {

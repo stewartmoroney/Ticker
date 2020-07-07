@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
 
-import { IAppAction } from "../redux/actions";
+import { Price } from "../../state/types";
 
-export type subscribePrices = (webSocket: WebSocket) => Observable<IAppAction>;
+export type subscribedPrices = () => Observable<Price>;

@@ -1,11 +1,5 @@
 import { Observable } from "rxjs";
 
-export type priceSubscribe = (
-  webSocket: WebSocket,
-  instrumentId: string
-) => Observable<boolean>;
+export type priceSubscribe = (instrumentId: string) => Observable<boolean>;
 
-export type priceUnsubscribe = (
-  webSocket: WebSocket,
-  instrumentId: string
-) => Observable<boolean>;
+export type priceUnsubscribe = (instrumentId: string) => Observable<boolean>;

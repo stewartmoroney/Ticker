@@ -12,7 +12,7 @@ import { ApplicationEpic } from "./ApplicationEpic";
 export const unsubscribePriceEpic: ApplicationEpic = (
   action$,
   state$,
-  { priceUnsubscribe, webSocketService }
+  { priceUnsubscribe }
 ) =>
   action$.pipe(
     ofType<IAppAction, IInstrumentUnsubscribeAction>(
@@ -20,7 +20,7 @@ export const unsubscribePriceEpic: ApplicationEpic = (
     ),
     mergeMap(action => {
       const { payload } = action;
-      return priceUnsubscribe(webSocketService.webSocket(), payload).pipe(
+      return priceUnsubscribe(payload).pipe(
         map(sucess => unsubscribeAck(payload))
       );
     })

@@ -1,6 +1,6 @@
 import { Observable, Observer } from "rxjs";
 
-import { instrumentSubscribe } from ".";
+import { instrumentSubscribe, subscribedInstruments } from ".";
 import { Instrument } from "./././../../state/types";
 
 const mockinstruments: Instrument[] = [
@@ -14,9 +14,9 @@ const mockinstruments: Instrument[] = [
   }
 ];
 
-export const subscribe: instrumentSubscribe = (
-  webSocket: WebSocket
-): Observable<Instrument> =>
+export const sendInstrumentSubscriptionMock: instrumentSubscribe = () => {};
+
+export const subscribedInstrumentsMock: subscribedInstruments = (): Observable<Instrument> =>
   Observable.create((observer: Observer<Instrument>) => {
     mockinstruments.forEach(mockinstrument => {
       observer.next(mockinstrument);
@@ -24,5 +24,3 @@ export const subscribe: instrumentSubscribe = (
     observer.complete();
     return;
   });
-
-export default subscribe;

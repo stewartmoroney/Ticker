@@ -1,5 +1,5 @@
 import { ofType } from "redux-observable";
-import { map, mergeMap } from "rxjs/operators";
+import { ignoreElements, map, tap } from "rxjs/operators";
 
 import {
   ActionTypes,
@@ -9,16 +9,21 @@ import {
 } from "../redux/actions";
 import { ApplicationEpic } from "./ApplicationEpic";
 
-export const subscribeInstrumentsEpic: ApplicationEpic = (
+export const sendInstrumentSubscribeEpic: ApplicationEpic = (
   action$,
   state$,
-  { webSocketService, instrumentSubscribe }
+  { instrumentSubscribe }
 ) =>
   action$.pipe(
     ofType<IAppAction, IConnectedAction>(ActionTypes.CONNECTED),
-    mergeMap(action =>
-      instrumentSubscribe(webSocketService.webSocket()).pipe(
-        map(instrument => newInstrument(instrument))
-      )
-    )
+    tap(() => {
+      instrumentSubscribe();
+    }),
+    ignoreElements()
   );
+
+export const subscribeInstrumentsEpic: ApplicationEpic = (
+  action$,
+  state$,
+  { subscribedInstruments }
+) => subscribedInstruments().pipe(map(instrument => newInstrument(instrument)));
