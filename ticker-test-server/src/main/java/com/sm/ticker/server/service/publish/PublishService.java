@@ -10,6 +10,7 @@ import com.sm.ticker.server.service.subscription.PriceSubscriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,19 +30,15 @@ public class PublishService {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    public void notifyPriceUpdate(Price price) {
+    public void notifyPriceUpdate(Price price) throws IOException {
         final PriceUpdate priceUpdate = new PriceUpdate(price);
 
         List<String> subscribedSessionIds = priceSubscriptionService.getSubscribedSessionIds(price.getInstrumentId());
         log.debug("update subscribed sessions " + subscribedSessionIds);
-        sessionService.openSessions().stream()
-            .filter(s -> subscribedSessionIds.contains(s.getId()))
-            .forEach(ws -> {
-                try {
-                    messageService.send(ws, priceUpdate);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+        for (WebSocketSession s : sessionService.openSessions()) {
+            if (subscribedSessionIds.contains(s.getId())) {
+                messageService.send(s, priceUpdate);
+            }
+        }
     }
 }

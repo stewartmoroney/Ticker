@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.io.IOException;
+
 @Configuration
 @EnableScheduling
 public class PriceUpdateService {
@@ -21,7 +23,7 @@ public class PriceUpdateService {
     private PriceGenerator priceGenerator;
 
     @Scheduled(fixedRate = 500)
-    public void updatePrices() {
+    public void updatePrices() throws IOException {
         final Price newPrice = priceGenerator.generatePrice();
         priceService.update(newPrice);
         publishService.notifyPriceUpdate(newPrice);
