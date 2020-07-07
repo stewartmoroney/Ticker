@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 public class PriceUpdateServiceTest {
@@ -34,7 +35,7 @@ public class PriceUpdateServiceTest {
     }
 
     @Test
-    public void shouldUpdateGeneratedPrice(){
+    public void shouldUpdateGeneratedPrice() throws IOException {
         //given
         final Price aPrice = new Price("instr1", new BigDecimal(1234.1234));
         Mockito.when(priceGenerator.generatePrice()).thenReturn(aPrice);
