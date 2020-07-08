@@ -26,6 +26,13 @@ dependencies {
     testImplementation 'org.mockito:mockito-junit-jupiter:3.3.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation 'io.cucumber:cucumber-java:6.1.1'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
 }
 
 test {
@@ -39,4 +46,20 @@ tasks.withType(JavaCompile) {
 bootRun {
     main = 'com.sm.ticker.server.TicketTestServerApp'
     jvmArgs([])
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            jvmArgs(['--enable-preview'])
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin',
+                    'pretty',
+                    '--glue',
+                    'gradle.cucumber',
+                    'src/test/resources']
+        }
+    }
 }

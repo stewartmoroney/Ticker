@@ -9,4 +9,8 @@ public class TicketTestServerApp {
     public static void main(String[] args) {
         SpringApplication.run(TicketTestServerApp.class, args);
     }
+
+    public static void start(String[] args) {
+        SpringApplication.run(TicketTestServerApp.class, args);
+    }
 }
