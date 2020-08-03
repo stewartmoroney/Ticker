@@ -3,3 +3,6 @@
  */
 
 rootProject.name = 'ticker-test-server'
+include 'ticker-web-gateway'
+include 'ticker-prices'
+
