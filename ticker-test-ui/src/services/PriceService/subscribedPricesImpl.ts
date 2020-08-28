@@ -1,13 +1,23 @@
-import { Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import { defer } from "rxjs";
+import { filter, map, scan, shareReplay } from "rxjs/operators";
 
 import { Price } from "../../state/types";
+import { Message } from "../getMessages$";
 import subscribe from "../subscribe";
 
-const isPriceMessage = (data: any) => data.type === "PriceUpdate";
+type PriceMessage = {
+  type: "PriceUpdate";
+  price: Price;
+};
 
-export default (): Observable<Price> =>
+const isPriceMessage = (data: Message): data is PriceMessage =>
+  data.type === "PriceUpdate";
+
+export const subscribedPrices$ = defer(() =>
   subscribe().pipe(
     filter(isPriceMessage),
-    map(message => message.price)
-  );
+    map(msg => msg.price),
+    scan((acc, p) => acc.concat(p), [] as Price[]),
+    shareReplay(1)
+  )
+);

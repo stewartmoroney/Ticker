@@ -1,18 +1,36 @@
+import { bind } from "@react-rxjs/core";
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { startWith } from "rxjs/operators";
 
-import { GlobalState } from "../../../services/redux/GlobalState";
-import { Instrument } from "../../../state/types";
+import { subscribedInstrumentsImpl } from "../../../services/InstrumentService/instrumentServiceImpl";
+import { subscribedPrices$ } from "../../../services/PriceService/subscribedPricesImpl";
+import { Instrument, Price } from "../../../state/types";
 import GridRow from "./GridRow";
 import { GridRows } from "./gridStyles";
 
-const GridData: FC = () => {
-  const instruments = useSelector((state: GlobalState) => state.instruments);
+const [useInstruments] = bind(
+  subscribedInstrumentsImpl().pipe(startWith([] as Instrument[]))
+);
 
-  const rows = instruments.map((instrument: Instrument) => (
-    <GridRow key={instrument.id} instrument={instrument}></GridRow>
-  ));
-  return <GridRows>{rows}</GridRows>;
+const [useSubscribedPrices] = bind(
+  subscribedPrices$.pipe(startWith([] as Price[]))
+);
+
+const GridData: FC = () => {
+  const instruments = useInstruments();
+  const prices = useSubscribedPrices();
+
+  return (
+    <GridRows>
+      {instruments.map((instrument: Instrument) => (
+        <GridRow
+          key={instrument.id}
+          instrument={instrument}
+          price={prices.find(p => p.instrumentId === instrument.id)}
+        ></GridRow>
+      ))}
+    </GridRows>
+  );
 };
 
 export default GridData;

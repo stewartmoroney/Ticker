@@ -1,18 +1,6 @@
-import {
-  instrumentSubscribe,
-  subscribedInstruments
-} from "./InstrumentService";
-import {
-  sendInstrumentSubscription,
-  subscribedInstrumentsImpl
-} from "./InstrumentService/instrumentServiceImpl";
-import {
-  sendInstrumentSubscriptionMock,
-  subscribedInstrumentsMock
-} from "./InstrumentService/instrumentServiceMock";
-import { subscribedPrices } from "./PriceService";
-import subscribedPricesImpl from "./PriceService/subscribedPricesImpl";
-import subscribedPricesMock from "./PriceService/subscribedPricesMock";
+import { instrumentSubscribe } from "./InstrumentService";
+import { sendInstrumentSubscription } from "./InstrumentService/instrumentServiceImpl";
+import { sendInstrumentSubscriptionMock } from "./InstrumentService/instrumentServiceMock";
 import { priceSubscribe, priceUnsubscribe } from "./PriceSubscriptionService";
 import {
   priceSubscribeImpl,
@@ -23,8 +11,6 @@ export interface IServices {
   instrumentSubscribe: instrumentSubscribe;
   priceSubscribe: priceSubscribe;
   priceUnsubscribe: priceUnsubscribe;
-  subscribedPrices: subscribedPrices;
-  subscribedInstruments: subscribedInstruments;
 }
 
 export default (): IServices => {
@@ -32,17 +18,13 @@ export default (): IServices => {
     return {
       instrumentSubscribe: sendInstrumentSubscriptionMock,
       priceSubscribe: priceSubscribeImpl,
-      priceUnsubscribe: priceUnsubscribeImpl,
-      subscribedPrices: subscribedPricesMock,
-      subscribedInstruments: subscribedInstrumentsMock
+      priceUnsubscribe: priceUnsubscribeImpl
     };
   } else {
     return {
       instrumentSubscribe: sendInstrumentSubscription,
       priceSubscribe: priceSubscribeImpl,
-      priceUnsubscribe: priceUnsubscribeImpl,
-      subscribedPrices: subscribedPricesImpl,
-      subscribedInstruments: subscribedInstrumentsImpl
+      priceUnsubscribe: priceUnsubscribeImpl
     };
   }
 };

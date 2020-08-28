@@ -1,12 +1,7 @@
 import { ofType } from "redux-observable";
-import { ignoreElements, map, tap } from "rxjs/operators";
+import { ignoreElements, tap } from "rxjs/operators";
 
-import {
-  ActionTypes,
-  IAppAction,
-  IConnectedAction,
-  newInstrument
-} from "../redux/actions";
+import { ActionTypes, IAppAction, IConnectedAction } from "../redux/actions";
 import { ApplicationEpic } from "./ApplicationEpic";
 
 export const sendInstrumentSubscribeEpic: ApplicationEpic = (
@@ -21,9 +16,3 @@ export const sendInstrumentSubscribeEpic: ApplicationEpic = (
     }),
     ignoreElements()
   );
-
-export const subscribeInstrumentsEpic: ApplicationEpic = (
-  action$,
-  state$,
-  { subscribedInstruments }
-) => subscribedInstruments().pipe(map(instrument => newInstrument(instrument)));

@@ -1,4 +1,5 @@
-import { filter, mergeMap } from "rxjs/operators";
+import { defer } from "rxjs";
+import { filter, map, shareReplay } from "rxjs/operators";
 
 import { Instrument } from "../../state/types";
 import { Message } from "../getMessages$";
@@ -24,12 +25,14 @@ export const sendInstrumentSubscription = (): void => {
     type: InstrumentRequestMessageType,
     body: {}
   };
-
   transport.send(JSON.stringify(req));
 };
 
 export const subscribedInstrumentsImpl = () =>
-  subscribe().pipe(
-    filter(isInstrumentMessage),
-    mergeMap(message => message.instruments)
+  defer(() =>
+    subscribe().pipe(
+      filter(isInstrumentMessage),
+      map(message => message.instruments),
+      shareReplay(1)
+    )
   );
