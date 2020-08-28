@@ -28,7 +28,7 @@ export const sendInstrumentSubscription = (): void => {
   transport.send(JSON.stringify(req));
 };
 
-export const subscribedInstrumentsImpl = () =>
+export const instrumentState$ = () =>
   defer(() =>
     subscribe().pipe(
       filter(isInstrumentMessage),

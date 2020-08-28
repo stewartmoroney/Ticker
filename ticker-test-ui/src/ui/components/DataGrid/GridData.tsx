@@ -2,14 +2,14 @@ import { bind } from "@react-rxjs/core";
 import React, { FC } from "react";
 import { startWith } from "rxjs/operators";
 
-import { subscribedInstrumentsImpl } from "../../../services/InstrumentService/instrumentServiceImpl";
+import { instrumentState$ } from "../../../services/InstrumentService/instrumentServiceImpl";
 import { subscribedPrices$ } from "../../../services/PriceService/subscribedPricesImpl";
 import { Instrument, Price } from "../../../state/types";
 import GridRow from "./GridRow";
 import { GridRows } from "./gridStyles";
 
 const [useInstruments] = bind(
-  subscribedInstrumentsImpl().pipe(startWith([] as Instrument[]))
+  instrumentState$().pipe(startWith([] as Instrument[]))
 );
 
 const [useSubscribedPrices] = bind(

@@ -19,18 +19,10 @@ const instruments: Instrument[] = [
   }
 ];
 
-const toggleCLick = () => {
-  alert("");
-};
-
 storiesOf("InstrumentSelector", module)
   .add("No Instruments", () => (
     <ThemeProvider theme={theme}>
-      <InstrumentSelector
-        instruments={[]}
-        subscribedInstrumentIds={[]}
-        toggleSubscribe={toggleCLick}
-      />
+      <InstrumentSelector instruments={[]} subscribedInstrumentIds={[]} />
     </ThemeProvider>
   ))
   .add("Has Instruments", () => (
@@ -38,7 +30,6 @@ storiesOf("InstrumentSelector", module)
       <InstrumentSelector
         instruments={instruments}
         subscribedInstrumentIds={["1"]}
-        toggleSubscribe={toggleCLick}
       />
     </ThemeProvider>
   ));

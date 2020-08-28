@@ -1,16 +1,6 @@
 import { Action } from "redux";
 
-import { Price } from "../../../state/types";
 import { ActionTypes } from "./ActionTypes";
-
-export interface IPriceAction extends Action {
-  payload: Price;
-  type: ActionTypes.INSTRUMENT_PRICE;
-}
-export const newPrice = (price: Price): IPriceAction => ({
-  payload: price,
-  type: ActionTypes.INSTRUMENT_PRICE
-});
 
 export interface IInstrumentSubscribeAction extends Action {
   payload: string;

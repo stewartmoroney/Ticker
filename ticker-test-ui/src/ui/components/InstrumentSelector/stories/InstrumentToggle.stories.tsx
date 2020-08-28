@@ -13,26 +13,14 @@ const instrument: Instrument = {
   name: "a"
 };
 
-const toggleCLick = () => {
-  alert("");
-};
-
 storiesOf("InstrumentToggle", module)
   .add("Subscribed Instrument", () => (
     <ThemeProvider theme={theme}>
-      <InstrumentToggle
-        instrument={instrument}
-        subscribed={true}
-        toggle={toggleCLick}
-      />
+      <InstrumentToggle instrument={instrument} subscribed={true} />
     </ThemeProvider>
   ))
   .add("Not Subscribed Instruments", () => (
     <ThemeProvider theme={theme}>
-      <InstrumentToggle
-        instrument={instrument}
-        subscribed={false}
-        toggle={toggleCLick}
-      />
+      <InstrumentToggle instrument={instrument} subscribed={false} />
     </ThemeProvider>
   ));

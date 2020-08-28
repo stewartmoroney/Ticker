@@ -1,7 +1,9 @@
+import { useSubscribe } from "@react-rxjs/core";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import styled, { ThemeProvider } from "styled-components";
 
+import { instrumentPriceSubscriptions$ } from "../../services/PriceSubscriptionService/PriceSubscribeService";
 import { GlobalState } from "../../services/redux/GlobalState";
 import AppStatusBar from "../components/AppStatusBar";
 import Grid from "../components/DataGrid";
@@ -20,6 +22,7 @@ const MainPanel = styled.div`
 
 const Shell: FC = () => {
   const themeName = useSelector((state: GlobalState) => state.system.themeName);
+  useSubscribe(instrumentPriceSubscriptions$());
 
   return (
     <ThemeProvider theme={getTheme(themeName)}>
