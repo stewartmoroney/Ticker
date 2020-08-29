@@ -22,6 +22,6 @@ public class UnsubscribePriceRequestHandler extends MessageHandler<UnsubscribePr
     @Override
     public void handle(WebSocketSession session, UnsubscribePriceRequest message) throws IOException {
         priceSubscriptionService.unsubscribe(session.getId(), message.getInstrumentId());
-        messageService.send(session, new UnsubscribePriceResponse(message.getCorrelationId()));
+        messageService.send(session, new UnsubscribePriceResponse(message.getCorrelationId(), message.getInstrumentId()));
     }
 }

@@ -1,6 +1,8 @@
-import { filter, mergeMap } from "rxjs/operators";
+import { defer } from "rxjs";
+import { filter, map, shareReplay, tap } from "rxjs/operators";
 
-import { Instrument } from "../../state/types";
+import { ConnectionStatus, Instrument } from "../../state/types";
+import getConnectionStatus$ from "../getConnectionStatus$";
 import { Message } from "../getMessages$";
 import { getTransport } from "../getTransport";
 import {
@@ -24,12 +26,23 @@ export const sendInstrumentSubscription = (): void => {
     type: InstrumentRequestMessageType,
     body: {}
   };
-
   transport.send(JSON.stringify(req));
 };
 
-export const subscribedInstrumentsImpl = () =>
-  subscribe().pipe(
-    filter(isInstrumentMessage),
-    mergeMap(message => message.instruments)
+export const instrumentState$ = () =>
+  defer(() =>
+    subscribe().pipe(
+      filter(isInstrumentMessage),
+      tap(x => console.log("ins")),
+      map(message => message.instruments),
+      shareReplay(1)
+    )
+  );
+
+export const instrumentSubscriptions$ = () =>
+  getConnectionStatus$().pipe(
+    filter(status => status === ConnectionStatus.CONNECTED),
+    tap(() => {
+      sendInstrumentSubscription();
+    })
   );

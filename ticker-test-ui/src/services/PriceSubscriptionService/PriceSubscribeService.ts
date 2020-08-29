@@ -1,61 +1,82 @@
-import { Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import { defer, EMPTY, Subject } from "rxjs";
+import { filter, mergeMap, scan, shareReplay, tap } from "rxjs/operators";
 import uuid from "uuid";
 
 import { getTransport } from "../getTransport";
 import {
-  PriceSubscribeRequestMessage,
   PriceSubscribeRequestMessageType,
-  UnsubscribePriceRequestMessage,
   UnsubscribePriceRequestMessageType
 } from "../messages";
 import subscribe from "../subscribe";
-import { priceSubscribe, priceUnsubscribe } from ".";
 
-export const priceSubscribeImpl: priceSubscribe = (
-  instrumentId: string
-): Observable<boolean> => {
-  const correlationId = uuid();
-  const transport = getTransport();
-  const req: PriceSubscribeRequestMessage = {
-    type: PriceSubscribeRequestMessageType,
-    body: {
-      instrumentId,
-      correlationId
-    }
-  };
-  transport.send(JSON.stringify(req));
-
-  const isSubscribeAckMessage = (data: any) =>
-    data.type === "SubscribePriceResponse" &&
-    data.correlationId === correlationId;
-
-  return subscribe().pipe(
-    filter(isSubscribeAckMessage),
-    map(message => true)
-  );
+type SubMessage = {
+  id: string;
+  type: string;
 };
 
-export const priceUnsubscribeImpl: priceUnsubscribe = (
-  instrumentId: string
-): Observable<boolean> => {
-  const correlationId = uuid();
-  const transport = getTransport();
-  const req: UnsubscribePriceRequestMessage = {
-    type: UnsubscribePriceRequestMessageType,
-    body: {
-      instrumentId,
-      correlationId
-    }
-  };
-  transport.send(JSON.stringify(req));
+export const instrumentSubscribe$ = new Subject<SubMessage>();
 
-  const isUnSubscribeAckMessage = (data: any) =>
-    data.type === "UnsubscribePriceResponse" &&
-    data.correlationId === correlationId;
-
-  return subscribe().pipe(
-    filter(isUnSubscribeAckMessage),
-    map(message => true)
-  );
+export const subscribeToInstrumentPrice = (id: string) => {
+  instrumentSubscribe$.next({ id, type: "subscribe" });
 };
+
+export const unsubscribeToInstrumentPrice = (id: string) => {
+  instrumentSubscribe$.next({ id, type: "unsubscribe" });
+};
+
+export const instrumentPriceSubscriptions$ = () =>
+  instrumentSubscribe$.asObservable().pipe(
+    tap(() => console.log("here")),
+    mergeMap(msg => {
+      const correlationId = uuid();
+      const transport = getTransport();
+      const req = {
+        type:
+          msg.type === "subscribe"
+            ? PriceSubscribeRequestMessageType
+            : UnsubscribePriceRequestMessageType,
+        body: {
+          instrumentId: msg.id,
+          correlationId
+        }
+      };
+      transport.send(JSON.stringify(req));
+      return EMPTY;
+    }),
+    shareReplay(1)
+  );
+
+type PriceSubscribeMessage = {
+  type: "SubscribePriceResponse" | "UnsubscribePriceResponse";
+  instrumentId: string;
+};
+
+const isSubscriptionStateMessage = (data: any): data is PriceSubscribeMessage =>
+  data.type === "SubscribePriceResponse" ||
+  data.type === "UnsubscribePriceResponse";
+
+const subscriptionsReducer = (
+  subscriptions: string[],
+  msg: PriceSubscribeMessage
+) => {
+  switch (msg.type) {
+    case "SubscribePriceResponse":
+      if (!subscriptions.includes(msg.instrumentId)) {
+        return [...subscriptions, msg.instrumentId];
+      }
+      break;
+    case "UnsubscribePriceResponse":
+      return subscriptions.filter(sub => sub !== msg.instrumentId);
+  }
+  return [...subscriptions];
+};
+
+export const subscribedPricesState$ = () =>
+  defer(() =>
+    subscribe().pipe(
+      tap(msg => console.log("msg " + JSON.stringify(msg))),
+      filter(isSubscriptionStateMessage),
+      scan(subscriptionsReducer, [] as string[]),
+      shareReplay(1)
+    )
+  );

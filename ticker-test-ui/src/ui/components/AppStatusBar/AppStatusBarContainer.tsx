@@ -1,8 +1,10 @@
+import { bind } from "@react-rxjs/core";
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { startWith } from "rxjs/operators";
 import styled from "styled-components";
 
-import { GlobalState } from "../../../services/redux/GlobalState";
+import getConnectionStatus$ from "../../../services/getConnectionStatus$";
+import { ConnectionStatus } from "../../../state/types";
 import ThemeSelector from "../ThemeSelector";
 import ConnectionStatusIcon from "./ConnectionStatusIcon";
 
@@ -13,11 +15,15 @@ const StatusBar = styled.div`
   background-color: ${props => props.theme.panel.background};
 `;
 
+const [useConnectionState] = bind(
+  getConnectionStatus$().pipe(
+    startWith(ConnectionStatus.DISCONNECTED as ConnectionStatus)
+  )
+);
+
 const AppStatusBarContainer: FC = () => {
-  const connectionStatus = useSelector(
-    (state: GlobalState) => state.system.connectionStatus
-  );
-  const sessionId = useSelector((state: GlobalState) => state.system.sessionId);
+  const connectionStatus = useConnectionState();
+  const sessionId = "";
 
   return (
     <StatusBar>

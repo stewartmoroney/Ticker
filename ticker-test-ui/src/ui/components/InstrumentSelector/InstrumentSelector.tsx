@@ -7,7 +7,6 @@ import InstrumentToggle from "./InstrumentToggle";
 interface IProps {
   instruments: Instrument[];
   subscribedInstrumentIds: string[];
-  toggleSubscribe: (id: string, subscribed: boolean) => void;
 }
 
 const InstrumentSelectorPanel = styled.div`
@@ -18,7 +17,6 @@ const InstrumentSelectorPanel = styled.div`
 
 const InstrumentSelector: FC<IProps> = ({
   instruments,
-  toggleSubscribe,
   subscribedInstrumentIds
 }) => (
   <InstrumentSelectorPanel>
@@ -31,7 +29,6 @@ const InstrumentSelector: FC<IProps> = ({
           key={instrument.id}
           instrument={instrument}
           subscribed={isSubscribed}
-          toggle={toggleSubscribe}
         >
           {instrument.id}
         </InstrumentToggle>

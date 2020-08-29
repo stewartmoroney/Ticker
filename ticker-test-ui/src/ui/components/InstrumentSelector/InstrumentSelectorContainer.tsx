@@ -1,37 +1,28 @@
-import React, { FC, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { bind } from "@react-rxjs/core";
+import React, { FC } from "react";
+import { startWith } from "rxjs/operators";
 
-import {
-  subscribeInstrument,
-  unsubscribeInstrument
-} from "../../../services/redux/actions";
-import { GlobalState } from "../../../services/redux/GlobalState";
+import { instrumentState$ } from "../../../services/InstrumentService/instrumentServiceImpl";
+import { subscribedPricesState$ } from "../../../services/PriceSubscriptionService/PriceSubscribeService";
+import { Instrument } from "../../../state/types";
 import InstrumentSelector from "./InstrumentSelector";
 
+const [useInstruments] = bind(
+  instrumentState$().pipe(startWith([] as Instrument[]))
+);
+
+const [useSubscribedInstruments] = bind(
+  subscribedPricesState$().pipe(startWith([] as string[]))
+);
+
 const InstrumentSelectorContainer: FC = () => {
-  const dispatch = useDispatch();
-  const toggle = useCallback(
-    (id: string, subscribed: boolean) => {
-      if (subscribed) {
-        dispatch(unsubscribeInstrument(id));
-      } else {
-        dispatch(subscribeInstrument(id));
-      }
-    },
-    [dispatch]
-  );
-
-  const instruments = useSelector((state: GlobalState) => state.instruments);
-
-  const subscribedInstrumentIds = useSelector(
-    (state: GlobalState) => state.subscriptions.subscribedInstruments
-  );
+  const instruments = useInstruments();
+  const subscribedInstrumentIds = useSubscribedInstruments();
 
   return (
     <InstrumentSelector
       instruments={instruments}
       subscribedInstrumentIds={subscribedInstrumentIds}
-      toggleSubscribe={toggle}
     ></InstrumentSelector>
   );
 };

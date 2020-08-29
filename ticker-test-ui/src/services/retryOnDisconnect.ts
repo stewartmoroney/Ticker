@@ -1,5 +1,5 @@
 import { merge, Observable, of, throwError } from "rxjs";
-import { filter, retryWhen, switchMap, switchMapTo } from "rxjs/operators";
+import { filter, retryWhen, switchMap, switchMapTo, tap } from "rxjs/operators";
 
 import { ConnectionStatus } from "../state/types";
 import getConnectionStatus$ from "./getConnectionStatus$";
@@ -9,6 +9,7 @@ const DISCONNECTED_ERROR = new Error("Got disconnected!");
 
 const retryOnDisconnect = <T>(target$: Observable<T>): Observable<T> => {
   const disconnected$ = getConnectionStatus$().pipe(
+    tap(status => console.log("status - " + status)),
     filter(x => x === ConnectionStatus.DISCONNECTED),
     switchMapTo(throwError(DISCONNECTED_ERROR))
   );

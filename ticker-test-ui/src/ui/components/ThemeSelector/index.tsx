@@ -1,3 +1,3 @@
-import ThemeSelectorContainer from "./ThemeSelectorContainer";
+import ThemeSelector from "./ThemeSelector";
 
-export default ThemeSelectorContainer;
+export default ThemeSelector;

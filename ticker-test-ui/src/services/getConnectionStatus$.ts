@@ -1,25 +1,20 @@
-import { Observable, ReplaySubject } from "rxjs";
+import { ReplaySubject } from "rxjs";
+import { shareReplay } from "rxjs/operators";
 
 import { ConnectionStatus } from "../state/types";
 import { getTransport } from "./getTransport";
 
-let cachedConnectionStatus$: Observable<ConnectionStatus> | null = null;
+const conStatus$ = new ReplaySubject<ConnectionStatus>();
 
-const getConnectionStatus$ = (): Observable<ConnectionStatus> => {
-  if (cachedConnectionStatus$) {
-    return cachedConnectionStatus$;
-  }
-  const transport = getTransport();
-  const connStatusSub: ReplaySubject<ConnectionStatus> = new ReplaySubject(1);
-  connStatusSub.next(ConnectionStatus.DISCONNECTED);
-  transport.onOpen((ev: Event) => {
-    connStatusSub.next(ConnectionStatus.CONNECTED);
-  });
-  transport.onClose((ev: Event) => {
-    connStatusSub.next(ConnectionStatus.DISCONNECTED);
-  });
+const transport = getTransport();
+transport.onOpen((ev: Event) => {
+  conStatus$.next(ConnectionStatus.CONNECTED);
+});
+transport.onClose((ev: Event) => {
+  conStatus$.next(ConnectionStatus.DISCONNECTED);
+});
 
-  return (cachedConnectionStatus$ = connStatusSub.asObservable());
-};
+const getConnectionStatus$ = () =>
+  conStatus$.asObservable().pipe(shareReplay(1));
 
 export default getConnectionStatus$;

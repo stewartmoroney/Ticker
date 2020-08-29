@@ -22,6 +22,6 @@ public class SubscribePriceRequestHandler extends MessageHandler<SubscribePriceR
     @Override
     public void handle(WebSocketSession session, SubscribePriceRequest message) throws IOException {
         priceSubscriptionService.subscribe(session.getId(), message.getInstrumentId());
-        messageService.send(session, new SubscribePriceResponse(message.getCorrelationId()));
+        messageService.send(session, new SubscribePriceResponse(message.getCorrelationId(), message.getInstrumentId()));
     }
 }

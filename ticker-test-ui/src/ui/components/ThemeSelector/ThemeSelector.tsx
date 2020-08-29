@@ -1,14 +1,18 @@
 import React, { FC, useCallback } from "react";
 import { FaLightbulb } from "react-icons/fa";
 
-interface IProps {
-  toggle: () => void;
-}
+import {
+  flipTheme,
+  switchTheme,
+  useTheme
+} from "../../../services/themeService";
 
-const ThemeSelector: FC<IProps> = ({ toggle }) => {
+const ThemeSelector: FC = () => {
+  const themeName = useTheme();
+
   const handleToggle = useCallback(() => {
-    toggle();
-  }, [toggle]);
+    switchTheme(flipTheme(themeName));
+  }, [themeName]);
   return (
     <div>
       <FaLightbulb onClick={handleToggle} />
