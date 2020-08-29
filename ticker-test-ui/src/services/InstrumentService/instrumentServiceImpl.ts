@@ -1,5 +1,5 @@
 import { defer } from "rxjs";
-import { filter, map, shareReplay } from "rxjs/operators";
+import { filter, map, shareReplay, tap } from "rxjs/operators";
 
 import { Instrument } from "../../state/types";
 import { Message } from "../getMessages$";
@@ -32,6 +32,7 @@ export const instrumentState$ = () =>
   defer(() =>
     subscribe().pipe(
       filter(isInstrumentMessage),
+      tap(x => console.log("ins")),
       map(message => message.instruments),
       shareReplay(1)
     )

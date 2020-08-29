@@ -1,5 +1,5 @@
 import { defer, EMPTY, Subject } from "rxjs";
-import { filter, map, mergeMap, scan, shareReplay, tap } from "rxjs/operators";
+import { filter, mergeMap, scan, shareReplay, tap } from "rxjs/operators";
 import uuid from "uuid";
 
 import { getTransport } from "../getTransport";

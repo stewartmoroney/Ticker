@@ -6,24 +6,12 @@ import styled, { ThemeProvider } from "styled-components";
 
 import Shell from "..";
 import { IAppAction } from "../../../services/redux/actions";
-import { GlobalState } from "../../../services/redux/GlobalState";
-import { initialState as systemIntialState } from "../../../services/redux/reducers/systemReducer";
 import { defaultTheme, getTheme } from "./../../shared";
 
 const StoryBackground = styled.div`
   background-color: black;
 `;
-
-const initialState: GlobalState = {
-  system: {
-    ...systemIntialState
-  }
-};
-
-const appReducer = (
-  state: GlobalState = initialState,
-  action: IAppAction
-): GlobalState => state;
+const appReducer = (state = {}, action: IAppAction): {} => state;
 
 const store = createStore(appReducer);
 
