@@ -33,7 +33,6 @@ export const instrumentState$ = () =>
   defer(() =>
     subscribe().pipe(
       filter(isInstrumentMessage),
-      tap(x => console.log("ins")),
       map(message => message.instruments),
       shareReplay(1)
     )
