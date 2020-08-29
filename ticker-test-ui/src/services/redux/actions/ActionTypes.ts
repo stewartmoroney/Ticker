@@ -1,5 +1,0 @@
-export enum ActionTypes {
-  CONNECT = "CONNECT",
-  CONNECTED = "CONNECTED",
-  DISCONNECTED = "DISCONNECTED"
-}

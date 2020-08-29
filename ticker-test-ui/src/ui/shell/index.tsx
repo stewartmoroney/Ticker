@@ -2,6 +2,7 @@ import { useSubscribe } from "@react-rxjs/core";
 import React, { FC } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
+import { instrumentSubscriptions$ } from "../../services/InstrumentService/instrumentServiceImpl";
 import { instrumentPriceSubscriptions$ } from "../../services/PriceSubscriptionService/PriceSubscribeService";
 import { useTheme } from "../../services/themeService";
 import AppStatusBar from "../components/AppStatusBar";
@@ -21,6 +22,7 @@ const MainPanel = styled.div`
 
 const Shell: FC = () => {
   const themeName = useTheme();
+  useSubscribe(instrumentSubscriptions$());
   useSubscribe(instrumentPriceSubscriptions$());
 
   return (

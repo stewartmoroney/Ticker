@@ -1,7 +1,8 @@
 import { defer } from "rxjs";
 import { filter, map, shareReplay, tap } from "rxjs/operators";
 
-import { Instrument } from "../../state/types";
+import { ConnectionStatus, Instrument } from "../../state/types";
+import getConnectionStatus$ from "../getConnectionStatus$";
 import { Message } from "../getMessages$";
 import { getTransport } from "../getTransport";
 import {
@@ -36,4 +37,12 @@ export const instrumentState$ = () =>
       map(message => message.instruments),
       shareReplay(1)
     )
+  );
+
+export const instrumentSubscriptions$ = () =>
+  getConnectionStatus$().pipe(
+    filter(status => status === ConnectionStatus.CONNECTED),
+    tap(() => {
+      sendInstrumentSubscription();
+    })
   );
