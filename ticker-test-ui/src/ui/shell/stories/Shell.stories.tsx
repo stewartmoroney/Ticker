@@ -7,7 +7,6 @@ import styled, { ThemeProvider } from "styled-components";
 import Shell from "..";
 import { IAppAction } from "../../../services/redux/actions";
 import { GlobalState } from "../../../services/redux/GlobalState";
-import { initialState as subscriptionState } from "../../../services/redux/reducers/subscriptionReducer";
 import { initialState as systemIntialState } from "../../../services/redux/reducers/systemReducer";
 import { defaultTheme, getTheme } from "./../../shared";
 
@@ -16,7 +15,6 @@ const StoryBackground = styled.div`
 `;
 
 const initialState: GlobalState = {
-  subscriptions: subscriptionState,
   system: {
     ...systemIntialState
   }

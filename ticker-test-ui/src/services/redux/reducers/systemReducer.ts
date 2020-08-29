@@ -1,5 +1,4 @@
-import { ConnectionStatus, ThemeName } from "../../../state/types";
-import { defaultTheme } from "../../../ui/shared";
+import { ConnectionStatus } from "../../../state/types";
 import { ActionTypes } from "../actions";
 import { IAppAction } from "../actions";
 
@@ -7,18 +6,13 @@ interface ISystemState {
   connected: boolean;
   sessionId: string;
   connectionStatus: ConnectionStatus;
-  themeName: ThemeName;
 }
 
 export const initialState: ISystemState = {
   connected: false,
   sessionId: "",
-  connectionStatus: ConnectionStatus.DISCONNECTED,
-  themeName: defaultTheme
+  connectionStatus: ConnectionStatus.DISCONNECTED
 };
-
-const flipTheme = (themeName: ThemeName): ThemeName =>
-  themeName === "dark" ? "light" : "dark";
 
 const systemReducer = (
   state: ISystemState = initialState,
@@ -37,8 +31,6 @@ const systemReducer = (
         connected: false,
         connectionStatus: ConnectionStatus.DISCONNECTED
       };
-    case ActionTypes.TOGGLE_THEME:
-      return { ...state, themeName: flipTheme(state.themeName) };
     default:
       return state;
   }

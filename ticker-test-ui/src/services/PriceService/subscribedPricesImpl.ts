@@ -17,7 +17,7 @@ export const subscribedPrices$ = defer(() =>
   subscribe().pipe(
     filter(isPriceMessage),
     map(msg => msg.price),
-    scan((acc, p) => acc.concat(p), [] as Price[]),
+    scan((acc, p) => [...acc, p], [] as Price[]),
     shareReplay(1)
   )
 );

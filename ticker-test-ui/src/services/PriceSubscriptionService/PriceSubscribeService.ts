@@ -1,5 +1,5 @@
 import { defer, EMPTY, Subject } from "rxjs";
-import { filter, map, scan, shareReplay, tap } from "rxjs/operators";
+import { filter, map, mergeMap, scan, shareReplay, tap } from "rxjs/operators";
 import uuid from "uuid";
 
 import { getTransport } from "../getTransport";
@@ -26,7 +26,8 @@ export const unsubscribeToInstrumentPrice = (id: string) => {
 
 export const instrumentPriceSubscriptions$ = () =>
   instrumentSubscribe$.asObservable().pipe(
-    map(msg => {
+    tap(() => console.log("here")),
+    mergeMap(msg => {
       const correlationId = uuid();
       const transport = getTransport();
       const req = {
@@ -41,7 +42,8 @@ export const instrumentPriceSubscriptions$ = () =>
       };
       transport.send(JSON.stringify(req));
       return EMPTY;
-    })
+    }),
+    shareReplay(1)
   );
 
 type PriceSubscribeMessage = {
