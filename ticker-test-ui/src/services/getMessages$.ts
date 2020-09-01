@@ -1,25 +1,22 @@
-import { Observable } from "rxjs";
-import { share } from "rxjs/operators";
+import { delay, retryWhen, tap } from "rxjs/operators";
 
-import { getTransport } from "./getTransport";
+import { websocket } from "./getTransport";
 
 export type Message = any;
 
-let cachedMessages$: Observable<Message> | null = null;
+const RECONNECT_TIME = 5000;
 
-const getMessages$ = (): Observable<Message> => {
-  if (cachedMessages$) {
-    return cachedMessages$;
-  }
-  const transport = getTransport();
-  const messages$ = new Observable<Message>(observer => {
-    const unsubscribe = transport.onMessage((evt: MessageEvent) => {
-      const data = JSON.parse(evt.data);
-      observer.next(data);
-    });
-    return unsubscribe;
-  }).pipe(share());
-  return (cachedMessages$ = messages$);
+const getMessages$ = () =>
+  websocket.pipe(
+    tap(x => {
+      console.log("here");
+    }),
+    retryWhen(errors => errors.pipe(delay(RECONNECT_TIME)))
+  );
+
+export const send = (msg: any) => {
+  console.log(msg);
+  websocket.next(msg);
 };
 
 export default getMessages$;
