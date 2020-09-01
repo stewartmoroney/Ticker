@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import { startWith } from "rxjs/operators";
 import styled from "styled-components";
 
-import getConnectionStatus$ from "../../../services/getConnectionStatus$";
+import { getConnectionStatus$ } from "../../../services/getTransport";
+// import getConnectionStatus$ from "../../../services/getConnectionStatus$";
 import { ConnectionStatus } from "../../../state/types";
 import ThemeSelector from "../ThemeSelector";
 import ConnectionStatusIcon from "./ConnectionStatusIcon";

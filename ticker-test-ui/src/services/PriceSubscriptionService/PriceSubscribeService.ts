@@ -2,12 +2,11 @@ import { defer, EMPTY, Subject } from "rxjs";
 import { filter, mergeMap, scan, shareReplay } from "rxjs/operators";
 import uuid from "uuid";
 
-import { getTransport } from "../getTransport";
+import getMessages$, { send } from "../getMessages$";
 import {
   PriceSubscribeRequestMessageType,
   UnsubscribePriceRequestMessageType
 } from "../messages";
-import subscribe from "../subscribe";
 
 type SubMessage = {
   id: string;
@@ -28,7 +27,6 @@ export const instrumentPriceSubscriptions$ = () =>
   instrumentSubscribe$.asObservable().pipe(
     mergeMap(msg => {
       const correlationId = uuid();
-      const transport = getTransport();
       const req = {
         type:
           msg.type === "subscribe"
@@ -39,7 +37,7 @@ export const instrumentPriceSubscriptions$ = () =>
           correlationId
         }
       };
-      transport.send(JSON.stringify(req));
+      send(req);
       return EMPTY;
     }),
     shareReplay(1)
@@ -72,7 +70,7 @@ const subscriptionsReducer = (
 
 export const subscribedPricesState$ = () =>
   defer(() =>
-    subscribe().pipe(
+    getMessages$().pipe(
       filter(isSubscriptionStateMessage),
       scan(subscriptionsReducer, [] as string[]),
       shareReplay(1)
