@@ -1,9 +1,8 @@
-import { bind, shareLatest } from "@react-rxjs/core";
-import { defer } from "rxjs";
+import { bind } from "@react-rxjs/core";
 import { filter, map, startWith, tap } from "rxjs/operators";
 
 import { ConnectionStatus, Instrument } from "../../state/types";
-import getMessages$, { Message, send } from "../getMessages$";
+import { mesages$, Message, send } from "../getMessages$";
 import { getConnectionStatus$ } from "../getTransport";
 import {
   InstrumentRequestMessage,
@@ -27,14 +26,10 @@ export const sendInstrumentSubscription = (): void => {
   send(req);
 };
 
-export const instrumentState$ = () =>
-  defer(() =>
-    getMessages$().pipe(
-      filter(isInstrumentMessage),
-      map(message => message.instruments),
-      shareLatest()
-    )
-  );
+export const instrumentState$ = mesages$.pipe(
+  filter(isInstrumentMessage),
+  map(message => message.instruments)
+);
 
 export const instrumentSubscriptions$ = () =>
   getConnectionStatus$().pipe(
@@ -45,5 +40,5 @@ export const instrumentSubscriptions$ = () =>
   );
 
 export const [useInstruments] = bind(
-  instrumentState$().pipe(startWith([] as Instrument[]))
+  instrumentState$.pipe(startWith([] as Instrument[]))
 );
