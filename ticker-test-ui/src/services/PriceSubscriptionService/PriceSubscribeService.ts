@@ -1,6 +1,6 @@
-import { bind } from "@react-rxjs/core";
+import { bind, shareLatest } from "@react-rxjs/core";
 import { defer, EMPTY, Subject } from "rxjs";
-import { filter, mergeMap, scan, shareReplay, startWith } from "rxjs/operators";
+import { filter, mergeMap, scan, startWith } from "rxjs/operators";
 import uuid from "uuid";
 
 import getMessages$, { send } from "../getMessages$";
@@ -41,7 +41,7 @@ export const instrumentPriceSubscriptions$ = () =>
       send(req);
       return EMPTY;
     }),
-    shareReplay(1)
+    shareLatest()
   );
 
 type PriceSubscribeMessage = {
@@ -74,7 +74,7 @@ export const subscribedPricesState$ = () =>
     getMessages$().pipe(
       filter(isSubscriptionStateMessage),
       scan(subscriptionsReducer, [] as string[]),
-      shareReplay(1)
+      shareLatest()
     )
   );
 

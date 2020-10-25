@@ -1,6 +1,6 @@
-import { bind } from "@react-rxjs/core";
+import { bind, shareLatest } from "@react-rxjs/core";
 import { defer } from "rxjs";
-import { filter, map, shareReplay, startWith, tap } from "rxjs/operators";
+import { filter, map, startWith, tap } from "rxjs/operators";
 
 import { ConnectionStatus, Instrument } from "../../state/types";
 import getMessages$, { Message, send } from "../getMessages$";
@@ -32,7 +32,7 @@ export const instrumentState$ = () =>
     getMessages$().pipe(
       filter(isInstrumentMessage),
       map(message => message.instruments),
-      shareReplay(1)
+      shareLatest()
     )
   );
 
