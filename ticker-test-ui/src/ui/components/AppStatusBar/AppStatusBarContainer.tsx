@@ -1,11 +1,7 @@
-import { bind } from "@react-rxjs/core";
 import React, { FC } from "react";
-import { startWith } from "rxjs/operators";
 import styled from "styled-components";
 
-import { getConnectionStatus$ } from "../../../services/getTransport";
-// import getConnectionStatus$ from "../../../services/getConnectionStatus$";
-import { ConnectionStatus } from "../../../state/types";
+import { useConnectionState } from "../../../services/getTransport";
 import ThemeSelector from "../ThemeSelector";
 import ConnectionStatusIcon from "./ConnectionStatusIcon";
 
@@ -15,12 +11,6 @@ const StatusBar = styled.div`
   line-height: 20px;
   background-color: ${props => props.theme.panel.background};
 `;
-
-const [useConnectionState] = bind(
-  getConnectionStatus$().pipe(
-    startWith(ConnectionStatus.DISCONNECTED as ConnectionStatus)
-  )
-);
 
 const AppStatusBarContainer: FC = () => {
   const connectionStatus = useConnectionState();

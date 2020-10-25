@@ -1,5 +1,6 @@
+import { bind } from "@react-rxjs/core";
 import { defer } from "rxjs";
-import { filter, map, shareReplay, tap } from "rxjs/operators";
+import { filter, map, shareReplay, startWith, tap } from "rxjs/operators";
 
 import { ConnectionStatus, Instrument } from "../../state/types";
 import getMessages$, { Message, send } from "../getMessages$";
@@ -42,3 +43,7 @@ export const instrumentSubscriptions$ = () =>
       sendInstrumentSubscription();
     })
   );
+
+export const [useInstruments] = bind(
+  instrumentState$().pipe(startWith([] as Instrument[]))
+);

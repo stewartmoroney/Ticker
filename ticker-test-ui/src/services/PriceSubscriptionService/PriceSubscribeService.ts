@@ -1,5 +1,6 @@
+import { bind } from "@react-rxjs/core";
 import { defer, EMPTY, Subject } from "rxjs";
-import { filter, mergeMap, scan, shareReplay } from "rxjs/operators";
+import { filter, mergeMap, scan, shareReplay, startWith } from "rxjs/operators";
 import uuid from "uuid";
 
 import getMessages$, { send } from "../getMessages$";
@@ -76,3 +77,7 @@ export const subscribedPricesState$ = () =>
       shareReplay(1)
     )
   );
+
+export const [useSubscribedInstruments] = bind(
+  subscribedPricesState$().pipe(startWith([] as string[]))
+);

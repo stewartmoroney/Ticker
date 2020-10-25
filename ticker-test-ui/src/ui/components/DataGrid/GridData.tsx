@@ -1,20 +1,9 @@
-import { bind } from "@react-rxjs/core";
 import React, { FC } from "react";
-import { startWith } from "rxjs/operators";
 
-import { instrumentState$ } from "../../../services/InstrumentService/instrumentServiceImpl";
-import { subscribedPrices$ } from "../../../services/PriceService/subscribedPricesImpl";
-import { Instrument, Price } from "../../../state/types";
+import { useInstruments } from "../../../services/InstrumentService/instrumentServiceImpl";
+import { useSubscribedPrices } from "../../../services/PriceService/subscribedPricesImpl";
 import GridRow from "./GridRow";
 import { GridRows } from "./gridStyles";
-
-const [useInstruments] = bind(
-  instrumentState$().pipe(startWith([] as Instrument[]))
-);
-
-const [useSubscribedPrices] = bind(
-  subscribedPrices$.pipe(startWith([] as Price[]))
-);
 
 const GridData: FC = () => {
   const instruments = useInstruments();
@@ -22,7 +11,7 @@ const GridData: FC = () => {
 
   return (
     <GridRows>
-      {instruments.map((instrument: Instrument) => (
+      {instruments.map(instrument => (
         <GridRow
           key={instrument.id}
           instrument={instrument}

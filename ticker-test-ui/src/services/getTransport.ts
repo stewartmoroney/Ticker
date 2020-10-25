@@ -1,5 +1,6 @@
+import { bind } from "@react-rxjs/core";
 import { ReplaySubject } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { shareReplay, startWith } from "rxjs/operators";
 import { webSocket } from "rxjs/webSocket";
 
 import { WS_URL } from "../Constants";
@@ -23,3 +24,9 @@ export const websocket = webSocket({
     }
   }
 });
+
+export const [useConnectionState] = bind(
+  getConnectionStatus$().pipe(
+    startWith(ConnectionStatus.DISCONNECTED as ConnectionStatus)
+  )
+);
