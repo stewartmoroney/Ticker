@@ -1,4 +1,4 @@
-import { bind, shareLatest } from "@react-rxjs/core";
+import { bind } from "@react-rxjs/core";
 import { Subject } from "rxjs";
 import { startWith } from "rxjs/operators";
 
@@ -13,7 +13,6 @@ export const switchTheme = (theme: ThemeName) => {
 export const flipTheme = (themeName: ThemeName): ThemeName =>
   themeName === "dark" ? "light" : "dark";
 
-export const themeState$ = () =>
-  selectedTheme$.asObservable().pipe(shareLatest());
+const themeState$ = () => selectedTheme$.asObservable();
 
 export const [useTheme] = bind(themeState$().pipe(startWith(defaultTheme)));

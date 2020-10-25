@@ -1,9 +1,9 @@
-import { bind, shareLatest } from "@react-rxjs/core";
-import { defer, EMPTY, Subject } from "rxjs";
-import { filter, mergeMap, scan, startWith } from "rxjs/operators";
+import { bind } from "@react-rxjs/core";
+import { Subject } from "rxjs";
+import { filter, scan, startWith, tap } from "rxjs/operators";
 import uuid from "uuid";
 
-import getMessages$, { send } from "../getMessages$";
+import { mesages$, send } from "../getMessages$";
 import {
   PriceSubscribeRequestMessageType,
   UnsubscribePriceRequestMessageType
@@ -26,7 +26,7 @@ export const unsubscribeToInstrumentPrice = (id: string) => {
 
 export const instrumentPriceSubscriptions$ = () =>
   instrumentSubscribe$.asObservable().pipe(
-    mergeMap(msg => {
+    tap(msg => {
       const correlationId = uuid();
       const req = {
         type:
@@ -39,9 +39,7 @@ export const instrumentPriceSubscriptions$ = () =>
         }
       };
       send(req);
-      return EMPTY;
-    }),
-    shareLatest()
+    })
   );
 
 type PriceSubscribeMessage = {
@@ -62,22 +60,17 @@ const subscriptionsReducer = (
       if (!subscriptions.includes(msg.instrumentId)) {
         return [...subscriptions, msg.instrumentId];
       }
-      break;
+      return [...subscriptions];
     case "UnsubscribePriceResponse":
       return subscriptions.filter(sub => sub !== msg.instrumentId);
   }
-  return [...subscriptions];
 };
 
-export const subscribedPricesState$ = () =>
-  defer(() =>
-    getMessages$().pipe(
-      filter(isSubscriptionStateMessage),
-      scan(subscriptionsReducer, [] as string[]),
-      shareLatest()
-    )
-  );
+export const subscribedPricesState$ = mesages$.pipe(
+  filter(isSubscriptionStateMessage),
+  scan(subscriptionsReducer, [] as string[])
+);
 
 export const [useSubscribedInstruments] = bind(
-  subscribedPricesState$().pipe(startWith([] as string[]))
+  subscribedPricesState$.pipe(startWith([] as string[]))
 );
