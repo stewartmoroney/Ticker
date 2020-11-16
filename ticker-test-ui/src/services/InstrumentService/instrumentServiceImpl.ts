@@ -2,7 +2,7 @@ import { bind } from "@react-rxjs/core";
 import { filter, map, startWith, tap } from "rxjs/operators";
 
 import { ConnectionStatus, Instrument } from "../../state/types";
-import { mesages$, Message, send } from "../getMessages$";
+import { Message, messages$, send } from "../getMessages$";
 import { getConnectionStatus$ } from "../getTransport";
 import {
   InstrumentRequestMessage,
@@ -26,7 +26,7 @@ export const sendInstrumentSubscription = (): void => {
   send(req);
 };
 
-export const instrumentState$ = mesages$.pipe(
+export const instrumentState$ = messages$.pipe(
   filter(isInstrumentMessage),
   map(message => message.instruments)
 );

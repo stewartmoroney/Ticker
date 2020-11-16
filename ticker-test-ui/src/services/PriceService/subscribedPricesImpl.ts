@@ -2,7 +2,7 @@ import { bind } from "@react-rxjs/core";
 import { filter, map, scan, startWith } from "rxjs/operators";
 
 import { Price } from "../../state/types";
-import { mesages$, Message } from "../getMessages$";
+import { Message, messages$ } from "../getMessages$";
 
 type PriceMessage = {
   type: "PriceUpdate";
@@ -19,7 +19,7 @@ const priceReducer = (acc: PriceState, p: Price) => {
   return [...acc.slice(0, index), p, ...acc.slice(index, acc.length)];
 };
 
-export const subscribedPrices$ = mesages$.pipe(
+export const subscribedPrices$ = messages$.pipe(
   filter(isPriceMessage),
   map(msg => msg.price),
   scan(priceReducer, [])

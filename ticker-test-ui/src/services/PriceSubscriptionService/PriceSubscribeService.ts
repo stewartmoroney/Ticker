@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 import { filter, scan, startWith, tap } from "rxjs/operators";
 import uuid from "uuid";
 
-import { mesages$, send } from "../getMessages$";
+import { messages$, send } from "../getMessages$";
 import {
   PriceSubscribeRequestMessageType,
   UnsubscribePriceRequestMessageType
@@ -66,7 +66,7 @@ const subscriptionsReducer = (
   }
 };
 
-export const subscribedPricesState$ = mesages$.pipe(
+export const subscribedPricesState$ = messages$.pipe(
   filter(isSubscriptionStateMessage),
   scan(subscriptionsReducer, [] as string[])
 );
