@@ -1,5 +1,6 @@
 import { useSubscribe } from "@react-rxjs/core";
-import React, { FC } from "react";
+import React, { FC, useRef, useState } from "react";
+import { usePopper } from "react-popper";
 import styled, { ThemeProvider } from "styled-components";
 
 import { instrumentSubscriptions$ } from "../../services/InstrumentService/instrumentServiceImpl";
@@ -8,6 +9,7 @@ import { useTheme } from "../../services/themeService";
 import AppStatusBar from "../components/AppStatusBar";
 import Grid from "../components/DataGrid";
 import InstrumentSelector from "../components/InstrumentSelector";
+import Notifications from "../components/Notifications";
 import AppHeader from "../components/TickerHeader";
 import { getTheme } from "./../shared";
 
@@ -24,14 +26,15 @@ const Shell: FC = () => {
   const themeName = useTheme();
   useSubscribe(instrumentSubscriptions$());
   useSubscribe(instrumentPriceSubscriptions$());
-
+  const mainRef = useRef(null);
   return (
     <ThemeProvider theme={getTheme(themeName)}>
-      <MainPanel>
+      <MainPanel ref={mainRef}>
         <AppHeader />
         <InstrumentSelector />
         <Grid />
         <AppStatusBar />
+        <Notifications ref={mainRef} notifications={["hey there"]} />
       </MainPanel>
     </ThemeProvider>
   );

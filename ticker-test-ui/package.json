@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
     "@react-rxjs/core": "^0.5.0",
     "@types/jest": "^24.0.2",
     "@types/node": "^12.12.47",
@@ -15,6 +16,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.7.0",
+    "react-popper": "^2.2.4",
     "react-scripts": "^4.0.0",
     "rxjs": "6.6.2",
     "rxjs-tslint-rules": "^4.1.1",

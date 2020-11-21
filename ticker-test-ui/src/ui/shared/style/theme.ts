@@ -13,6 +13,9 @@ export interface Theme {
   panel: {
     background: string;
   };
+  notification: {
+    background: string;
+  };
   border: string;
   bodyText: string;
   subscriptions: {
@@ -45,6 +48,9 @@ export const getTheme = (themeName: ThemeName): Theme =>
         panel: {
           background: "#262f40"
         },
+        notification: {
+          background: "#262f40"
+        },
         border: "#4d5e80",
         bodyText: "#f0f2f4",
         subscriptions: themeCommon.subscriptions,
@@ -56,6 +62,9 @@ export const getTheme = (themeName: ThemeName): Theme =>
         },
         panel: {
           background: "#eff1f5"
+        },
+        notification: {
+          background: "#262f40"
         },
         border: "#afbacf",
         bodyText: "#586174",
