@@ -29,9 +29,7 @@ const InstrumentSelector: FC<IProps> = ({
           key={instrument.id}
           instrument={instrument}
           subscribed={isSubscribed}
-        >
-          {instrument.id}
-        </InstrumentToggle>
+        />
       );
     })}
   </InstrumentSelectorPanel>
