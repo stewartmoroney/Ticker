@@ -16,7 +16,7 @@
     "react-dom": "^18.3",
     "react-icons": "^3.7.0",
     "react-is": "^19.0.0",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "^5.0.1",
     "rxjs": "6.6.2",
     "rxjs-tslint-rules": "^4.1.1",
     "styled-components": "^5.3.5",
