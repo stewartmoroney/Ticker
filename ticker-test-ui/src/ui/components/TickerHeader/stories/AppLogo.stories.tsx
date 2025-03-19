@@ -1,4 +1,4 @@
-import { storiesOf } from "@storybook/react";
+// import { storiesOf } from "@storybook/react";
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 
@@ -17,12 +17,12 @@ const LogoWrapper = styled.div`
   outline: 1px solid white;
 `;
 
-storiesOf("AppLogo", module).add("Header", () => (
-  <Background>
-    <ThemeProvider theme={getTheme(defaultTheme)}>
-      <LogoWrapper>
-        <AppLogo />
-      </LogoWrapper>
-    </ThemeProvider>
-  </Background>
-));
+// storiesOf("AppLogo", module).add("Header", () => (
+//   <Background>
+//     <ThemeProvider theme={getTheme(defaultTheme)}>
+//       <LogoWrapper>
+//         <AppLogo />
+//       </LogoWrapper>
+//     </ThemeProvider>
+//   </Background>
+// ));

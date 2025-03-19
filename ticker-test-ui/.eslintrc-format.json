@@ -5,7 +5,7 @@
     "prettier/prettier": "warn",
     "import/order": "off",
     "import/newline-after-import": "warn",
-    "simple-import-sort/sort": [
+    "simple-import-sort/imports": [
       "warn",
       {
         "groups": [
