@@ -82,7 +82,7 @@
   },
   "lint-staged": {
     "*.+(ts|tsx)": [
-      "eslint -c ./.eslintrc-format.json --fix",
+      "eslint --fix",
       "git add"
     ],
     "*.+(js|jsx|json|md)": [
