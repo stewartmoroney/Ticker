@@ -9,7 +9,6 @@ export default defineConfig([
     files: ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
