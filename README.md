@@ -19,4 +19,4 @@ gradle ticker-web-gateway:bootRun
 requires node, npm  
 
 npm install  
-npm start  
+npm run dev  
