@@ -1,17 +1,18 @@
-import { useSubscribe } from "@react-rxjs/core";
-import React, { FC } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { Subscribe } from "@react-rxjs/core";
+import { FC } from "react";
+import styled from "styled-components";
+import { merge } from "rxjs";
 
 import { instrumentSubscriptions$ } from "../../services/InstrumentService/instrumentServiceImpl";
 import { instrumentPriceSubscriptions$ } from "../../services/PriceSubscriptionService/PriceSubscribeService";
-import { useTheme } from "../../services/themeService";
 import AppStatusBar from "../components/AppStatusBar";
 import Grid from "../components/DataGrid";
 import InstrumentSelector from "../components/InstrumentSelector";
 import AppHeader from "../components/TickerHeader";
-import { getTheme } from "./../shared";
+import ThemeWrapper from "./themeWrapper";
+import { Theme } from "../shared";
 
-const MainPanel = styled.div`
+const MainPanel = styled.div<{theme: Theme}>`
   width: 100%;
   display: grid;
   background-color: ${props => props.theme.body.background};
@@ -21,19 +22,18 @@ const MainPanel = styled.div`
 `;
 
 const Shell: FC = () => {
-  const themeName = useTheme();
-  useSubscribe(instrumentSubscriptions$());
-  useSubscribe(instrumentPriceSubscriptions$());
-
+  const source$ = merge(instrumentSubscriptions$(), instrumentPriceSubscriptions$());
   return (
-    <ThemeProvider theme={getTheme(themeName)}>
-      <MainPanel>
-        <AppHeader />
-        <InstrumentSelector />
-        <Grid />
-        <AppStatusBar />
-      </MainPanel>
-    </ThemeProvider>
+    <Subscribe source$={source$}>
+      <ThemeWrapper>
+        <MainPanel>
+          <AppHeader />
+          <InstrumentSelector />
+          <Grid />
+          <AppStatusBar />
+        </MainPanel>
+      </ThemeWrapper>
+    </Subscribe>
   );
 };
 

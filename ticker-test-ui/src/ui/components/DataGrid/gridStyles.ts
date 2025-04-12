@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Theme } from "../../shared";
 
-export const Table = styled.div`
+export const Table = styled.div<{theme: Theme}>`
   border: ${props => "1px solid" + props.theme.border};
 `;
 
@@ -17,7 +18,7 @@ export const NoData = styled(Row)`
   justify-content: center;
 `;
 
-export const Header = styled(Row)`
+export const Header = styled(Row)<{theme: Theme}>`
   background-color: ${props => props.theme.panel.background};
 `;
 

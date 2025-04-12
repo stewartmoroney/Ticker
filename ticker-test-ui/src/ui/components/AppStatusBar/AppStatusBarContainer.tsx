@@ -1,11 +1,12 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
 import { useConnectionState } from "../../../services/getTransport";
 import ThemeSelector from "../ThemeSelector";
 import ConnectionStatusIcon from "./ConnectionStatusIcon";
+import { Theme } from "../../shared";
 
-const StatusBar = styled.div`
+const StatusBar = styled.div<{theme: Theme}>`
   display: flex;
   height: 20px;
   line-height: 20px;

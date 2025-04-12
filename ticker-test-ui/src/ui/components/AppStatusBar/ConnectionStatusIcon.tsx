@@ -1,7 +1,8 @@
-import React, { FC, useCallback } from "react";
+import { FC, useCallback } from "react";
 import styled from "styled-components";
 
 import { ConnectionStatus } from "../../../state/types";
+import { Theme } from "../../shared";
 
 export interface IDataProps {
   sessionId: string;
@@ -13,12 +14,12 @@ const ConnectionStatusWrapper = styled.div`
   margin-left: auto;
 `;
 
-const Status = styled.div<{ connectionStatus: ConnectionStatus }>`
+const Status = styled.div<{ theme: Theme, $connectionStatus:ConnectionStatus }>`
   width: 10px;
   height: 10px;
 
   background-color: ${props =>
-    props.connectionStatus === ConnectionStatus.CONNECTED
+    props.$connectionStatus === ConnectionStatus.CONNECTED
       ? props.theme.connection.connected
       : props.theme.connection.disconnected};
 
@@ -37,7 +38,7 @@ const ConnectionStatusIcon: FC<IDataProps> = props => {
   return (
     <ConnectionStatusWrapper>
       <abbr title={statusText()}>
-        <Status connectionStatus={props.connectionStatus} />
+        <Status $connectionStatus={props.connectionStatus} />
       </abbr>
     </ConnectionStatusWrapper>
   );

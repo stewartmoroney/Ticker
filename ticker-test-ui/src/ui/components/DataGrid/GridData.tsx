@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import { useInstruments } from "../../../services/InstrumentService/instrumentServiceImpl";
 import { useSubscribedPrices } from "../../../services/PriceService/subscribedPricesImpl";

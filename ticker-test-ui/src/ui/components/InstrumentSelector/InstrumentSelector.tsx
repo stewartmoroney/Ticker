@@ -1,15 +1,16 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 
 import { Instrument } from "./../../../state/types";
 import InstrumentToggle from "./InstrumentToggle";
+import { Theme } from "../../shared";
 
 interface IProps {
   instruments: Instrument[];
   subscribedInstrumentIds: string[];
 }
 
-const InstrumentSelectorPanel = styled.div`
+const InstrumentSelectorPanel = styled.div<{theme: Theme}>`
   display: flex;
   height: 100px;
   background-color: ${props => props.theme.panel.background};

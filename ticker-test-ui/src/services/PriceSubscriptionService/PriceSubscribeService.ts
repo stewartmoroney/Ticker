@@ -1,7 +1,7 @@
 import { bind } from "@react-rxjs/core";
 import { Subject } from "rxjs";
 import { filter, scan, startWith, tap } from "rxjs/operators";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 
 import { messages$, send } from "../getMessages$";
 import {
