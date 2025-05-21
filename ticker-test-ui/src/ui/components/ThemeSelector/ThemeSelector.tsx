@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import { useCallback } from "react";
 import { FaLightbulb } from "react-icons/fa";
 
 import {
@@ -7,7 +7,7 @@ import {
   useTheme
 } from "../../../services/themeService";
 
-const ThemeSelector: FC = () => {
+const ThemeSelector = () => {
   const themeName = useTheme();
 
   const handleToggle = useCallback(() => {

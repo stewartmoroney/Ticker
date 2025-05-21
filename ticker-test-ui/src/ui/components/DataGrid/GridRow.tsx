@@ -1,5 +1,3 @@
-import React, { FC } from "react";
-
 import { Instrument, Price } from "../../../state/types";
 import { Cell, Row } from "./gridStyles";
 
@@ -8,11 +6,13 @@ interface Props {
   price: Price | undefined;
 }
 
-const GridRow: FC<Props> = ({ instrument, price }) => (
-  <Row>
-    <Cell>{instrument.name}</Cell>
-    <Cell>{price && price.value}</Cell>
-  </Row>
-);
+const GridRow = ({ instrument, price }: Props) => {
+  return (
+    <Row>
+      <Cell>{instrument.name}</Cell>
+      <Cell>{price && price.value}</Cell>
+    </Row>
+  );
+};
 
 export default GridRow;

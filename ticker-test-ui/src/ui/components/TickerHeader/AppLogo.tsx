@@ -1,14 +1,12 @@
-import React, { FC } from "react";
 import styled from "styled-components";
 
 const circleWidth = 38;
-
 const SVG = styled.svg`
   width: 100%;
   height: 100%;
 `;
 
-const AppLogo: FC = () => {
+const AppLogo = () => {
   const makeCircle = (inWidth: number, strokeWidth: number) => {
     const circleWidth = inWidth.toString();
 

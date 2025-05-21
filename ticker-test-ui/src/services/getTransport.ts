@@ -14,12 +14,12 @@ export const getConnectionStatus$ = () =>
 export const websocket = webSocket({
   url: WS_URL,
   openObserver: {
-    next: value => {
+    next: () => {
       connnectionStatus$.next(ConnectionStatus.CONNECTED);
     }
   },
   closeObserver: {
-    next: value => {
+    next: () => {
       connnectionStatus$.next(ConnectionStatus.DISCONNECTED);
     }
   }

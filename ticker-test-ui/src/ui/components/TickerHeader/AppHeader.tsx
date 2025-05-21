@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import styled from "styled-components";
 
 import AppLogo from "./AppLogo";
@@ -19,7 +18,7 @@ const AppLogoPosition = styled.div`
   width: 80px;
 `;
 
-const AppHeader: FC = () => (
+const AppHeader = () => (
   <HeaderPanel>
     <HeaderText>Ticker Test App</HeaderText>
     <AppLogoPosition>
