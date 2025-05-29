@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import { styled } from '@mui/material/styles';
 
 const circleWidth = 38;
-const SVG = styled.svg`
+const SVG = styled('svg')`
   width: 100%;
   height: 100%;
 `;

@@ -1,29 +1,47 @@
 import { ThemeName } from "../../../state/types";
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    body: {
+      background: string;
+    };
+    panel: {
+      background: string;
+    };
+    border: string;
+    bodyText: string;
+    subscriptions: {
+      subscribed: string;
+      unsubscribed: string;
+    };
+    connection: {
+      connected: string;
+      disconnected: string;
+    };    
+  }
+  // allow configuration using `createTheme()`
+  interface ThemeOptions {
+    body?: {
+      background?: string;
+    };
+    panel?: {
+      background?: string;
+    };
+    border?: string;
+    bodyText?: string;
+
+    subscriptions?: {
+      subscribed?: string;
+      unsubscribed?: string;
+    };
+    connection?: {
+      connected?: string;
+      disconnected?: string;
+    };    
+  }
+}
+
 export const defaultTheme: ThemeName = "dark";
-
-export interface IThemeProps {
-  theme: Theme;
-}
-
-export interface Theme {
-  body: {
-    background: string;
-  };
-  panel: {
-    background: string;
-  };
-  border: string;
-  bodyText: string;
-  subscriptions: {
-    subscribed: string;
-    unsubscribed: string;
-  };
-  connection: {
-    connected: string;
-    disconnected: string;
-  };
-}
 
 const themeCommon = {
   subscriptions: {
@@ -36,7 +54,7 @@ const themeCommon = {
   }
 };
 
-export const getTheme = (themeName: ThemeName): Theme =>
+export const getTheme = (themeName: ThemeName) =>
   themeName === "dark"
     ? {
         body: {

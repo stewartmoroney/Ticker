@@ -1,17 +1,15 @@
 import { FC } from "react";
-import styled from "styled-components";
+import { styled } from '@mui/material/styles';
 
 import { useConnectionState } from "../../../services/getTransport";
 import ThemeSelector from "../ThemeSelector";
 import ConnectionStatusIcon from "./ConnectionStatusIcon";
-import { Theme } from "../../shared";
 
-const StatusBar = styled.div<{theme: Theme}>`
-  display: flex;
-  height: 20px;
-  line-height: 20px;
-  background-color: ${props => props.theme.panel.background};
-`;
+const StatusBar = styled('div')(({ theme }) => ({
+  display: 'flex',
+  height: '20px',
+  backgroundColor: theme.panel.background,
+}));
 
 const AppStatusBarContainer: FC = () => {
   const connectionStatus = useConnectionState();

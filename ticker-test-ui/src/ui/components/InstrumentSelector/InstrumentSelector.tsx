@@ -1,25 +1,23 @@
-import { FC } from "react";
-import styled from "styled-components";
+import { styled } from '@mui/material/styles';
 
 import { Instrument } from "./../../../state/types";
 import InstrumentToggle from "./InstrumentToggle";
-import { Theme } from "../../shared";
 
 interface IProps {
   instruments: Instrument[];
   subscribedInstrumentIds: string[];
 }
 
-const InstrumentSelectorPanel = styled.div<{theme: Theme}>`
-  display: flex;
-  height: 100px;
-  background-color: ${props => props.theme.panel.background};
-`;
+const InstrumentSelectorPanel = styled('div')(({ theme }) => ({
+  display: 'flex',
+  height: '100px',
+  backgroundColor: theme.panel.background,
+}));
 
-const InstrumentSelector: FC<IProps> = ({
+const InstrumentSelector = ({
   instruments,
   subscribedInstrumentIds
-}) => (
+}: IProps) => (
   <InstrumentSelectorPanel>
     {instruments.map(instrument => {
       const isSubscribed = !!subscribedInstrumentIds.find(

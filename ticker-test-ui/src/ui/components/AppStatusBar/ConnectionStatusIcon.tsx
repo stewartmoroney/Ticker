@@ -1,32 +1,33 @@
-import { FC, useCallback } from "react";
-import styled from "styled-components";
+import { useCallback } from "react";
+import { styled } from '@mui/material/styles';
 
 import { ConnectionStatus } from "../../../state/types";
-import { Theme } from "../../shared";
 
 export interface IDataProps {
   sessionId: string;
   connectionStatus: ConnectionStatus;
 }
 
-const ConnectionStatusWrapper = styled.div`
+const ConnectionStatusWrapper = styled('div')`
   margin-right: 2px;
   margin-left: auto;
 `;
 
-const Status = styled.div<{ theme: Theme, $connectionStatus:ConnectionStatus }>`
-  width: 10px;
-  height: 10px;
+const Status = styled('div')(() => ({
+  width: '10px',
+  height: '10px',
+  borderRadius: '50%',
+}));
 
-  background-color: ${props =>
-    props.$connectionStatus === ConnectionStatus.CONNECTED
-      ? props.theme.connection.connected
-      : props.theme.connection.disconnected};
+const ConnectedStatus = styled(Status)(({ theme }) => ({
+  backgroundColor: theme.connection.connected
+}));
 
-  border-radius: 50%;
-`;
+const DisconnectedStatus = styled(Status)(({ theme }) => ({
+  backgroundColor: theme.connection.disconnected
+}));
 
-const ConnectionStatusIcon: FC<IDataProps> = props => {
+const ConnectionStatusIcon = (props: IDataProps) => {
   const statusText = useCallback(
     () =>
       props.connectionStatus +
@@ -38,7 +39,7 @@ const ConnectionStatusIcon: FC<IDataProps> = props => {
   return (
     <ConnectionStatusWrapper>
       <abbr title={statusText()}>
-        <Status $connectionStatus={props.connectionStatus} />
+        {props.connectionStatus === ConnectionStatus.CONNECTED ? <ConnectedStatus/> : <DisconnectedStatus/>}
       </abbr>
     </ConnectionStatusWrapper>
   );

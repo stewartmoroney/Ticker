@@ -1,32 +1,33 @@
-import { FC, useCallback } from "react";
-import styled from "styled-components";
-
+import { useCallback } from "react";
+import { styled } from '@mui/material/styles';
 import {
   subscribeToInstrumentPrice,
   unsubscribeToInstrumentPrice
 } from "../../../services/PriceSubscriptionService/PriceSubscribeService";
 import { Instrument } from "./../../../state/types";
-import { Theme } from "../../shared";
 
 export interface IProps {
   instrument: Instrument;
   subscribed: boolean;
 }
 
-const InstrumentButton = styled.div<{ theme: Theme, $subscribed: boolean }>`
-  width: 100px;
-  height: 50px;
-  line-height: 50px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${props =>
-    props.$subscribed
-      ? props.theme.subscriptions.subscribed
-      : props.theme.subscriptions.unsubscribed};
-  text-align: center;
-`;
+const InstrumentButton = styled('div')(() => ({
+  height: '50px',
+  width: '100px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  textAlign: 'center',
+  }));
 
-const InstrumentToggle: FC<IProps> = ({ instrument, subscribed }) => {
+const SubInstrumentButton = styled(InstrumentButton)(({ theme }) => ({
+  borderColor: theme.subscriptions.subscribed
+}));
+
+const UnSubInstrumentButton = styled(InstrumentButton)(({ theme }) => ({
+  borderColor: theme.subscriptions.unsubscribed
+}));
+
+const InstrumentToggle = ({ instrument, subscribed }: IProps) => {
   const toggleClick = useCallback(() => {
     if (subscribed) {
       unsubscribeToInstrumentPrice(instrument.id);
@@ -35,10 +36,11 @@ const InstrumentToggle: FC<IProps> = ({ instrument, subscribed }) => {
     }
   }, [instrument.id, subscribed]);
 
+  const InstrButton = subscribed ? SubInstrumentButton : UnSubInstrumentButton;
   return (
-    <InstrumentButton $subscribed={subscribed} onClick={toggleClick}>
+    <InstrButton onClick={toggleClick}>
       {instrument.name}
-    </InstrumentButton>
+    </InstrButton>
   );
 };
 

@@ -1,12 +1,12 @@
-import { FC, ReactNode } from "react";
-import { ThemeProvider } from "styled-components";
+import { ReactNode } from "react";
+import { ThemeProvider } from '@mui/material/styles';
 
 import { useTheme } from "../../services/themeService";
 import { getTheme } from "./../shared";
 
 type Props = { children: ReactNode }
 
-const ThemeWrapper: FC<Props> = ({ children }: Props) => {  
+const ThemeWrapper = ({ children }: Props) => {  
     const themeName = useTheme();
     return (
         <ThemeProvider theme={getTheme(themeName)}>
